@@ -1,0 +1,76 @@
+1746839362738	geckodriver	INFO	Listening on 127.0.0.1:32781
+1746839365773	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "32782" "-no-remote" "-profile" "C:\\Users\\creat\\AppData\\Local\\Temp\\rust_mozprofileLLe10l"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1746839366034	Marionette	INFO	Marionette enabled
+1746839366130	Marionette	INFO	Listening on port 32792
+WebDriver BiDi listening on ws://127.0.0.1:32782
+1746839366336	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:32782/devtools/browser/d057775c-c1ed-4ee8-8650-49fa875e0338
+[libprotobuf ERROR /builds/worker/checkouts/gecko/toolkit/components/protobuf/src/google/protobuf/message_lite.cc:134] Can't parse message of type "mozilla.cookieBanner.GoogleSOCSCookie" because it is missing required fields: (cannot determine missing fields for lite message)
+1746839367899	Marionette	INFO	Stopped listening on port 32792
+Dynamically enable window occlusion 1
+1746839469731	geckodriver	INFO	Listening on 127.0.0.1:32843
+1746839472806	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "32844" "-no-remote" "-profile" "C:\\Users\\creat\\AppData\\Local\\Temp\\rust_mozprofileFMBCzU"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1746839473034	Marionette	INFO	Marionette enabled
+1746839473123	Marionette	INFO	Listening on port 32849
+WebDriver BiDi listening on ws://127.0.0.1:32844
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+1746839473436	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+DevTools listening on ws://127.0.0.1:32844/devtools/browser/554475e7-48c1-445d-9127-f894cb53ec3b
+[libprotobuf ERROR /builds/worker/checkouts/gecko/toolkit/components/protobuf/src/google/protobuf/message_lite.cc:134] Can't parse message of type "mozilla.cookieBanner.GoogleSOCSCookie" because it is missing required fields: (cannot determine missing fields for lite message)
+1746839474897	Marionette	INFO	Stopped listening on port 32849
+Dynamically enable window occlusion 1
+1746839533395	geckodriver	INFO	Listening on 127.0.0.1:32904
+1746839536462	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "329 ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\creat\\AppData\\Local\\Temp\\rust_mozprofilejMz3AY"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1746839536693	Marionette	INFO	Marionette enabled
+1746839536776	Marionette	INFO	Listening on port 32912
+WebDriver BiDi listening on ws://127.0.0.1:32905
+Read port: 32912
+1746839536908	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:32905/devtools/browser/f0f6372d-3cb0-4015-9037-67c4a0285140
+[libprotobuf ERROR /builds/worker/checkouts/gecko/toolkit/components/protobuf/src/google/protobuf/message_lite.cc:134] Can't parse message of type "mozilla.cookieBanner.GoogleSOCSCookie" because it is missing required fields: (cannot determine missing fields for lite message)
+1746839538584	Marionette	INFO	Stopped listening on port 32912
+JavaScript warning: https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp, line 265: Script terminated by timeout at:
+_.Xf@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:265:882
+ji@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:339:337
+_.ki@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:119:54
+aha/<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/ck=boq-identity.ConsentUi.FnEDdwyl3b0.L.F4.O/am=AYARcgsAAAAE/d=1/exm=_b,_tp/excm=_b,_tp,mainview/ed=1/wt=2/ujg=1/rs=AOaEmlEhiejx-fzB36GJoMeHsP0kFMhInw/ee=BcQPH:lOY4De;EVNhjf:pw70Gc;EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:SdcwHb;Me32dd:MEeYgc;NJ1rfe:qTnoBf;NPKaK:SdcwHb;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SMDL4c:fTfGO;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:QIhFr;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;oSUNyd:fTfGO;pXdRYb:MdUzUe;qafBPd:yDVVkb;qddgKe:xQtZb;vNjB7d:YTxL4;wR5FRb:O1Gjze;xqZiqf:BBI74;yxTchf:KUM7Z;zxnPse:GkRiKb/m=ws9Tlc,n73qwf,aW3pY,GkRiKb,e5qFLc,IZT63,UUJqVe,O1Gjze,byfTOb,lsjVmc,xUdipf,ZDZcre,OTA3Ae,ZwDk9d,RyvaUb,fTfGO,m9oV,vjKJJ,y5vRwf,O6y8ed,PrPYRd,MpJwZc,LEikZe,NwH0H,V3dDOb,cYShmd,XVMNvd,KUM7Z,WpP9Yc,qTnoBf,lwddkf,gychg,w9hDv,RMhBfe,qmdT9,SdcwHb,pw70Gc,EFQ78c,Ulmmrd,A7fCU,xQtZb,JNoxi,BVgquf,QIhFr,hc6Ubd,SpsfSb,Z5uLle,BBI74,MdUzUe,zbML3c,zr1jrb,YTxL4,Uas9Hd,OgOVNe,pjICDe:14:426
+_.Tf.prototype.flatMap/</<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:266:448
+_.Xf@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:265:928
+_.Tf.prototype.flatMap/<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:266:422
+_.Tf@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:265:832
+_.Tf.prototype.flatMap@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:266:397
+aha@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/ck=boq-identity.ConsentUi.FnEDdwyl3b0.L.F4.O/am=AYARcgsAAAAE/d=1/exm=_b,_tp/excm=_b,_tp,mainview/ed=1/wt=2/ujg=1/rs=AOaEmlEhiejx-fzB36GJoMeHsP0kFMhInw/ee=BcQPH:lOY4De;EVNhjf:pw70Gc;EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:SdcwHb;Me32dd:MEeYgc;NJ1rfe:qTnoBf;NPKaK:SdcwHb;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SMDL4c:fTfGO;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:QIhFr;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;oSUNyd:fTfGO;pXdRYb:MdUzUe;qafBPd:yDVVkb;qddgKe:xQtZb;vNjB7d:YTxL4;wR5FRb:O1Gjze;xqZiqf:BBI74;yxTchf:KUM7Z;zxnPse:GkRiKb/m=ws9Tlc,n73qwf,aW3pY,GkRiKb,e5qFLc,IZT63,UUJqVe,O1Gjze,byfTOb,lsjVmc,xUdipf,ZDZcre,OTA3Ae,ZwDk9d,RyvaUb,fTfGO,m9oV,vjKJJ,y5vRwf,O6y8ed,PrPYRd,MpJwZc,LEikZe,NwH0H,V3dDOb,cYShmd,XVMNvd,KUM7Z,WpP9Yc,qTnoBf,lwddkf,gychg,w9hDv,RMhBfe,qmdT9,SdcwHb,pw70Gc,EFQ78c,Ulmmrd,A7fCU,xQtZb,JNoxi,BVgquf,QIhFr,hc6Ubd,SpsfSb,Z5uLle,BBI74,MdUzUe,zbML3c,zr1jrb,YTxL4,Uas9Hd,OgOVNe,pjICDe:14:380
+_.KC/b[_.ug]@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/ck=boq-identity.ConsentUi.FnEDdwyl3b0.L.F4.O/am=AYARcgsAAAAE/d=1/exm=_b,_tp/excm=_b,_tp,mainview/ed=1/wt=2/ujg=1/rs=AOaEmlEhiejx-fzB36GJoMeHsP0kFMhInw/ee=BcQPH:lOY4De;EVNhjf:pw70Gc;EmZ2Bf:zr1jrb;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;LBgRLc:SdcwHb;Me32dd:MEeYgc;NJ1rfe:qTnoBf;NPKaK:SdcwHb;NSEoX:lazG7b;Pjplud:EEDORb;QGR0gd:Mlhmy;SMDL4c:fTfGO;SNUn3:ZwDk9d;ScI3Yc:e7Hzgb;Uvc8o:VDovNc;YIZmRd:A1yn5d;a56pNe:JEfCwb;cEt90b:ws9Tlc;dIoSBb:SpsfSb;dowIGb:ebZ3mb;eBAeSb:zbML3c;iFQyKf:QIhFr;lOO0Vd:OTA3Ae;oGtAuc:sOXFj;oSUNyd:fTfGO;pXdRYb:MdUzUe;qafBPd:yDVVkb;qddgKe:xQtZb;vNjB7d:YTxL4;wR5FRb:O1Gjze;xqZiqf:BBI74;yxTchf:KUM7Z;zxnPse:GkRiKb/m=ws9Tlc,n73qwf,aW3pY,GkRiKb,e5qFLc,IZT63,UUJqVe,O1Gjze,byfTOb,lsjVmc,xUdipf,ZDZcre,OTA3Ae,ZwDk9d,RyvaUb,fTfGO,m9oV,vjKJJ,y5vRwf,O6y8ed,PrPYRd,MpJwZc,LEikZe,NwH0H,V3dDOb,cYShmd,XVMNvd,KUM7Z,WpP9Yc,qTnoBf,lwddkf,gychg,w9hDv,RMhBfe,qmdT9,SdcwHb,pw70Gc,EFQ78c,Ulmmrd,A7fCU,xQtZb,JNoxi,BVgquf,QIhFr,hc6Ubd,SpsfSb,Z5uLle,BBI74,MdUzUe,zbML3c,zr1jrb,YTxL4,Uas9Hd,OgOVNe,pjICDe:18:418
+_.yg/<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:101:157
+_.Tf@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:265:832
+_.yg@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:101:127
+_.Eg/b[_.ug]/</<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:102:433
+_.sg@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:100:269
+_.Eg/b[_.ug]/<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:102:403
+_.Tf.prototype.flatMap/</<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:266:448
+c@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:265:650
+_.Ag/</<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:268:256
+dm/e.j</e.ha<@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:220:448
+nm@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:223:425
+km@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:223:307
+_.Wl.prototype.Ga@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:223:186
+iaa@https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.ConsentUi.es.ba7it6jEZDs.es5.O/am=AYARcgsAAAAE/d=1/excm=_b,_tp,mainview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlE7GBnPJ82qekzYEz3G7A8T_crPrA/m=_b,_tp:42:454
+
+Dynamically enable window occlusion 1

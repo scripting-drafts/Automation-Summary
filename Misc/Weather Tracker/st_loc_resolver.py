@@ -30,8 +30,8 @@ options.set_preference('browser.cache.memory.enable', False)
 options.set_preference('browser.cache.offline.enable', False)
 options.set_preference('network.http.use-cache', False)
 
-profile_path = open('../Selenium-Module/resources/profile_path', 'r').read()
-path_firefox_binary = Service(path.abspath('../Selenium-Module/tools/geckodriver.exe'))
+profile_path = open('Selenium-Module/resources/profile_path', 'r').read()
+path_firefox_binary = Service(path.abspath('Selenium-Module/tools/geckodriver.exe'))
 
 driver = webdriver.Firefox(service=path_firefox_binary, options=options)
                            # service_log_path=path_geckodriver_log)
@@ -52,11 +52,8 @@ def coords(zone='knokke heist beach', country=None, maps_url = 'https://www.goog
     while redirect == url:
         redirect = driver.current_url
 
-    # log.debug(redirect)
     geoCode = re.findall(geolocation_pattern, redirect)
     lat, lon = geoCode[0][0], geoCode[0][1]
-    # log.debug(lat)
-    # log.debug(lon)
 
     return lat, lon
 
