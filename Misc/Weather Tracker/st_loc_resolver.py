@@ -9,11 +9,21 @@ import re
 from selenium import webdriver
 from os import path
 from tqdm import tqdm
+<<<<<<< HEAD
+=======
+
+region = 'Australia'
+>>>>>>> 3804c98 (update and improvements preview)
 
 log = Logger().logging()
 datalist = []
 geolocation_pattern = re.compile('(-?\d+\.\d+?),(-?\d+\.\d+)')
+<<<<<<< HEAD
 df = open('worldcam_aa.csv', newline='')
+=======
+region_title = region.replace(' ', '_')
+df = open(f'./Processing/Initial_{region_title}.csv', newline='')
+>>>>>>> 3804c98 (update and improvements preview)
 csv_datareader = csv.reader(df, delimiter=';')
 headers = next(csv_datareader, None)
 
@@ -61,7 +71,14 @@ def process_datalist(data=csv_datareader):
     first_run = True
     csv_data = list(csv_datareader)
 
+<<<<<<< HEAD
     for row in csv_data:    # Match[1589:] [1957:]
+=======
+    csv_data = csv_data
+    csv_data_obj = tqdm(csv_data)
+
+    for row in tqdm(csv_data):    # Asia start at 316, Polska 386
+>>>>>>> 3804c98 (update and improvements preview)
         lat, lon = coords(zone=row[2], country=row[1], first_run=True) if first_run else coords(zone=row[2], country=row[1], first_run=False)
         data = {}
 
@@ -74,13 +91,20 @@ def process_datalist(data=csv_datareader):
         data['ref'] = row[3]
 
         datalist.append(data)
-        log.debug('DONE {} of {}: {}'.format(csv_data.index(row), len(csv_data), data['url']))
+        
+        # log.debug('Acquired {} of {}: {}'.format(csv_data.index(row), len(csv_data), data['url']))
+        csv_data_obj.set_description('Acquired {} of {} locations: {}'.format(csv_data.index(row), len(csv_data), data['url']))
+        
         first_run = False
 
 def write_to_csv(datalist):
     keys = datalist[0].keys()
 
+<<<<<<< HEAD
     with open('./coords_asia.csv', 'w', encoding='utf_8_sig', newline='') as f:
+=======
+    with open(f'./Processing/Coords_{region}.csv', 'w', encoding='utf_8_sig', newline='') as f:
+>>>>>>> 3804c98 (update and improvements preview)
         dict_writer = csv.DictWriter(f, keys, dialect='excel', delimiter=';')
         dict_writer.writeheader()
         dict_writer.writerows(datalist)

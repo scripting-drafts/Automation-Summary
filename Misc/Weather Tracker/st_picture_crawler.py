@@ -10,7 +10,13 @@ log = Logger().logging()
 # Copy Image Data-Url
 # data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAQAAAAe/WZNAAAADklEQVR42mNkgAJGDAYAAFEABCaLYqoAAAAASUVORK5CYII=
 
+<<<<<<< HEAD
 df = pd.read_csv('coords_asia.csv', delimiter=';')
+=======
+region = 'Australia'
+
+df = pd.read_csv(f'./Processing/Coords_{region}.csv', delimiter=';')
+>>>>>>> 3804c98 (update and improvements preview)
 datalist = []
 
 def b64_encode(jpg_img):
@@ -21,7 +27,11 @@ def b64_encode(jpg_img):
 def write_to_csv(datalist):
     keys = datalist[0].keys()
 
+<<<<<<< HEAD
     with open('./coords_asia_img.csv', 'w', encoding='utf_8_sig', newline='') as f:
+=======
+    with open(f'./Processing/Complete_{region}.csv', 'w', encoding='utf_8_sig', newline='') as f:
+>>>>>>> 3804c98 (update and improvements preview)
         dict_writer = csv.DictWriter(f, keys, dialect='excel', delimiter=';')
         dict_writer.writeheader()
         dict_writer.writerows(datalist)

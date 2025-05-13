@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 __pycache__
+=======
+__pycache__
+geckodriver.log
+storm*tracker.log
+>>>>>>> 3804c98 (update and improvements preview)

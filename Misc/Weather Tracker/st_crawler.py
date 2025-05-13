@@ -9,6 +9,8 @@ import string
 from st_logger import Logger
 from tqdm import tqdm
 
+region = 'Australia'
+
 log = Logger().logging()
 colorama.init()
 GREEN = colorama.Fore.GREEN
@@ -204,13 +206,18 @@ def crawl(url='https://worldcam.eu/webcams/', regions_list=['Asia'],
         get_all_website_links(u, 'third_level', third_level_links)
         
     else:
-        log.error(f'{RED}[!]urls List is empty: {urls}{RESET}')
+        log.error(f'{RED}[!] urls List is empty: {urls}{RESET}')
 
 
 def write_to_csv(datalist):
     keys = datalist[0].keys()
 
+<<<<<<< HEAD
     with open('./worldcam_aa.csv', 'w', encoding='utf_8_sig', newline='') as f:
+=======
+    region_title = region.replace(' ', '_')
+    with open(f'./Processing/Initial_{region_title}.csv', 'w', encoding='utf_8_sig', newline='') as f:
+>>>>>>> 3804c98 (update and improvements preview)
         dict_writer = csv.DictWriter(f, keys, dialect='excel', delimiter=';')
         dict_writer.writeheader()
         dict_writer.writerows(datalist)
