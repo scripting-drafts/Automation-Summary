@@ -5,4 +5,8 @@ __pycache__
 geckodriver.log
 storm*tracker.log
 storm tracker.log
+Samples/sample_europe.csv
+Samples/Complete_*
+Samples/Europe*
+
 >>>>>>> 3804c98 (update and improvements preview)
