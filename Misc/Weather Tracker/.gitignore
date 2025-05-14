@@ -3,8 +3,7 @@ __pycache__
 =======
 __pycache__
 geckodriver.log
-storm*tracker.log
-storm tracker.log
+storm*
 Samples/sample_europe.csv
 Samples/Complete_*
 Samples/Europe*
