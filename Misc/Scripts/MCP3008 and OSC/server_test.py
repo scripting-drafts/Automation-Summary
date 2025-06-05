@@ -13,21 +13,17 @@ RESET = colorama.Fore.RESET
 RED = colorama.Fore.RED
 
 ip = "127.0.0.1"
-port = 3721
+port = 4444
 
 listener = keyboard.Listener(on_press=on_press)
 listener.start()
 
 def handlerfunction(s, x, y):
-    log.debug('message received {}{}{}'.format(s,x,y))
+    log.debug('message received {} {} {}'.format(s,x,y))
     pass
 
-# Start the system.
 osc_startup()
-
 osc_udp_server(ip, port, "server")
-
-osc_method("/test/*", handlerfunction)
 
 while True:
     osc_method("/test/*", handlerfunction)
