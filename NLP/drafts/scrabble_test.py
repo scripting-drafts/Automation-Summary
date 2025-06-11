@@ -1,3 +1,5 @@
+import itertools
+
 letter_scores = {
     'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
     'D': 2, 'G': 2,
@@ -16,3 +18,24 @@ def scrabble_score(word):
 
 letters = ['A', 'D', 'F', 'B', 'E', 'E', 'U']
 
+vocab = open('../resources/wordlist.txt', 'r').read().split()
+
+combinations = []
+counter = len(letters)
+
+while True:
+    if counter != 1:
+        combinations_1 = set(itertools.combinations(letters, counter))
+        counter -= 1
+    else:
+        break
+
+    combinations.extend(combinations_1)
+
+valuable_combinations = []
+
+for com in combinations:
+    if com in vocab:
+        valuable_combinations.append(com)
+
+print(valuable_combinations)
