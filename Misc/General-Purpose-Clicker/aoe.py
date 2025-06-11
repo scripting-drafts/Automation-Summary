@@ -1,76 +1,89 @@
-import mouse
-import time
-import random
-import numpy as np
-from bool_converter import strtobool
 from sys import exit
-from threading import Thread
 from pynput import keyboard
 from pynput.keyboard import Controller, Key
-import os
+from threading import Thread
+import time
+import mouse
 
-times_to_repeat = 3
-stop_key = chr(ord("C") - 64)
 
-str_food = "cheese steak jimmy's"
-str_wood = "lumberjack"
-str_gold = "robin hood"
-str_stone = "rock on"
-str_car = "how do you turn this on"
-str_instant_build = "aegis"
+# Configuration
+times_to_repeat = 1
+stop_key = chr(ord("C") - 64)      # CTRL+C
 
-# Keyboard controller to type the cheats
-kb_controller = Controller()
-
-# Mapping hotkeys to cheat strings
+# Define the cheat codes
 cheat_map = {
-    (Key.alt_l, '1'): str_food,
-    (Key.alt_l, '2'): str_wood,
-    (Key.alt_l, '3'): str_gold,
-    (Key.alt_l, '4'): str_stone,
-    (Key.alt_l, '5'): str_car,
-    (Key.alt_l, '6'): str_instant_build
+    '1': "cheese steak jimmy's",   # Food
+    '2': "lumberjack",             # Wood
+    '3': "robin hood",             # Gold
+    '4': "rock on",                # Stone
+    '5': "how do you turn this on",  # Cobra car
+    '6': "aegis"                   # Instant build
 }
 
-pressed_keys = set()
+# Track modifier state
+modifiers = {
+    'alt': False
+}
 
-def type_cheat(cheat):
+# Create a keyboard controller
+kb = Controller()
+
+def type_cheat(cheat: str):
+    # Release Alt to avoid Alt+Enter fullscreen bug
+    kb.release(Key.alt_l)
+    kb.release(Key.alt_r)
     for _ in range(times_to_repeat):
-        kb_controller.press(Key.enter)
-        kb_controller.release(Key.enter)
-        kb_controller.type(cheat)
-        kb_controller.press(Key.enter)
-        kb_controller.release(Key.enter)
-        time.sleep(0.1)
+        kb.press(Key.enter)
+        kb.release(Key.enter)
+
+        time.sleep(2)
+        mouse.move(623, 400)
+        mouse.click()
+        
+        kb.type(cheat)
+        
+        kb.press(Key.enter)
+        time.sleep(2)
+        kb.release(Key.enter)
+
+        time.sleep(.1)
+        print(f"AOE Cheat {cheat}")
 
 def on_press(key):
-    '''Handle key press for hotkeys and stop key.'''
-    pressed_keys.add(key)
-
-    # Check for stop key
-    try:
-        if key.char == stop_key:
-            os._exit(1)
-    except AttributeError:
-        if key == stop_key:
-            os._exit(1)
-
-    # Check if Alt+<number> was pressed
-    for (mod, num), cheat in cheat_map.items():
-        if mod in pressed_keys and hasattr(key, 'char') and key.char == num:
-            Thread(target=type_cheat, args=(cheat,), daemon=True).start()
+    if key in [Key.alt_l, Key.alt_r]:
+        modifiers['alt'] = True
 
 def on_release(key):
-    '''Clear key from pressed set on release.'''
-    if key in pressed_keys:
-        pressed_keys.remove(key)
+    if key in [Key.alt_l, Key.alt_r]:
+        modifiers['alt'] = False
+    elif isinstance(key, keyboard.KeyCode):
+        if modifiers['alt'] and key.char in cheat_map:
+            cheat = cheat_map[key.char]
+            Thread(target=type_cheat, args=(cheat,), daemon=True).start()
+    try:
+        if key.char == stop_key:
+        # Optional: allow exiting with ESC
+            print("Exiting...")
+            return False
+        
+    except AttributeError:
+        if key == stop_key:
+            exit(1) 
 
+# Start the global keyboard listener
 listener = keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()
 
-# Keep the program running
-try:
-    while True:
-        time.sleep(1)
-except KeyboardInterrupt:
-    pass
+print("AOE Cheat Hotkeys enabled.")
+print("Use Alt+1 to Alt+6 to type cheats. Press ESC to quit.")
+
+while True:
+    time.sleep(.1)
+
+    
+
+
+
+
+
+
