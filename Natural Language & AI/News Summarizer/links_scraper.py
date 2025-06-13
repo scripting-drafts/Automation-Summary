@@ -13,15 +13,18 @@ while True:
         load_btn = driver.find_element_by_css_selector('.btn.btn-custom > span')
         if 'Loading' in load_btn.text:
             pass
+
         elif 'Load more stories' in load_btn.text:
             load_btn.click()
             load_btn = driver.find_element_by_css_selector('.btn.btn-custom > span')
             if 'Loading' in load_btn.text:
                 pass
+
             else:
                 new_height = driver.execute_script('return document.body.scrollHeight')
                 if new_height == last_height:
                     break
+                
                 last_height = new_height
     except Exception:
         if popup:

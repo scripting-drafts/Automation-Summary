@@ -37,7 +37,7 @@ class SeleniumWireModule:
                                    options=options, executable_path=path_firefox_binary,
                                    service_log_path=path_geckodriver_log)
         driver.implicitly_wait(10)
-        log.debug(f'Webdriver is UP')
+        log.debug('Webdriver is UP')
 
         self.log = log
         self.localhost = localhost
@@ -64,7 +64,7 @@ class SeleniumWireModule:
         attempts_count = 1
         initial_url=self.initial_url
 
-        while not attempts_count > max_attempts_count:
+        while attempts_count < max_attempts_count:
             self.log.debug(f'{self.localhost} <-> {initial_url}')
             self.driver.get(initial_url)
 
@@ -94,7 +94,7 @@ class SeleniumWireModule:
         if not self.is_connected:
             self.log.debug('The driver is not available')
 
-    def tearDown(self):
+    def teardown(self):
         '''Graceful shutdown and status verification'''
         self.driver.quit()
         self.log.debug('Verifying webdriver shutdown')
@@ -113,4 +113,4 @@ if wm_is_up:
     is_connected = wm.connection_attempt()
     wm.requests_vars_get()
 
-wm.tearDown()
+wm.teardown()
