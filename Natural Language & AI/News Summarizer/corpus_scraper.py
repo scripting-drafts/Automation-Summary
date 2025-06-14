@@ -26,7 +26,7 @@ driver.implicitly_wait(10)
 datalist = []
 first_time = True
 
-for link in tqdm(links):
+for link in tqdm(links[201:400]):
     try:
         driver.get(link)
         if first_time == True:
