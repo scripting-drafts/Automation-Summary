@@ -99,7 +99,7 @@ def monitor_network(subnet, interval=10):
             known_devices = current_devices
             time.sleep(interval)
     except KeyboardInterrupt:
-        print("\n👋 Monitoring stopped.")
+        print("\n Monitoring stopped.")
 
 if __name__ == "__main__":
     subnet = "192.168.1.0/24"  # Set to your local subnet
