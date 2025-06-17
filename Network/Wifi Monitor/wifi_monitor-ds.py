@@ -37,7 +37,7 @@ logger = setup_logger()
 
 def log_event(event_type, ip, hostname):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_line = f"{event_type};{ip};{hostname}"
+    log_line = f"{timestamp};{event_type};{ip};{hostname}"
     logger.info(log_line)
 
     color = Fore.GREEN if event_type == "JOIN" else Fore.RED
@@ -96,7 +96,7 @@ def show_uptime_status(interval=5):
             print(f"  {ip:<15} {format_td(ut):>12}")
 
 
-def ping_loop(get_ips, ping_interval=30):
+def ping_loop(get_ips, interval=3):
     while True:
         print("\n🔁 Pinging known devices:")
         alive = 0
@@ -108,7 +108,7 @@ def ping_loop(get_ips, ping_interval=30):
             else:
                 print(f"  {ip:<15} -> {Fore.RED}NO RESPONSE{Style.RESET_ALL}")
         print(f"\n📶 Ping Status: {alive}/{len(get_ips())} responsive\n")
-        time.sleep(ping_interval)
+        time.sleep(interval)
 
 def monitor(ip_range):
     seen = set()
@@ -117,7 +117,7 @@ def monitor(ip_range):
     def get_ips():
         return list(active)
 
-    # threading.Thread(target=ping_loop, args=(get_ips,), daemon=True).start()
+    threading.Thread(target=ping_loop, args=(get_ips,), daemon=True).start()
     threading.Thread(target=show_uptime_status, daemon=True).start()
 
     while True:
