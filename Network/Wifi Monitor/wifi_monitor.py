@@ -24,7 +24,6 @@ hostname_cache = {}
 mac_by_ip = {}
 
 
-
 def setup_logger():
     if not os.path.exists(CSV_LOG):
         with open(CSV_LOG, "w", encoding="utf-8") as f:
@@ -62,14 +61,13 @@ def parse_old_logs():
         for row in reader:
             if len(row) < 4:
                 continue
-            timestamp, event, ip, hostname = row
+            timestamp, event, ip, _ = row
             dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
             if event == "JOIN":
                 joins[ip] = dt
-            elif event == "LEAVE":
-                if ip in joins:
-                    duration = dt - joins.pop(ip)
-                    total_uptime[ip] += duration
+            elif event == "LEAVE" and ip in joins:
+                duration = dt - joins.pop(ip)
+                total_uptime[ip] += duration
     # Any lingering JOINs without a corresponding LEAVE
     for ip, dt in joins.items():
         total_uptime[ip] += datetime.now() - dt
@@ -78,8 +76,11 @@ def parse_old_logs():
 
 def log_event(event_type, ip, hostname):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # log_line = f"{event_type};{ip};{hostname}"
-    
+    log_line = f"{timestamp};{event_type};{ip};{hostname}"
+
+    f = open(CSV_LOG, 'a+')
+    f.write(log_line + '\n')
+    f.close()
 
     color = Fore.GREEN if event_type == "JOIN" else Fore.RED
     label = "[+]" if event_type == "JOIN" else "[-]"
@@ -112,7 +113,7 @@ def format_td(td):
     return f"{h}h{m:02d}m{s:02d}s"
 
 
-def show_uptime_status(interval=5):
+def show_uptime_status(active, known, interval=5):
     while True:
         time.sleep(interval)
         os.system("cls" if os.name == "nt" else "clear")
@@ -141,45 +142,38 @@ def show_uptime_status(interval=5):
             hostname = hostname_cache.get(ip, "Unknown")
             mac = mac_by_ip.get(ip, "N/A")
             uptime = format_td(uptime_snapshot[ip])
-            return hostname, mac, uptime
+            if ip in active:
+                status = "🟢 Online"
+            elif ip in known:
+                status = "🔴 Offline"
+            else:
+                status = "⚪ Unknown"
+            return hostname, mac, uptime, status
 
         print(f"{Fore.GREEN}🟢 Most Active Devices:{Style.RESET_ALL}")
-        print(f"{'IP':<16} {'MAC':<18} {'Hostname':<25} {'Uptime':>10}")
-        print("-" * 75)
+        print(f"{'IP':<16} {'MAC':<18} {'Hostname':<25} {'Uptime':>10} {'Status':>10}")
+        print("-" * 90)
         for ip, _ in most_active:
-            hostname, mac, uptime = get_info(ip)
-            print(f"{ip:<16} {mac:<18} {hostname:<25} {uptime:>10}")
+            hostname, mac, uptime, status = get_info(ip)
+            print(f"{ip:<16} {mac:<18} {hostname:<25} {uptime:>10} {status:>10}")
 
         print(f"\n{Fore.RED}🔴 Least Active Devices:{Style.RESET_ALL}")
-        print(f"{'IP':<16} {'MAC':<18} {'Hostname':<25} {'Uptime':>10}")
-        print("-" * 75)
+        print(f"{'IP':<16} {'MAC':<18} {'Hostname':<25} {'Uptime':>10} {'Status':>10}")
+        print("-" * 90)
         for ip, _ in least_active:
-            hostname, mac, uptime = get_info(ip)
-            print(f"{ip:<16} {mac:<18} {hostname:<25} {uptime:>10}")
+            hostname, mac, uptime, status = get_info(ip)
+            print(f"{ip:<16} {mac:<18} {hostname:<25} {uptime:>10} {status:>10}")
 
         print('\n')
 
 
-
-def ping_loop(get_ips, ping_interval=30):
-    while True:
-        print("\n🔁 Pinging known devices:")
-        alive = 0
-        for ip in get_ips():
-            res = subprocess.run(["ping", "-c", "1", "-W", "1", ip], stdout=subprocess.DEVNULL)
-            if res.returncode == 0:
-                alive += 1
-                print(f"  {ip:<15} -> {Fore.GREEN}ALIVE{Style.RESET_ALL}")
-            else:
-                print(f"  {ip:<15} -> {Fore.RED}NO RESPONSE{Style.RESET_ALL}")
-        print(f"\n📶 Ping Status: {alive}/{len(get_ips())} responsive\n")
-        time.sleep(ping_interval)
-
-
 def monitor(ip_range):
-    active = set()
+    seen = set()
+    active = set()  # Track currently online devices
+    known = set()   # Track known devices
 
-    threading.Thread(target=show_uptime_status, daemon=True).start()
+    # 👇 Pass the active and known sets to the thread
+    threading.Thread(target=show_uptime_status, args=(active, known), daemon=True).start()
 
     while True:
         devices = scan_network(ip_range)
@@ -191,6 +185,7 @@ def monitor(ip_range):
             hostname = get_hostname(ip)
             mac_by_ip[ip] = d["mac"]
             current.add(ip)
+            known.add(ip)
             if ip not in active:
                 log_event("JOIN", ip, hostname)
                 online_since[ip] = now
