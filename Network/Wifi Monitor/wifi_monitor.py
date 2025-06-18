@@ -16,7 +16,6 @@ init(autoreset=True)
 
 CSV_LOG = "wifi_log.csv"
 mon_interval = 0.5  # seconds between scans
-ping_interval = 20  # seconds between ping rounds
 
 total_uptime = defaultdict(timedelta)   # ip -> total time joined
 online_since = {}                       # ip -> datetime
@@ -168,7 +167,6 @@ def show_uptime_status(active, known, interval=5):
 
 
 def monitor(ip_range):
-    seen = set()
     active = set()  # Track currently online devices
     known = set()   # Track known devices
 
