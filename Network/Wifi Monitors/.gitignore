@@ -1,6 +1,8 @@
 device*
 wifi.log
-wifi_log*
+wifi_log.csv
 Graphical/bookmarks-2025-06-19.json
 ignorable*
 perceptible*
+wifi_ap*
+resources/__pycache__
