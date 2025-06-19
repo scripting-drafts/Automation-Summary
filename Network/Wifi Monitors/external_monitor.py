@@ -2,7 +2,7 @@
 import os, re, subprocess, time, threading, csv, argparse
 from datetime import datetime
 from colorama import Fore, Style, init
-from mac_vendors import MAC_VENDOR_PREFIXES
+from resources.mac_vendors import MAC_VENDOR_PREFIXES
 
 init(autoreset=True)
 
@@ -50,27 +50,44 @@ def parse_csv():
         lines = open('/tmp/apdump-01.csv', errors='ignore').read().splitlines()
     except:
         return {}
+
     aps, clients = {}, []
     section = 0
-    for l in lines:
-        if section == 0 and l.strip().startswith('BSSID'): section = 1
-        elif section == 1 and l.strip().startswith('Station MAC'): section = 2
-        elif section == 1:
-            p = re.split(r'\s+', l.strip())
-            if len(p) >= 14:
-                aps[p[0]] = {
-                    'ssid': ' '.join(p[13:]),
-                    'ch': p[3], 'sig': int(p[8]),
-                    'clients': [], 'handshake': False
-                }
+    for line in lines:
+        if not line.strip():
+            continue
+        if 'BSSID' in line and 'Privacy' in line:
+            section = 1
+            continue
+        elif 'Station MAC' in line:
+            section = 2
+            continue
+
+        if section == 1:
+            parts = [x.strip() for x in line.split(',')]
+            if len(parts) < 14:
+                continue
+            bssid = parts[0]
+            try:
+                ch = int(parts[3])
+                sig = int(parts[8])
+            except ValueError:
+                continue
+            ssid = parts[13].strip()
+            aps[bssid] = {'ssid': ssid, 'ch': ch, 'sig': sig, 'clients': [], 'handshake': False}
         elif section == 2:
-            p = re.split(r'\s+', l.strip())
-            if len(p) >= 6:
-                clients.append({'mac': p[0], 'ap': p[3]})
+            parts = [x.strip() for x in line.split(',')]
+            if len(parts) >= 6:
+                client_mac = parts[0]
+                ap_mac = parts[5]
+                clients.append({'mac': client_mac, 'ap': ap_mac})
+
     for c in clients:
         if c['ap'] in aps:
             aps[c['ap']]['clients'].append(c['mac'])
+
     return aps
+
 
 def vendor(mac):
     p = mac.lower().replace('-',':')[:8]
