@@ -6,3 +6,4 @@ ignorable*
 perceptible*
 wifi_ap*
 resources/__pycache__
+handshakes/*
