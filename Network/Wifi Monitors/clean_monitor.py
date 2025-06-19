@@ -180,14 +180,33 @@ def wait_for_csv(timeout=5):
 def main():
     if not os.path.exists(LOG_FILE):
         open(LOG_FILE,'w').write("ts;evt;bssid;ssid;mac;vendor;signal\n")
-    enable_monitor()
+
+    max_attempts = 3
+    attempt = 0
+    while attempt < max_attempts:
+        try:
+            enable_monitor()
+            break
+        except Exception as e:
+            print(Fore.RED + f"[!] Failed to enable monitor mode (attempt {attempt+1}/{max_attempts}): {e}")
+            attempt += 1
+            if attempt == max_attempts:
+                print(Fore.RED + "[!] Could not enable monitor mode. Exiting.")
+                return
+
     proc = start_airodump()
+    time.sleep(2)
+    if proc.poll() is not None:
+        print(Fore.RED + "[!] airodump-ng exited prematurely.")
+        disable_monitor()
+        return
+
     if not wait_for_csv():
         print(Fore.RED + "[!] Timeout waiting for airodump-ng to write CSV output.")
         disable_monitor()
         return
-    state = {'running': True, 'do_h': False, 'do_H': False}
 
+    state = {'running': True, 'do_h': False, 'do_H': False}
     threading.Thread(target=input_listener, args=(state,), daemon=True).start()
 
     try:
@@ -216,6 +235,7 @@ def main():
     finally:
         proc.terminate()
         disable_monitor()
+
 
 if __name__ == "__main__":
     main()
