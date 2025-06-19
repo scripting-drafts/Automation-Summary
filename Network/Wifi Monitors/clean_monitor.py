@@ -2,7 +2,7 @@
 import os, re, subprocess, time, threading, csv, sys, termios, tty, select
 from datetime import datetime
 from colorama import Fore, Style, init
-from mac_vendors import MAC_VENDOR_PREFIXES
+from resources.mac_vendors import MAC_VENDOR_PREFIXES
 
 init(autoreset=True)
 
@@ -131,7 +131,14 @@ def display(aps):
     sorted_aps = sorted(aps.items(), key=lambda item: item[1]['sig'], reverse=True)
     for bssid, info in sorted_aps:
         ssid = info['ssid'][:22].ljust(22)
-        signal = f"{info['sig']}".rjust(5)
+        sig_val = info['sig']
+        if sig_val >= 60:
+            signal = Fore.GREEN + f"{sig_val}".rjust(5) + Style.RESET_ALL
+        elif sig_val >= 40:
+            signal = Fore.YELLOW + f"{sig_val}".rjust(5) + Style.RESET_ALL
+        else:
+            signal = Fore.RED + f"{sig_val}".rjust(5) + Style.RESET_ALL
+
         ch = str(info['ch']).rjust(3)
         num_clients = str(len(info['clients'])).rjust(4)
         hs_flag = Fore.GREEN + '[OK]' if info.get('handshake') else Fore.RED + '[--]'
