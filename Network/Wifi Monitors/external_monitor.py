@@ -22,19 +22,27 @@ def run_cmd(cmd, sudo=False):
 def select_interface():
     out = run_cmd(['iw', 'dev'])
     matches = re.findall(r'Interface\s+(\w+)', out)
-    if not matches:
-        print(Fore.RED + "[!] No wireless interfaces detected."); exit(1)
+    usable = [iface for iface in matches if 'wl' in iface]  # crude filter
+    if not usable:
+        print(Fore.RED + "[!] No usable wireless interfaces found.")
+        exit(1)
     print("Available interfaces:")
-    for i, name in enumerate(matches, 1):
+    for i, name in enumerate(usable, 1):
         print(f"  [{i}] {name}")
     choice = int(input("Choose interface: ")) - 1
-    return matches[choice]
+    return usable[choice]
 
 def enable_monitor():
     global MON_IF
     iface = select_interface()
-    run_cmd(['iw', 'dev', iface, 'interface', 'add', iface + 'mon', 'type', 'monitor'], sudo=True)
-    MON_IF = iface + 'mon'
+
+    try:
+        run_cmd(['airmon-ng', 'start', iface], sudo=True)
+        MON_IF = iface + 'mon' if not iface.endswith('mon') else iface
+    except subprocess.CalledProcessError as e:
+        print(Fore.RED + f"[!] Failed to enable monitor mode on {iface}")
+        print(Fore.RED + f"    ↳ Error: {e}")
+        exit(1)
 
 def disable_monitor():
     if MON_IF:
