@@ -120,14 +120,24 @@ def display(aps):
     os.system('clear')
     now = datetime.now().strftime("%H:%M:%S")
     print(Fore.CYAN + f"[ WIFI MONITOR {now} ]" + Style.RESET_ALL)
-    print(f"{'SSID':<20}{'BSSID':<20}{'SIG':<5}{'CLIENTS':<8} FLAG")
-    print('-'*60)
-    for b,info in aps.items():
-        flag = Fore.GREEN + "[OK]" if info.get('handshake') else "    "
-        print(f"{info['ssid'][:20]:<20}{b:<20}{info['sig']:<5}{len(info['clients']):<8}{flag}")
-        for m in info['clients']:
-            print("  " + m + " (" + vendor(m) + ")")
-    print("\n[h] deauth+handshake selected   [H] for strong APs   [q] quit")
+
+    print(f"{'SSID':<22} {'BSSID':<20} {'SIG':>5} {'CH':>3} {'#CL':>4} {'HS':>4}")
+    print('-' * 70)
+
+    for bssid, info in aps.items():
+        ssid = info['ssid'][:22].ljust(22)
+        signal = f"{info['sig']}".rjust(5)
+        ch = str(info['ch']).rjust(3)
+        num_clients = str(len(info['clients'])).rjust(4)
+        hs_flag = Fore.GREEN + '[OK]' if info.get('handshake') else Fore.RED + '[--]'
+        print(f"{ssid} {bssid:<20} {signal} {ch} {num_clients}  {hs_flag}")
+
+        for mac in info['clients']:
+            vend = vendor(mac)
+            print(Fore.LIGHTBLACK_EX + f"    ↳ {mac:<17} ({vend})" + Style.RESET_ALL)
+
+    print("\n" + Fore.YELLOW + "[h] deauth+capture selected clients   [H] strong APs   [q] quit" + Style.RESET_ALL)
+
 
 def input_listener(state):
     while state['running']:
