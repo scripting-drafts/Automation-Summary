@@ -170,11 +170,22 @@ def input_listener(state):
         elif k == 'h': state['do_h'] = True
         elif k == 'H': state['do_H'] = True
 
+def wait_for_csv(timeout=5):
+    for _ in range(timeout * 2):
+        if os.path.exists('/tmp/apdump-01.csv'):
+            return True
+        time.sleep(0.5)
+    return False
+
 def main():
     if not os.path.exists(LOG_FILE):
         open(LOG_FILE,'w').write("ts;evt;bssid;ssid;mac;vendor;signal\n")
     enable_monitor()
     proc = start_airodump()
+    if not wait_for_csv():
+        print(Fore.RED + "[!] Timeout waiting for airodump-ng to write CSV output.")
+        disable_monitor()
+        return
     state = {'running': True, 'do_h': False, 'do_H': False}
 
     threading.Thread(target=input_listener, args=(state,), daemon=True).start()
