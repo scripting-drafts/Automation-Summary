@@ -37,7 +37,7 @@ def enable_monitor():
         MON_IF = iface + 'mon' if not iface.endswith('mon') else iface
     except subprocess.CalledProcessError as e:
         print(Fore.RED + f"[!] Failed to enable monitor mode on {iface}")
-        print(Fore.RED + f"    \u2192 Error: {e}")
+        print(Fore.RED + f"    → Error: {e}")
         exit(1)
 
 def disable_monitor():
@@ -51,7 +51,8 @@ def start_airodump():
 
 def parse_csv():
     try:
-        lines = open('/tmp/apdump-01.csv', errors='ignore').read().splitlines()
+        with open('/tmp/apdump-01.csv', errors='ignore') as f:
+            lines = f.read().splitlines()
     except:
         return {}
 
@@ -125,7 +126,10 @@ def display(aps):
     print(Fore.CYAN + f"[ WIFI MONITOR {now} ]" + Style.RESET_ALL)
     print(f"{'SSID':<22} {'BSSID':<20} {'SIG':>5} {'CH':>3} {'#CL':>4} {'HS':>4}")
     print('-' * 70)
-    for bssid, info in aps.items():
+    if not aps:
+        print("[ No Access Points found yet... scanning... ]")
+    sorted_aps = sorted(aps.items(), key=lambda item: item[1]['sig'], reverse=True)
+    for bssid, info in sorted_aps:
         ssid = info['ssid'][:22].ljust(22)
         signal = f"{info['sig']}".rjust(5)
         ch = str(info['ch']).rjust(3)
@@ -134,7 +138,7 @@ def display(aps):
         print(f"{ssid} {bssid:<20} {signal} {ch} {num_clients}  {hs_flag}")
         for mac in info['clients']:
             vend = vendor(mac)
-            print(Fore.LIGHTBLACK_EX + f"    \u2192 {mac:<17} ({vend})" + Style.RESET_ALL)
+            print(Fore.LIGHTBLACK_EX + f"    → {mac:<17} ({vend})" + Style.RESET_ALL)
     print("\n" + Fore.YELLOW + "[h] deauth+capture selected clients   [H] strong APs   [q] quit" + Style.RESET_ALL)
 
 def getch(timeout=0.1):
