@@ -37,7 +37,22 @@ def enable_monitor():
     iface = select_interface()
     try:
         run_cmd(['airmon-ng', 'start', iface], sudo=True)
-        MON_IF = iface + 'mon' if not iface.endswith('mon') else iface
+        # After enabling monitor mode, detect which interface is in monitor mode
+        out = run_cmd(['iw', 'dev'])
+        matches = re.findall(r'Interface\s+(\w+)', out)
+        # Find interfaces in monitor mode:
+        mon_ifaces = []
+        for mon_iface in matches:
+            info = run_cmd(['iw', 'dev', mon_iface, 'info'])
+            if 'type monitor' in info:
+                mon_ifaces.append(mon_iface)
+        if mon_ifaces:
+            MON_IF = mon_ifaces[0]
+            print(Fore.GREEN + f"[*] Monitor mode enabled on interface: {MON_IF}")
+        else:
+            # fallback to original iface
+            MON_IF = iface
+            print(Fore.YELLOW + f"[*] Could not detect monitor mode interface, using {MON_IF}")
     except subprocess.CalledProcessError as e:
         print(Fore.RED + f"[!] Failed to enable monitor mode on {iface}")
         print(Fore.RED + f"    → Error: {e}")
