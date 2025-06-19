@@ -10,6 +10,33 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 import os
 import csv
+# Try importing full vendor database, fallback to built-in minimal set
+try:
+    from Extra.mac_vendors import MAC_VENDOR_PREFIXES
+except ImportError:
+    MAC_VENDOR_PREFIXES = {
+        "b8:be:f4": "Apple, Inc.",
+        "1c:b0:44": "Cisco Systems",
+        "00:1a:2b": "Intel Corporation",
+        "ac:de:48": "Samsung Electronics",
+        "3c:5a:b4": "Amazon Technologies",
+        "50:6b:4b": "Google, Inc.",
+        "fc:fb:fb": "Cisco Systems",
+    }
+
+def guess_os_from_mac(mac):
+    """
+    Attempts to map a MAC prefix to a known vendor (used as OS hint).
+    Handles common MAC formatting issues gracefully.
+    """
+    if not mac or len(mac) < 8:
+        return "Unknown"
+    normalized = mac.lower().replace('-', ':')
+    parts = normalized.split(':')
+    if len(parts) < 3:
+        return "Unknown"
+    prefix = ':'.join(parts[:3])
+    return MAC_VENDOR_PREFIXES.get(prefix, "Unknown")
 
 init(autoreset=True)
 
@@ -22,18 +49,6 @@ online_since = {}                       # ip -> datetime
 hostname_cache = {}                     # ip -> hostname
 mac_by_ip = {}                          # ip -> mac
 os_cache = {}                          # ip -> os/vendor info
-
-MAC_VENDOR_PREFIXES = {
-    "b8:be:f4": "Apple, Inc.",
-    "1c:b0:44": "Cisco Systems",
-    "00:1a:2b": "Intel Corporation",
-    "ac:de:48": "Samsung Electronics",
-    # Add more prefixes as desired...
-}
-
-def guess_os_from_mac(mac):
-    prefix = mac.lower()[:8]
-    return MAC_VENDOR_PREFIXES.get(prefix, "Unknown")
 
 def parse_logs_for_uptime():
     """
