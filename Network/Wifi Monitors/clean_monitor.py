@@ -57,9 +57,10 @@ def cleanup():
     disable_monitor()
 
 def start_airodump():
-    return subprocess.Popen(['sudo','airodump-ng','--write-interval','1',
-                             '--write','/tmp/apdump','--output-format','csv', MON_IF],
+    return subprocess.Popen(['sudo', 'airodump-ng', '--ignore-negative-one', '--write-interval', '1',
+                             '--write', '/tmp/apdump', '--output-format', 'csv', MON_IF],
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 
 def wait_for_csv(timeout=5):
     for _ in range(timeout * 2):
@@ -205,6 +206,7 @@ def main():
     while attempt < max_attempts:
         try:
             enable_monitor()
+            time.sleep(3)
             break
         except Exception as e:
             print(Fore.RED + f"[!] Failed to enable monitor mode (attempt {attempt+1}/{max_attempts}): {e}")
