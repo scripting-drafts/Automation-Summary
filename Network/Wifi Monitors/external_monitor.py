@@ -139,12 +139,33 @@ def display(aps):
     print("\n" + Fore.YELLOW + "[h] deauth+capture selected clients   [H] strong APs   [q] quit" + Style.RESET_ALL)
 
 
+import sys
+import termios
+import tty
+import select
+
+def getch(timeout=0.1):
+    fd = sys.stdin.fileno()
+    old = termios.tcgetattr(fd)
+    try:
+        tty.setcbreak(fd)
+        rlist, _, _ = select.select([fd], [], [], timeout)
+        if rlist:
+            return sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old)
+    return None
+
 def input_listener(state):
     while state['running']:
-        k = input().strip().lower()
+        k = getch()
+        if not k:
+            continue
+        k = k.lower()
         if k == 'q': state['running'] = False
-        if k == 'h': state['do_h'] = True
-        if k == 'h' and state['do_h']: state['do_H'] = True
+        elif k == 'h': state['do_h'] = True
+        elif k == 'H': state['do_H'] = True
+
 
 def main():
     if not os.path.exists(LOG_FILE):
