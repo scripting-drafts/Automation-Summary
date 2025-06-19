@@ -13,8 +13,7 @@ import csv
 
 init(autoreset=True)
 
-CSV_LOG = "wifi_log.csv"
-UPTIME_FILE = "uptime_data.csv"
+CSV_LOG = "wifi.log"              # unified log file with uptime_seconds column
 mon_interval = 2  # seconds between scans
 
 # State
@@ -22,12 +21,64 @@ total_uptime = defaultdict(timedelta)   # ip -> total time joined
 online_since = {}                       # ip -> datetime
 hostname_cache = {}                     # ip -> hostname
 mac_by_ip = {}                          # ip -> mac
+os_cache = {}                          # ip -> os/vendor info
 
+MAC_VENDOR_PREFIXES = {
+    "b8:be:f4": "Apple, Inc.",
+    "1c:b0:44": "Cisco Systems",
+    "00:1a:2b": "Intel Corporation",
+    "ac:de:48": "Samsung Electronics",
+    # Add more prefixes as desired...
+}
+
+def guess_os_from_mac(mac):
+    prefix = mac.lower()[:8]
+    return MAC_VENDOR_PREFIXES.get(prefix, "Unknown")
+
+def parse_logs_for_uptime():
+    """
+    Reconstruct total_uptime and online_since from the wifi.log file.
+    """
+    if not os.path.isfile(CSV_LOG):
+        return
+
+    joins = {}  # ip -> datetime join time
+    total_uptime.clear()
+    online_since.clear()
+
+    with open(CSV_LOG, newline='', encoding="utf-8") as f:
+        reader = csv.reader(f, delimiter=';')
+        next(reader, None)  # skip header
+        for row in reader:
+            if len(row) < 6:
+                continue
+            timestamp_str, event, ip, mac, hostname, os_info = row[:6]
+            try:
+                ts = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
+            except Exception:
+                continue
+
+            os_cache[ip] = os_info
+            mac_by_ip[ip] = mac
+            hostname_cache[ip] = hostname
+
+            if event == "JOIN":
+                joins[ip] = ts
+            elif event == "LEAVE":
+                if ip in joins:
+                    duration = ts - joins[ip]
+                    total_uptime[ip] += duration
+                    joins.pop(ip, None)
+
+    now = datetime.now()
+    for ip, join_time in joins.items():
+        total_uptime[ip] += now - join_time
+        online_since[ip] = join_time
 
 def setup_logger():
     if not os.path.exists(CSV_LOG):
         with open(CSV_LOG, "w", encoding="utf-8") as f:
-            f.write("timestamp;event;ip;mac;hostname\n")
+            f.write("timestamp;event;ip;mac;hostname;os;uptime_seconds\n")
 
     logger = logging.getLogger("NetworkMonitor")
     logger.setLevel(logging.INFO)
@@ -45,10 +96,12 @@ def setup_logger():
 
     return logger
 
-
-def log_event(event_type, ip, mac, hostname):
+def log_event(event_type, ip, mac, hostname, uptime_seconds=None):
+    os_info = guess_os_from_mac(mac)
+    os_cache[ip] = os_info
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_line = f"{timestamp};{event_type};{ip};{mac};{hostname}"
+    uptime_str = str(uptime_seconds) if uptime_seconds is not None and uptime_seconds != "" else "None"
+    log_line = f"{timestamp};{event_type};{ip};{mac};{hostname};{os_info};{uptime_str}"
     with open(CSV_LOG, 'a+', encoding='utf-8') as f:
         f.write(log_line + '\n')
 
@@ -61,8 +114,7 @@ def log_event(event_type, ip, mac, hostname):
         label = "[ - ]"
         status = Fore.YELLOW + "LEAVE"
 
-    print(f"{color}{label}{Style.RESET_ALL}  {timestamp:<20}  |  {status:<6}{Style.RESET_ALL}  |  IP: {ip:<15}  |  MAC: {mac:<17}  |  Host: {hostname}")
-
+    print(f"{color}{label}{Style.RESET_ALL}  {timestamp:<20}  |  {status:<6}{Style.RESET_ALL}  |  IP: {ip:<15}  |  MAC: {mac:<17}  |  Host: {hostname:<20}  |  OS: {os_info}")
 
 def scan_network(ip_range):
     arp = scapy.ARP(pdst=ip_range)
@@ -70,7 +122,6 @@ def scan_network(ip_range):
     packet = ether / arp
     answered = scapy.srp(packet, timeout=1, verbose=False)[0]
     return [{"ip": rcv.psrc, "mac": rcv.hwsrc} for _, rcv in answered]
-
 
 def get_hostname(ip):
     if ip in hostname_cache:
@@ -82,38 +133,11 @@ def get_hostname(ip):
     hostname_cache[ip] = hostname
     return hostname
 
-
 def format_td(td):
     s = int(td.total_seconds())
     h, rem = divmod(s, 3600)
     m, s = divmod(rem, 60)
     return f"{h}h{m:02d}m{s:02d}s"
-
-
-def save_uptime():
-    with open(UPTIME_FILE, "w", newline='', encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter=';')
-        for ip, td in total_uptime.items():
-            writer.writerow([ip, int(td.total_seconds())])
-
-
-def load_uptime():
-    if not os.path.isfile(UPTIME_FILE):
-        return
-    with open(UPTIME_FILE, newline='', encoding="utf-8") as f:
-        reader = csv.reader(f, delimiter=';')
-        for row in reader:
-            if len(row) != 2:
-                continue
-            ip, seconds = row
-            total_uptime[ip] = timedelta(seconds=int(seconds))
-
-
-def uptime_autosave():
-    while True:
-        save_uptime()
-        time.sleep(30)
-
 
 def display_status():
     while True:
@@ -121,7 +145,7 @@ def display_status():
         os.system("cls" if os.name == "nt" else "clear")
         now = datetime.now()
 
-        print(f"\n{Fore.BLUE}{'=' * 80}{Style.RESET_ALL}")
+        print(f"\n{Fore.BLUE}{'=' * 100}{Style.RESET_ALL}")
         print(f"{Fore.BLUE}{Back.BLACK}[ DASHBOARD ] Device Uptime Summary ({now.strftime('%H:%M:%S')}){Style.RESET_ALL}\n")
 
         uptime_snapshot = {}
@@ -144,31 +168,30 @@ def display_status():
             hostname = hostname_cache.get(ip, "Unresolved")
             mac = mac_by_ip.get(ip, "N/A")
             uptime = format_td(uptime_snapshot[ip])
+            os_info = os_cache.get(ip, "Unknown")
             if ip in online_since:
                 status = Fore.LIGHTGREEN_EX + Back.BLACK + " ONLINE  "
             else:
                 status = Fore.LIGHTRED_EX + Back.BLACK + " OFFLINE "
-            return hostname, mac, uptime, status
+            return hostname, mac, uptime, status, os_info
 
-        print(f"{Fore.LIGHTGREEN_EX}{Back.BLACK}[ MOST ACTIVE DEVICES ]{Style.RESET_ALL}\n")
-        print(f"{'IP':<18} {'MAC':<20} {'Hostname':<28} {'Uptime':>12} {'Status':>10}")
-        print("-" * 90)
+        print(f"{Fore.LIGHTGREEN_EX}{Back.BLACK} MOST ACTIVE DEVICES {Style.RESET_ALL}\n")
+        print(f"{'IP':<18} {'MAC':<20} {'Hostname':<28} {'Uptime':>12} {'Status':>10} {'OS/Vendor':<20}")
+        print("-" * 110)
         for ip, _ in most_active:
-            hostname, mac, uptime, status = get_info(ip)
-            print(f"{ip:<18} {mac:<20} {hostname:<28} {uptime:>12} {status:>10}")
+            hostname, mac, uptime, status, os_info = get_info(ip)
+            print(f"{ip:<18} {mac:<20} {hostname:<28} {uptime:>12} {status:>10} {os_info:<20}")
 
-        print(f"\n{Fore.LIGHTRED_EX}{Back.BLACK}[ LEAST ACTIVE DEVICES ]{Style.RESET_ALL}\n")
-        print(f"{'IP':<18} {'MAC':<20} {'Hostname':<28} {'Uptime':>12} {'Status':>10}")
-        print("-" * 90)
+        print(f"\n{Fore.LIGHTRED_EX}{Back.BLACK} LEAST ACTIVE DEVICES {Style.RESET_ALL}\n")
+        print(f"{'IP':<18} {'MAC':<20} {'Hostname':<28} {'Uptime':>12} {'Status':>10} {'OS/Vendor':<20}")
+        print("-" * 110)
         for ip, _ in least_active:
-            hostname, mac, uptime, status = get_info(ip)
-            print(f"{ip:<18} {mac:<20} {hostname:<28} {uptime:>12} {status:>10}")
+            hostname, mac, uptime, status, os_info = get_info(ip)
+            print(f"{ip:<18} {mac:<20} {hostname:<28} {uptime:>12} {status:>10} {os_info:<20}")
 
         print('\n')
 
-
 def monitor(ip_range):
-    threading.Thread(target=uptime_autosave, daemon=True).start()
     threading.Thread(target=display_status, daemon=True).start()
 
     while True:
@@ -181,23 +204,25 @@ def monitor(ip_range):
             mac = d["mac"]
             seen_ips.add(ip)
             mac_by_ip[ip] = mac
-            get_hostname(ip)
+            hostname = get_hostname(ip)
+            os_cache[ip] = guess_os_from_mac(mac)
 
             if ip not in online_since:
                 online_since[ip] = now
-                log_event("JOIN", ip, mac, hostname_cache[ip])
+                log_event("JOIN", ip, mac, hostname)
 
-        # Detect LEAVES
         for ip in list(online_since.keys()):
             if ip not in seen_ips:
-                total_uptime[ip] += now - online_since.pop(ip)
-                log_event("LEAVE", ip, mac_by_ip.get(ip, "N/A"), hostname_cache.get(ip, "Unresolved"))
+                duration = now - online_since.pop(ip)
+                total_uptime[ip] += duration
+                uptime_sec = int(duration.total_seconds())
+                log_event("LEAVE", ip, mac_by_ip.get(ip, "N/A"), hostname_cache.get(ip, "Unresolved"), uptime_seconds=uptime_sec)
 
         time.sleep(mon_interval)
 
-
 if __name__ == "__main__":
+    setup_logger()
+    parse_logs_for_uptime()
     subnet = "192.168.1.1/24"
     print(f"{Fore.BLUE}{Back.BLACK}[ * ]{Style.RESET_ALL} Monitoring {subnet}...\n")
-    load_uptime()
     monitor(subnet)
