@@ -55,8 +55,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-LIST_OF_ADMINS = [19419361]
-TOKEN = '449394451:AAF70wCzhZer4EfSzvMyLXTs5yL1WsH8O1M'
+LIST_OF_ADMINS = 
+TOKEN = 
 
 import time
 import socket
