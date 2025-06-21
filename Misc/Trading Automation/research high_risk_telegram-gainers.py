@@ -1,4 +1,4 @@
-# --- HIGH RISK TRADING BOT with TELEGRAM, STREAMLIT, SMART SELL/CONVERT, PNL CUTS ---
+# --- HIGH RISK TRADING BOT with AI RESEARCH LOGGING ---
 
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
@@ -6,47 +6,82 @@ import pandas as pd
 import threading
 import time
 from datetime import datetime
-import json, os, csv, sys, decimal
+import json, os, decimal, requests, csv, sys
+
+# ==== Telegram Setup ====
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-from secret import API_KEY, API_SECRET, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
+# ------------------ USER SETTINGS ------------------------
+from secret import API_KEY, API_SECRET, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 BASE_ASSET = 'USDC'
 TRADING_INTERVAL = 5  # seconds
 
 client = Client(API_KEY, API_SECRET)
 balance = {'usd': 0.0}
 positions = {}
-
-TRADE_CSV = "trades.csv"
 trade_log = []
 SYMBOLS = []
 
-def resume_positions_from_binance():
+# -------------- AI-Research Logging Setup -----------------
+TRADE_LOG_FILE = "trades_detailed.csv"
+from symbol_map import usdc_symbols
+COINGECKO_SYMBOL_MAP = usdc_symbols
+
+def get_coin_market_cap(symbol):
+    coingecko_id = COINGECKO_SYMBOL_MAP.get(symbol, "")
+    if not coingecko_id:
+        return None
     try:
-        account_info = client.get_account()
-        balances = {a["asset"]: float(a["free"]) for a in account_info["balances"] if float(a["free"]) > 0.0001}
-
-        positions = {}
-        for asset, amount in balances.items():
-            if asset == "USDC":
-                continue  # skip the base coin
-            symbol = f"{asset}USDC"
-            try:
-                price = float(client.get_symbol_ticker(symbol=symbol)["price"])
-                positions[symbol] = {
-                    "entry": price,
-                    "qty": float(amount),
-                    "timestamp": time.time()
-                }
-            except:
-                continue  # skip symbols that aren't tradable
-        print(f"[RESUME] Found {len(positions)} open position(s) from Binance balances.")
-        return positions
+        url = f"https://api.coingecko.com/api/v3/coins/{coingecko_id}"
+        r = requests.get(url)
+        data = r.json()
+        cap = data['market_data']['market_cap']['usd']
+        return cap
     except Exception as e:
-        print(f"[ERROR] Resuming from Binance failed: {e}")
-        return {}
+        print(f"[COIN CAP ERROR] {symbol}: {e}")
+        return None
 
+def get_simple_volatility(symbol, lookback_seconds=300):
+    try:
+        klines = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE, limit=lookback_seconds // 60)
+        closes = [float(k[4]) for k in klines]
+        if len(closes) < 2:
+            return 0.0
+        return (max(closes) - min(closes)) / closes[0]
+    except Exception as e:
+        print(f"[VOL ERROR] {symbol}: {e}")
+        return None
+
+def log_trade_ai(symbol, entry, exit_price, qty, trade_time, exit_time, fees=0, tax=0):
+    market_cap = get_coin_market_cap(symbol)
+    volatility = get_simple_volatility(symbol)
+    pnl = (exit_price - entry) * qty - fees - tax
+    duration_sec = int(exit_time - trade_time)
+    trade = {
+        'Time': datetime.fromtimestamp(trade_time).strftime("%Y-%m-%d %H:%M:%S"),
+        'Symbol': symbol,
+        'Entry': round(entry, 8),
+        'Exit': round(exit_price, 8),
+        'Qty': round(qty, 8),
+        'PnL $': round(pnl, 8),
+        'Duration (s)': duration_sec,
+        'Market Cap': market_cap,
+        'Volatility': volatility,
+        'Fees': fees,
+        'Tax': tax
+    }
+    try:
+        file_exists = os.path.isfile(TRADE_LOG_FILE)
+        with open(TRADE_LOG_FILE, "a", newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=list(trade.keys()))
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(trade)
+    except Exception as e:
+        print(f"[LOG ERROR] {e}")
+
+# ========== Trading Utilities ===============
 def lot_step_size_for(symbol):
     try:
         info = client.get_symbol_info(symbol)
@@ -72,27 +107,17 @@ def quote_precision_for(symbol):
     try:
         info = client.get_symbol_info(symbol)
         for f in info['filters']:
-            if f['filterType'] == 'PRICE_FILTER':
-                step = str(f['tickSize'])
+            if f['filterType'] == 'LOT_SIZE':
+                step = str(f['stepSize'])
                 if '.' in step:
                     return len(step.split('.')[1].rstrip('0'))
         return 2
     except Exception:
         return 2
 
-def binance_convert(asset_from, asset_to, amount):
-    try:
-        print(f"[CONVERT] Would attempt to convert {amount} {asset_from} to {asset_to}")
-        # Placeholder for real convert endpoint!
-        return True, f"Converted {amount} {asset_from} to {asset_to}"
-    except BinanceAPIException as e:
-        return False, f"[CONVERT ERROR] {asset_from}->{asset_to}: {e}"
-    except Exception as e:
-        return False, f"[CONVERT ERROR] {asset_from}->{asset_to}: {e}"
-
 def get_bot_state():
     if not os.path.exists("bot_state.json"):
-        return {"balance": 0, "positions": {}, "log": [], "actions": []}
+        return {"balance": 0, "positions": {}, "paused": False, "log": [], "actions": []}
     with open("bot_state.json", "r") as f:
         return json.load(f)
 
@@ -107,22 +132,23 @@ def sync_state():
     state["log"] = trade_log[-100:]
     save_bot_state(state)
 
-def load_trade_history():
-    logs = []
-    if os.path.exists(TRADE_CSV):
-        with open(TRADE_CSV, "r") as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if len(row) == 6:
-                    logs.append({
-                        "Time": row[0],
-                        "Symbol": row[1],
-                        "Entry": float(row[2]),
-                        "Exit": float(row[3]),
-                        "Qty": float(row[4]),
-                        "PnL $": float(row[5]),
-                    })
-    return logs
+def process_actions():
+    state = get_bot_state()
+    actions = state.get("actions", [])
+    performed = []
+    for act in actions:
+        if act["type"] == "rotate":
+            rotate_positions()
+            performed.append(act)
+        elif act["type"] == "invest":
+            invest_gainers()
+            performed.append(act)
+        elif act["type"] == "sell_all":
+            sell_results = sell_everything()
+            state["last_sell_report"] = sell_results
+            performed.append(act)
+    state["actions"] = [a for a in actions if a not in performed]
+    save_bot_state(state)
 
 def fetch_usdc_balance():
     try:
@@ -142,8 +168,39 @@ def get_top_gainers(limit=10):
         print(f"[ERROR] Failed to fetch top gainers: {e}")
         return []
 
+def resume_positions_from_binance():
+    try:
+        account_info = client.get_account()
+        balances = {
+            a["asset"]: float(a["free"])
+            for a in account_info["balances"]
+            if float(a["free"]) > 0.0001 and a["asset"] != BASE_ASSET
+        }
+        resumed = {}
+        for asset, amount in balances.items():
+            symbol = f"{asset}{BASE_ASSET}"
+            try:
+                price = float(client.get_symbol_ticker(symbol=symbol)["price"])
+                resumed[symbol] = {
+                    "entry": price,
+                    "qty": amount,
+                    "timestamp": time.time(),
+                    "trade_time": time.time()
+                }
+            except:
+                continue
+        return resumed
+    except Exception as e:
+        return {}
+
 def get_latest_price(symbol):
     return float(client.get_symbol_ticker(symbol=symbol)["price"])
+
+def calculate_trade_amount(n=1):
+    fetch_usdc_balance()
+    if n == 0:
+        return 0.0
+    return round((balance['usd'] / n) * 0.98, 2)
 
 def min_notional_for(symbol):
     try:
@@ -169,60 +226,31 @@ def buy(symbol, amount=None):
         qty = float(order['executedQty'])
         qty = round_qty(symbol, qty)
         balance['usd'] -= trade_amount
-        print(f"[BUY] {symbol}: Bought {qty} at {price} for ${trade_amount}")
-        return {'entry': price, 'qty': qty, 'timestamp': time.time()}
+        positions[symbol] = {'entry': price, 'qty': qty, 'timestamp': time.time(), 'trade_time': time.time()}
+        return positions[symbol]
     except BinanceAPIException as e:
         print(f"[BUY ERROR] {symbol}: {e}")
         return None
-    except Exception as e:
-        print(f"[BUY ERROR] {symbol}: {e}")
-        return None
 
-def sell_or_convert(symbol, qty, prefer='USDC'):
-    messages = []
-    result = None
-    sell_qty = round_qty(symbol, qty)
-    if sell_qty == 0:
-        msg = f"[SELL ERROR] {symbol}: Qty after rounding is 0."
-        print(msg)
-        messages.append(msg)
-        return None, messages
-    # Market sell attempt
+def sell(symbol, qty):
     try:
+        sell_qty = round_qty(symbol, qty)
+        if sell_qty == 0:
+            print(f"[SELL ERROR] {symbol}: Qty after rounding is 0.")
+            return None, 0, 0
         order = client.order_market_sell(symbol=symbol, quantity=sell_qty)
         price = float(order['fills'][0]['price'])
-        messages.append(f"[SELL] {symbol}: Sold {sell_qty} at {price}")
-        return price, messages
+        fee = sum(float(f['commission']) for f in order['fills']) if "fills" in order else 0
+        return price, fee, 0
     except BinanceAPIException as e:
-        msg = f"[SELL ERROR] {symbol}: {e}"
-        print(msg)
-        messages.append(msg)
-    except Exception as e:
-        msg = f"[SELL ERROR] {symbol}: {e}"
-        print(msg)
-        messages.append(msg)
-    # Fallback to convert
-    base_asset = symbol.replace('USDC', '')
-    if prefer == 'USDC':
-        to_asset = 'USDC'
-    else:
-        to_asset = 'BTC'
-    success, msg = binance_convert(base_asset, to_asset, sell_qty)
-    messages.append(msg)
-    if success:
-        print(f"[CONVERT] {symbol}: {base_asset} -> {to_asset} success")
-        return None, messages
-    if prefer == 'USDC':
-        success, msg = binance_convert(base_asset, 'BTC', sell_qty)
-        messages.append(msg)
-        if success:
-            print(f"[CONVERT] {symbol}: {base_asset} -> BTC success")
-    return None, messages
+        print(f"[SELL ERROR] {symbol}: {e}")
+        return None, 0, 0
 
-def log_trade(symbol, entry, exit_price, qty):
+def log_trade(symbol, entry, exit_price, qty, trade_time, exit_time, fees=0, tax=0):
+    # Log simple and AI format
     pnl = (exit_price - entry) * qty
     trade = {
-        'Time': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        'Time': datetime.fromtimestamp(trade_time).strftime("%Y-%m-%d %H:%M:%S"),
         'Symbol': symbol,
         'Entry': round(entry, 4),
         'Exit': round(exit_price, 4),
@@ -231,16 +259,38 @@ def log_trade(symbol, entry, exit_price, qty):
     }
     trade_log.append(trade)
     try:
-        with open(TRADE_CSV, "a") as f:
+        with open("trades.csv", "a") as f:
             f.write(f"{trade['Time']},{symbol},{entry:.4f},{exit_price:.4f},{qty:.6f},{pnl:.2f}\n")
     except Exception:
         pass
+    # AI/detailed log
+    log_trade_ai(symbol, entry, exit_price, qty, trade_time, exit_time, fees, tax)
 
-def calculate_trade_amount(n=1):
-    fetch_usdc_balance()
-    if n == 0:
-        return 0.0
-    return round((balance['usd'] / n) * 0.98, 2)
+def rotate_positions():
+    not_sold = []
+    for symbol in list(positions.keys()):
+        qty = positions[symbol]["qty"]
+        entry = positions[symbol]["entry"]
+        trade_time = positions[symbol]["trade_time"]
+        sell_qty = round_qty(symbol, qty)
+        if sell_qty == 0:
+            print(f"[SKIP] {symbol}: Qty after rounding is 0. Not attempting to sell anymore.")
+            del positions[symbol]
+            continue
+        try:
+            exit_price, fee, tax = sell(symbol, qty)
+            if exit_price:
+                log_trade(symbol, entry, exit_price, qty, trade_time, time.time(), fee, tax)
+                del positions[symbol]
+            else:
+                not_sold.append(symbol)
+        except Exception as e:
+            print(f"[ERROR] Rotate failed for {symbol}: {e}")
+            not_sold.append(symbol)
+    time.sleep(2)
+    invest_gainers()
+    return not_sold
+
 
 def refresh_symbols():
     global SYMBOLS
@@ -271,53 +321,33 @@ def invest_gainers():
         if symbol in positions:
             continue
         try:
-            pos = buy(symbol, amount=amount_per_coin)
-            if pos:
-                positions[symbol] = pos
+            buy(symbol, amount=amount_per_coin)
         except Exception as e:
             print(f"[ERROR] Invest gainers failed for {symbol}: {e}")
 
 def sell_everything():
-    """
-    Attempts to market sell every position. If it fails,
-    attempts to convert to USDC, then to BTC. Logs each step.
-    Returns a list of status messages.
-    """
-    summary = []
+    not_sold = []
     for symbol in list(positions.keys()):
+        qty = positions[symbol]["qty"]
+        entry = positions[symbol]["entry"]
+        trade_time = positions[symbol]["trade_time"]
+        sell_qty = round_qty(symbol, qty)
+        if sell_qty == 0:
+            print(f"[SKIP] {symbol}: Qty after rounding is 0. Not attempting to sell anymore.")
+            del positions[symbol]
+            continue
         try:
-            qty = positions[symbol]["qty"]
-            entry = positions[symbol]["entry"]
-            sell_qty = round_qty(symbol, qty)
-            # 1. Market Sell
-            try:
-                if sell_qty == 0:
-                    raise Exception("Qty after rounding is 0")
-                order = client.order_market_sell(symbol=symbol, quantity=sell_qty)
-                price = float(order['fills'][0]['price'])
-                summary.append(f"[SELL] {symbol}: Sold {sell_qty} at {price}")
-                log_trade(symbol, entry, price, qty)
+            exit_price, fee, tax = sell(symbol, qty)
+            if exit_price:
+                log_trade(symbol, entry, exit_price, qty, trade_time, time.time(), fee, tax)
                 del positions[symbol]
-                continue
-            except Exception as e1:
-                summary.append(f"[SELL ERROR] {symbol}: {e1}")
-            # 2. Convert to USDC
-            base_asset = symbol.replace('USDC', '')
-            success, msg = binance_convert(base_asset, 'USDC', sell_qty)
-            summary.append(msg)
-            if success:
-                del positions[symbol]
-                continue
-            # 3. Convert to BTC
-            success, msg = binance_convert(base_asset, 'BTC', sell_qty)
-            summary.append(msg)
-            if success:
-                del positions[symbol]
-                continue
-            summary.append(f"[FAIL] {symbol}: Could not sell or convert after all attempts.")
+            else:
+                not_sold.append(symbol)
         except Exception as e:
-            summary.append(f"[ERROR] {symbol}: {e}")
-    return summary
+            print(f"[ERROR] Sell failed for {symbol}: {e}")
+            not_sold.append(symbol)
+    return not_sold
+
 
 def trading_loop():
     while True:
@@ -325,18 +355,22 @@ def trading_loop():
             fetch_usdc_balance()
             sold = False
             for symbol in list(positions.keys()):
-                current_price = get_latest_price(symbol)
-                entry = positions[symbol]["entry"]
                 qty = positions[symbol]["qty"]
-                pnl_pct = (current_price - entry) / entry * 100
-                if current_price >= entry * 1.01 or pnl_pct <= -10.0:
-                    exit_price, messages = sell_or_convert(symbol, qty, prefer='USDC')
-                    for msg in messages:
-                        print(msg)
+                entry = positions[symbol]["entry"]
+                trade_time = positions[symbol]["trade_time"]
+                sell_qty = round_qty(symbol, qty)
+                if sell_qty == 0:
+                    print(f"[SKIP] {symbol}: Qty after rounding is 0. Not attempting to sell anymore.")
+                    del positions[symbol]
+                    continue
+                current_price = get_latest_price(symbol)
+                if current_price >= entry * 1.01 or current_price <= entry * 0.995:
+                    exit_price, fee, tax = sell(symbol, qty)
                     if exit_price:
-                        log_trade(symbol, entry, exit_price, qty)
+                        log_trade(symbol, entry, exit_price, qty, trade_time, time.time(), fee, tax)
                         del positions[symbol]
                         sold = True
+
             sync_state()
             process_actions()
             if (not positions) or sold:
@@ -345,6 +379,7 @@ def trading_loop():
             print(f"[LOOP ERROR] {e}")
         time.sleep(TRADING_INTERVAL)
 
+# ========== Telegram Interface ===============
 main_keyboard = [
     ["📊 Balance", "💼 Open Positions"],
     ["🔄 Rotate", "🟢 Invest", "🔴 Sell All"],
@@ -364,26 +399,12 @@ def telegram_handle_message(update: Update, context: CallbackContext):
         return
     text = update.message.text
     state = get_bot_state()
+
     if text == "📊 Balance":
-        fetch_usdc_balance()
-        total_positions = 0
-        for s, p in positions.items():
-            try:
-                current = get_latest_price(s)
-                value = current * p['qty']
-                total_positions += value
-            except Exception:
-                pass
-        portfolio_value = balance['usd'] + total_positions
-        update.message.reply_text(
-            f"Portfolio value: ${portfolio_value:.2f} USDC\n"
-            f"USDC balance: ${balance['usd']:.2f}\n"
-            f"Positions value: ${total_positions:.2f}"
-        )
+        update.message.reply_text(f"USDC Balance: ${state.get('balance',0):.2f}")
     elif text == "💼 Open Positions":
-        fetch_usdc_balance()
-        pos = positions
-        usdc = balance['usd']
+        pos = state.get("positions", {})
+        usdc = state.get("balance", 0)
         rows = []
         total_usdc_value = 0
         for s, p in pos.items():
@@ -395,7 +416,9 @@ def telegram_handle_message(update: Update, context: CallbackContext):
                 rows.append(
                     f"{s}\n"
                     f"  Qty: {p['qty']:.4f}   Entry: {p['entry']:.4f}\n"
-                    f"  Now: {current:.4f}   Value: ${value:.2f} USDC   PnL: {pnl_pct:+.2f}%\n"
+                    f"  Now: {current:.4f}   "
+                    f"Value: ${value:.2f} USDC   "
+                    f"PnL: {pnl_pct:+.2f}%\n"
                 )
             except Exception:
                 rows.append(
@@ -412,29 +435,9 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             + "\n".join(rows)
         )
         update.message.reply_text(msg)
-    elif text == "🔄 Rotate":
-        queue_action("rotate")
-        update.message.reply_text(
-            "🔄 Rotating portfolio...\n"
-            "Rotate = Sell everything to USDC/BTC and immediately invest in current top gainers."
-        )
-    elif text == "🟢 Invest":
-        queue_action("invest")
-        update.message.reply_text(
-            "🟢 Investing in the current top gainers (most positive % change)."
-        )
-    elif text in ["🔴 Sell All", "Sell All"]:
-        queue_action("sell_all")
-        report = state.get("last_sell_report", [])
-        if not report:
-            update.message.reply_text(
-                "🔴 Selling all assets (market sell, convert to USDC, then BTC if needed)."
-            )
-        else:
-            msg = "Tried to sell all assets (with fallback to convert):\n" + "\n".join(report)
-            update.message.reply_text(msg)
+
     elif text == "📝 Trade Log":
-        log = trade_log
+        log = state.get("log", [])
         if not log:
             update.message.reply_text("No trades yet.")
         else:
@@ -452,6 +455,26 @@ def telegram_handle_message(update: Update, context: CallbackContext):
                     f"{tr['PnL $']:<8.2f}\n"
                 )
             update.message.reply_text(f"```{msg}```", parse_mode='Markdown')
+
+    elif text == "🔄 Rotate":
+        queue_action("rotate")
+        update.message.reply_text(
+            "🔄 Rotating portfolio...\n"
+            "Rotate = Sell everything and immediately invest in the current top gainers."
+        )
+    elif text == "🟢 Invest":
+        queue_action("invest")
+        update.message.reply_text(
+            "🟢 Investing in the current top gainers (most positive % change)."
+        )
+    elif text == "🔴 Sell All":
+        queue_action("sell_all")
+        report = state.get("last_sell_report", [])
+        if not report:
+            update.message.reply_text("🔴 Selling everything to USDC. Any unsold coins will remain in Open Positions.")
+        else:
+            msg = "Tried to sell all to USDC.\nFailed to sell:\n" + "\n".join(report)
+            update.message.reply_text(msg)
     else:
         update.message.reply_text("Unknown action.")
 
@@ -461,7 +484,8 @@ def telegram_main():
     dispatcher.add_handler(CommandHandler('start', lambda update, ctx:
         update.message.reply_text(
             "Welcome! Use the buttons below:\n\n"
-            "Rotate: Sells everything to USDC/BTC and reinvests in top gainers.",
+            "Rotate: Sells everything and reinvests in top gainers.\n"
+            "Pause: Stops all trades. Resume: Restarts trading.",
             reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
         )
     ))
@@ -469,36 +493,16 @@ def telegram_main():
     updater.start_polling()
     updater.idle()
 
-def process_actions():
-    state = get_bot_state()
-    actions = state.get("actions", [])
-    performed = []
-    for act in actions:
-        if act["type"] == "rotate":
-            sell_everything()
-            invest_gainers()
-            performed.append(act)
-        elif act["type"] == "invest":
-            invest_gainers()
-            performed.append(act)
-        elif act["type"] == "sell_all":
-            sell_results = sell_everything()
-            state["last_sell_report"] = sell_results
-            performed.append(act)
-    state["actions"] = [a for a in actions if a not in performed]
-    save_bot_state(state)
-
-
+# ========== Startup ===========
 import subprocess
+import sys
+import threading
+import time
 
 def run_streamlit():
-    # Launch dashboard in background
     return subprocess.Popen([sys.executable, "-m", "streamlit", "run", "streamlit_dashboard.py"])
 
-# ----------------------- MAIN ------------------------------
-
 if __name__ == "__main__":
-    trade_log = load_trade_history()
     refresh_symbols()
     positions.update(resume_positions_from_binance())
     streamlit_proc = run_streamlit()
