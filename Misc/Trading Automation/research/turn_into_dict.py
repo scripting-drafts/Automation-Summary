@@ -1,8 +1,9 @@
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
+import pandas as pd
+import subprocess
 import threading
 import time
-import subprocess
 from datetime import datetime
 import json, os, decimal, requests, csv, sys
 
@@ -16,26 +17,10 @@ TRADING_INTERVAL = 5  # seconds
 client = Client(API_KEY, API_SECRET)
 balance = {'usd': 0.0}
 positions = {}
-TRADE_LOG_FILE = "trades_detailed.csv"
-
-# --------- Load previous trades -----------
-def load_trade_history():
-    log = []
-    if os.path.exists(TRADE_LOG_FILE):
-        try:
-            with open(TRADE_LOG_FILE, "r") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    log.append(row)
-        except Exception as e:
-            print(f"[LOAD TRADE ERROR] {e}")
-    return log
-
-trade_log = load_trade_history()
-
-# ------------------------------------------
-
+trade_log = []
 SYMBOLS = []
+
+TRADE_LOG_FILE = "trades_detailed.csv"
 
 def lot_step_size_for(symbol):
     try:
@@ -325,8 +310,7 @@ def trading_loop():
                     del positions[symbol]
                     continue
                 current_price = get_latest_price(symbol)
-                # SELL: If profit ≥ 1% OR loss ≥ 0.10%
-                if current_price >= entry * 1.01 or current_price <= entry * 0.999:
+                if current_price >= entry * 1.01 or current_price <= entry * 0.995:
                     exit_price, fee, tax = sell(symbol, qty)
                     if exit_price:
                         log_trade(symbol, entry, exit_price, qty, trade_time, time.time(), fee, tax)
@@ -334,9 +318,8 @@ def trading_loop():
                         sold = True
             sync_state()
             process_actions()
-            # Only invest after sales/rotations, NOT at every app start!
             if (not positions) or sold:
-                pass  # do not invest_gainers() automatically
+                invest_gainers()
         except Exception as e:
             print(f"[LOOP ERROR] {e}")
         time.sleep(TRADING_INTERVAL)
@@ -362,23 +345,7 @@ def telegram_handle_message(update: Update, context: CallbackContext):
     state = get_bot_state()
 
     if text == "📊 Balance":
-        state = get_bot_state()
-        pos = state.get("positions", {})
-        usdc = state.get("balance", 0)
-        total_usdc_value = 0
-        for s, p in pos.items():
-            try:
-                current = get_latest_price(s)
-                total_usdc_value += current * float(p['qty'])
-            except Exception:
-                continue
-        total_portfolio_value = usdc + total_usdc_value
-        msg = (
-            f"USDC Balance: ${usdc:.2f}\n"
-            f"Portfolio value (incl. open positions): ${total_portfolio_value:.2f}"
-        )
-        update.message.reply_text(msg)
-
+        update.message.reply_text(f"USDC Balance: ${state.get('balance',0):.2f}")
     elif text == "💼 Open Positions":
         pos = state.get("positions", {})
         usdc = state.get("balance", 0)
@@ -387,12 +354,12 @@ def telegram_handle_message(update: Update, context: CallbackContext):
         for s, p in pos.items():
             try:
                 current = get_latest_price(s)
-                value = current * float(p['qty'])
+                value = current * p['qty']
                 total_usdc_value += value
-                pnl_pct = (current - float(p['entry'])) / float(p['entry']) * 100
+                pnl_pct = (current - p['entry']) / p['entry'] * 100
                 rows.append(
                     f"{s}\n"
-                    f"  Qty: {float(p['qty']):.4f}   Entry: {float(p['entry']):.4f}\n"
+                    f"  Qty: {p['qty']:.4f}   Entry: {p['entry']:.4f}\n"
                     f"  Now: {current:.4f}   "
                     f"Value: ${value:.2f} USDC   "
                     f"PnL: {pnl_pct:+.2f}%\n"
@@ -414,7 +381,7 @@ def telegram_handle_message(update: Update, context: CallbackContext):
         update.message.reply_text(msg)
 
     elif text == "📝 Trade Log":
-        log = trade_log  # <-- use full trade history!
+        log = state.get("log", [])
         if not log:
             update.message.reply_text("No trades yet.")
         else:
@@ -426,10 +393,10 @@ def telegram_handle_message(update: Update, context: CallbackContext):
                 msg += (
                     f"{tr['Time'][:16]:<19} "
                     f"{tr['Symbol']:<11} "
-                    f"{float(tr['Entry']):<9.4f} "
-                    f"{float(tr['Exit']):<9.4f} "
-                    f"{float(tr['Qty']):<9.5f} "
-                    f"{float(tr['PnL $']):<8.2f}\n"
+                    f"{tr['Entry']:<9.4f} "
+                    f"{tr['Exit']:<9.4f} "
+                    f"{tr['Qty']:<9.5f} "
+                    f"{tr['PnL $']:<8.2f}\n"
                 )
             update.message.reply_text(f"```{msg}```", parse_mode='Markdown')
 
