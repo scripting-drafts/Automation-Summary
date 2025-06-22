@@ -389,7 +389,7 @@ def get_prices_cache(symbols):
     tickers = client.get_ticker()
     return {t['symbol']: float(t['lastPrice']) for t in tickers if t['symbol'] in symbols}
 
-def auto_sell_pnl_positions(target_pnl=1.0, stop_loss=0.5, trailing_stop=0.8, max_hold_time=3600):
+def auto_sell_pnl_positions(target_pnl=1.0, stop_loss=0.01, trailing_stop=0.8, max_hold_time=3600):
     now = time.time()
     sold_any = False
     for symbol, pos in list(positions.items()):
@@ -430,27 +430,29 @@ def auto_sell_pnl_positions(target_pnl=1.0, stop_loss=0.5, trailing_stop=0.8, ma
             if should_sell:
                 exit_price, fee, _ = sell(symbol, sell_qty)
                 exit_time = time.time()
+                if exit_price is None:
+                    print(f"[SELL ERROR] {symbol}: Sell failed, exit_price=None. Skipping tax/profit calculation.")
+                    continue
                 tax = estimate_trade_tax(entry, exit_price, sell_qty, trade_time, exit_time)
                 profit = (exit_price - entry) * sell_qty
-                # Only sell if profit after tax is positive
                 net_profit = profit - tax
                 if profit > 0 and net_profit <= 0:
                     print(f"[SKIP] {symbol}: Profit after tax ({net_profit:.2f}) is not positive. Not selling.")
                     continue
-                if exit_price:
-                    log_trade(
-                        symbol=symbol,
-                        entry=entry,
-                        exit_price=exit_price,
-                        qty=sell_qty,
-                        trade_time=trade_time,
-                        exit_time=exit_time,
-                        fees=fee,
-                        tax=tax,
-                        action="sell"
-                    )
-                    del positions[symbol]
-                    sold_any = True
+                log_trade(
+                    symbol=symbol,
+                    entry=entry,
+                    exit_price=exit_price,
+                    qty=sell_qty,
+                    trade_time=trade_time,
+                    exit_time=exit_time,
+                    fees=fee,
+                    tax=tax,
+                    action="sell"
+                )
+                del positions[symbol]
+                sold_any = True
+
 
         except Exception as e:
             print(f"[AUTO-SELL ERROR] {symbol}: {e}")
