@@ -2,7 +2,7 @@
 
 A **curated showcase of automation and tooling projects** — demonstrating advanced skills in Python scripting, hybrid testing, network monitoring, AI/ML, scrapers, security tooling, and IoT bots.
   \
-  \
+  
   \
 | Domain                   | Key Projects & Skills Demonstrated                                                                                           |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
@@ -14,8 +14,9 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 | **Scrapers**             | Robust web crawlers; scalable, error-tolerant scraping and data pipeline infrastructure                                     |
 | **Security**             | Network/endpoint hardening; vulnerability scanning; compliance checks via custom scripts                                    |
 | **Tests**                | Test harnesses; CI workflows; coverage tooling; automated validation and regression suites                                  |
+  
   \
-  \
+  
   \
 ## Tech Stack & Tools
 
@@ -26,7 +27,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **Security:** Custom scanners, hardening scripts, endpoint monitoring
 - **IoT & Trading:** API integration bots, event-driven scripting
   \
-  \
+  
   \
 ## Achievements
 
@@ -36,7 +37,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **Scalable Scraping:** Designed scrapers with robust error handling for reliable, large-scale data extraction.
 - **Quality & Security:** Maintained high standards with automated testing, CI checks, and vulnerability scanning.
   \
-  \
+  
   \
 ## Ideal Use Cases
 
@@ -46,7 +47,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **ML/NLP prototyping** for data-driven workflows
 - **IoT & bot orchestration** across distributed systems
   \
-  \
+  
   \
 ## Repository Structure
 
