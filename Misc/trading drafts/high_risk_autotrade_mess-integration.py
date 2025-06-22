@@ -22,170 +22,6 @@ positions = {}
 TRADE_LOG_FILE = "trades_detailed.csv"
 YAML_SYMBOLS_FILE = "symbols.yaml"
 
-
-#----------Firstly ommited methods----------------#
-def get_bot_state():
-    if not os.path.exists("bot_state.json"):
-        return {"balance": 0, "positions": {}, "paused": False, "log": [], "actions": []}
-    with open("bot_state.json", "r") as f:
-        return json.load(f)
-
-def save_bot_state(state):
-    with open("bot_state.json", "w") as f:
-        json.dump(state, f)
-
-def sync_state():
-    state = get_bot_state()
-    state["balance"] = balance['usd']
-    state["positions"] = positions
-    state["log"] = trade_log[-100:] if 'trade_log' in globals() else []
-    save_bot_state(state)
-
-def process_actions():
-    state = get_bot_state()
-    actions = state.get("actions", [])
-    performed = []
-    for act in actions:
-        if act["type"] == "rotate":
-            rotate_positions()
-            performed.append(act)
-        elif act["type"] == "invest":
-            invest_gainers()
-            performed.append(act)
-        elif act["type"] == "sell_all":
-            sell_everything()
-            performed.append(act)
-    state["actions"] = [a for a in actions if a not in performed]
-    save_bot_state(state)
-
-def queue_action(action):
-    state = get_bot_state()
-    state.setdefault("actions", []).append({"type": action})
-    save_bot_state(state)
-
-def rotate_positions():
-    sold = []
-    for symbol in list(positions.keys()):
-        qty = positions[symbol]["qty"]
-        entry = positions[symbol]["entry"]
-        trade_time = positions[symbol]["trade_time"]
-        sell_qty = round_qty(symbol, qty)
-        if sell_qty == 0 or qty == 0:
-            del positions[symbol]
-            continue
-        try:
-            exit_price, fee, tax = sell(symbol, qty)
-            if exit_price:
-                log_trade(symbol, entry, exit_price, qty, trade_time, time.time(), fee, tax)
-                del positions[symbol]
-            else:
-                sold.append(symbol)
-        except Exception as e:
-            sold.append(symbol)
-    sync_investments_with_binance()
-    time.sleep(2)
-    invest_gainers()
-    sync_investments_with_binance()
-    return sold
-
-def sell_everything():
-    results = []
-    for symbol in list(positions.keys()):
-        qty = positions[symbol]['qty']
-        entry = positions[symbol]['entry']
-        trade_time = positions[symbol].get("trade_time", time.time())
-        exit_price, fee, tax = sell(symbol, qty)
-        exit_time = time.time()
-        if exit_price:
-            log_trade(symbol, entry, exit_price, qty, trade_time, exit_time, fee, tax, action="sell")
-            results.append((symbol, exit_price))
-            del positions[symbol]
-    return results
-
-def auto_sell_pnl_positions(target_pnl=11.0, stop_loss=0.2, trailing_stop=0.8, max_hold_time=3600):
-    now = time.time()
-    for symbol, pos in list(positions.items()):
-        try:
-            entry = float(pos['entry'])
-            qty = float(pos['qty'])
-            trade_time = float(pos.get('trade_time', now))
-            sell_qty = round_qty(symbol, qty)
-            min_notional = min_notional_for(symbol)
-            current_price = get_latest_price(symbol)
-            notional = sell_qty * current_price
-            if sell_qty == 0 or qty == 0 or notional < min_notional:
-                del positions[symbol]
-                continue
-            pnl_pct = (current_price - entry) / entry * 100
-            held_for = now - trade_time
-            if 'max_price' not in pos:
-                pos['max_price'] = entry
-            pos['max_price'] = max(pos['max_price'], current_price)
-            trail_pct = (current_price - pos['max_price']) / pos['max_price'] * 100
-            should_sell = False
-            if pnl_pct >= target_pnl or pnl_pct <= -stop_loss or trail_pct <= -trailing_stop or held_for >= max_hold_time:
-                should_sell = True
-            if should_sell:
-                exit_price, fee, _ = sell(symbol, sell_qty)
-                exit_time = time.time()
-                tax = estimate_trade_tax(entry, exit_price, sell_qty, trade_time, exit_time)
-                log_trade(symbol, entry, exit_price, sell_qty, trade_time, exit_time, fee, tax, action="sell")
-                del positions[symbol]
-        except Exception as e:
-            continue
-
-def estimate_trade_tax(entry, exit_price, qty, trade_time, exit_time):
-    if exit_price > entry:
-        return abs(exit_price - entry) * qty * 0.002
-    return 0
-
-def log_trade(symbol, entry, exit_price, qty, trade_time, exit_time, fees=0, tax=0, action="sell"):
-    pnl = (exit_price - entry) * qty if action == "sell" else 0
-    pnl_pct = ((exit_price - entry) / entry * 100) if action == "sell" and entry != 0 else 0
-    duration_sec = int(exit_time - trade_time) if action == "sell" else 0
-    trade = {
-        'Time': datetime.fromtimestamp(trade_time).strftime("%Y-%m-%d %H:%M:%S"),
-        'Action': action,
-        'Symbol': symbol,
-        'Entry': round(entry, 8),
-        'Exit': round(exit_price, 8),
-        'Qty': round(qty, 8),
-        'PnL $': round(pnl, 8),
-        'PnL %': round(pnl_pct, 3),
-        'Duration (s)': duration_sec,
-        'Fees': round(fees, 8),
-        'Tax': round(tax, 8)
-    }
-    try:
-        file_exists = os.path.isfile(TRADE_LOG_FILE)
-        with open(TRADE_LOG_FILE, "a", newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=list(trade.keys()))
-            if not file_exists:
-                writer.writeheader()
-            writer.writerow(trade)
-    except Exception as e:
-        print(f"[LOG ERROR] {e}")
-
-def too_many_positions():
-    return len(positions) > 10
-
-def market_is_risky():
-    return False
-
-def sell(symbol, qty):
-    try:
-        sell_qty = round_qty(symbol, qty)
-        if sell_qty == 0:
-            return None, 0, 0
-        order = client.order_market_sell(symbol=symbol, quantity=sell_qty)
-        price = float(order['fills'][0]['price'])
-        fee = sum(float(f['commission']) for f in order['fills']) if "fills" in order else 0
-        return price, fee, 0
-    except BinanceAPIException as e:
-        print(f"[SELL ERROR] {symbol}: {e}")
-        return None, 0, 0
-# -----------------------------------------------------------
-
 def sync_investments_with_binance():
     try:
         account_info = client.get_account()
@@ -910,24 +746,14 @@ def telegram_handle_message(update: Update, context: CallbackContext):
                 "-----------------------------------------------------------------------\n"
             )
             for tr in log[-10:]:
-                try:
-                    entry = float(tr['Entry'])
-                    exit_ = float(tr['Exit'])
-                    qty = float(tr['Qty'])
-                    pnl = float(tr['PnL $'])
-                    msg += (
-                        f"{tr['Time'][:16]:<19} "
-                        f"{tr['Symbol']:<11} "
-                        f"{entry:<9.4f} "
-                        f"{exit_:<9.4f} "
-                        f"{qty:<9.5f} "
-                        f"{pnl:<8.2f}\n"
-                    )
-                except (ValueError, KeyError) as e:
-                    # Skip this row, optionally log error
-                    print(f"[WARN] Bad trade log row: {tr} ({e})")
-                    continue
-
+                msg += (
+                    f"{tr['Time'][:16]:<19} "
+                    f"{tr['Symbol']:<11} "
+                    f"{float(tr['Entry']):<9.4f} "
+                    f"{float(tr['Exit']):<9.4f} "
+                    f"{float(tr['Qty']):<9.5f} "
+                    f"{float(tr['PnL $']):<8.2f}\n"
+                )
             update.message.reply_text(f"```{msg}```", parse_mode='Markdown')
 
     elif text == "🔄 Rotate":
