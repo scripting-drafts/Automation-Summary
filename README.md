@@ -3,7 +3,7 @@
 A **curated showcase of automation and tooling projects** — demonstrating advanced skills in Python scripting, hybrid testing, network monitoring, AI/ML, scrapers, security tooling, and IoT bots.
 
   
-
+  
 | Domain                   | Key Projects & Skills Demonstrated                                                                                           |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | **Android**              | Hybrid test scripts & standalone checks (Robot Framework); improved automation efficiency on mobile platforms                |
@@ -14,9 +14,9 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 | **Scrapers**             | Robust web crawlers; scalable, error-tolerant scraping and data pipeline infrastructure                                     |
 | **Security**             | Network/endpoint hardening; vulnerability scanning; compliance checks via custom scripts                                    |
 | **Tests**                | Test harnesses; CI workflows; coverage tooling; automated validation and regression suites                                  |
-
   
-
+  
+  
 ## Tech Stack & Tools
 
 - **Languages:** Python (~94%), Shell, HTML, TypeScript, Java
@@ -25,9 +25,9 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **CI/CD:** GitHub Actions, automated workflows, test pipelines
 - **Security:** Custom scanners, hardening scripts, endpoint monitoring
 - **IoT & Trading:** API integration bots, event-driven scripting
-
   
-
+  
+  
 ## Achievements
 
 - **Modular Automation Platform:** Reusable scripts across multiple domains for rapid prototyping and testing.
@@ -35,9 +35,9 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **Cross-Domain Expertise:** Seamlessly pivoting between Android, network, ML, and security projects.
 - **Scalable Scraping:** Designed scrapers with robust error handling for reliable, large-scale data extraction.
 - **Quality & Security:** Maintained high standards with automated testing, CI checks, and vulnerability scanning.
-
   
-
+  
+  
 ## Ideal Use Cases
 
 - **Automation initiatives** seeking cross-domain scripting expertise
@@ -45,9 +45,9 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **Security automation** and network monitoring
 - **ML/NLP prototyping** for data-driven workflows
 - **IoT & bot orchestration** across distributed systems
-
   
-
+  
+  
 ## Repository Structure
 
 ```text
