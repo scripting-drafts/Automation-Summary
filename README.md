@@ -1,9 +1,9 @@
 # Automation Summary
 
 A **curated showcase of automation and tooling projects** — demonstrating advanced skills in Python scripting, hybrid testing, network monitoring, AI/ML, scrapers, security tooling, and IoT bots.
+<br />  
+<br />  
   
-<br />  
-<br />  
 | Domain                   | Key Projects & Skills Demonstrated                                                                                           |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | **Android**              | Hybrid test scripts & standalone checks (Robot Framework); improved automation efficiency on mobile platforms                |
