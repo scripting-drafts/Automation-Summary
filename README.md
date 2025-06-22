@@ -3,7 +3,7 @@
 A **curated showcase of automation and tooling projects** — demonstrating advanced skills in Python scripting, hybrid testing, network monitoring, AI/ML, scrapers, security tooling, and IoT bots.
   
 <br />  
-  
+<br />  
 | Domain                   | Key Projects & Skills Demonstrated                                                                                           |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | **Android**              | Hybrid test scripts & standalone checks (Robot Framework); improved automation efficiency on mobile platforms                |
@@ -16,8 +16,8 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 | **Tests**                | Test harnesses; CI workflows; coverage tooling; automated validation and regression suites                                  |
   
   
-  
-  
+<br />  
+<br />  
 ## Tech Stack & Tools
 
 - **Languages:** Python (~94%), Shell, HTML, TypeScript, Java
@@ -27,8 +27,8 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **Security:** Custom scanners, hardening scripts, endpoint monitoring
 - **IoT & Trading:** API integration bots, event-driven scripting
   
-  
-  
+<br />  
+<br />  
 ## Achievements
 
 - **Modular Automation Platform:** Reusable scripts across multiple domains for rapid prototyping and testing.
@@ -37,8 +37,8 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **Scalable Scraping:** Designed scrapers with robust error handling for reliable, large-scale data extraction.
 - **Quality & Security:** Maintained high standards with automated testing, CI checks, and vulnerability scanning.
   
-  
-  
+<br />  
+<br />  
 ## Ideal Use Cases
 
 - **Automation initiatives** seeking cross-domain scripting expertise
@@ -47,8 +47,8 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
 - **ML/NLP prototyping** for data-driven workflows
 - **IoT & bot orchestration** across distributed systems
   
-  
-  
+<br />  
+<br />  
 ## Repository Structure
 
 ```text
