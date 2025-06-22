@@ -18,7 +18,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
   
 <br />  
 <br />  
-## Tech Stack & Tools
+### Tech Stack & Tools
 
 - **Languages:** Python (~94%), Shell, HTML, TypeScript, Java
 - **Frameworks:** Robot Framework, Requests, BeautifulSoup, scikit-learn, spaCy
@@ -29,7 +29,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
   
 <br />  
 <br />  
-## Achievements
+### Achievements
 
 - **Modular Automation Platform:** Reusable scripts across multiple domains for rapid prototyping and testing.
 - **Productivity Gains:** Automated workflows saving an estimated **X hours/week**.
@@ -39,7 +39,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
   
 <br />  
 <br />  
-## Ideal Use Cases
+### Ideal Use Cases
 
 - **Automation initiatives** seeking cross-domain scripting expertise
 - **CI/CD pipelines** with built-in test/monitoring automation
@@ -49,7 +49,7 @@ A **curated showcase of automation and tooling projects** — demonstrating adva
   
 <br />  
 <br />  
-## Repository Structure
+### Repository Structure
 
 ```text
 /Android                – RobotFramework scripts & hybrid tests  
