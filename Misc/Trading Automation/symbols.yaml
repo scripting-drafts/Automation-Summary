@@ -1,4137 +1,4137 @@
 BNBUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 609.25
+  last_price: 606.05
   volatility:
-    15m: 0.0005559660159020726
-    1h: 0.00094271157764718
-    1d: 0.0026930879010766463
+    15m: 0.00043834416305365187
+    1h: 0.0005930740924059292
+    1d: 0.00281264242871174
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 141.131
-  volume_1h: 2624.882
-  volume_1d: 26988.382
+  volume_15m: 188.538
+  volume_1h: 1011.71
+  volume_1d: 34497.098
   arbitrage:
     bid_ask_spread: 0.010000000000104592
-    top_bid: 609.31
-    top_ask: 609.32
-    order_book_depth: 9.121
+    top_bid: 606.06
+    top_ask: 606.07
+    order_book_depth: 11.685
 BTCUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 99537.0
+  last_price: 99244.0
   volatility:
-    15m: 0.0008023882237088535
-    1h: 0.0011359367648290913
-    1d: 0.002789766229411191
+    15m: 0.000684507902317454
+    1h: 0.0006893169210323378
+    1d: 0.002922275337594058
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 38.68055
-  volume_1h: 463.41867
-  volume_1d: 4916.04601
+  volume_15m: 31.97213
+  volume_1h: 175.78543
+  volume_1d: 6478.80645
   arbitrage:
     bid_ask_spread: 0.00999999999476131
-    top_bid: 99534.0
-    top_ask: 99534.01
-    order_book_depth: 1.34824
+    top_bid: 99253.83
+    top_ask: 99253.84
+    order_book_depth: 1.58468
 ETHUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 2192.16
+  last_price: 2189.45
   volatility:
-    15m: 0.0012592517823886817
-    1h: 0.0015956652508087841
-    1d: 0.0063298772198193696
+    15m: 0.0010270705262619825
+    1h: 0.0013094934751327534
+    1d: 0.0063826319914144615
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1271.8343
-  volume_1h: 11418.4382
-  volume_1d: 220857.7283
+  volume_15m: 418.8578
+  volume_1h: 4622.1039
+  volume_1d: 260826.5802
   arbitrage:
     bid_ask_spread: 0.009999999999763531
-    top_bid: 2192.61
-    top_ask: 2192.62
-    order_book_depth: 32.388400000000004
+    top_bid: 2188.9
+    top_ask: 2188.91
+    order_book_depth: 33.0244
 XRPUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.9527
+  last_price: 1.9606
   volatility:
-    15m: 0.0013748090897724924
-    1h: 0.001627186476362784
-    1d: 0.005198615911545629
+    15m: 0.0007945690879199855
+    1h: 0.0010760589730643391
+    1d: 0.0054768760055452234
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 167656.9
-  volume_1h: 2610685.0
-  volume_1d: 44627334.0
+  volume_15m: 161522.3
+  volume_1h: 1138846.8
+  volume_1d: 55390550.3
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 1.9528
-    top_ask: 1.9529
-    order_book_depth: 73853.1
+    top_bid: 1.96
+    top_ask: 1.9601
+    order_book_depth: 40874.399999999994
 XLMUSDC:
-  market_cap: 6996776927
-  circulating_supply: 31212060702.12583
-  last_price: 0.2244
+  market_cap: 6943215241
+  circulating_supply: 31212058181.69244
+  last_price: 0.2226
   volatility:
-    15m: 0.0013417386268561092
-    1h: 0.0013916006354785977
-    1d: 0.004457772238324352
+    15m: 0.001232350941622191
+    1h: 0.0011849983993839723
+    1d: 0.004674116491223956
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 39286.0
-  volume_1h: 1011517.0
-  volume_1d: 13146832.0
+  volume_15m: 43896.0
+  volume_1h: 260424.0
+  volume_1d: 16509325.0
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.2245
-    top_ask: 0.2246
-    order_book_depth: 299860.0
+    top_bid: 0.2225
+    top_ask: 0.2226
+    order_book_depth: 313544.0
 LINKUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 11.6
+  last_price: 11.33
   volatility:
-    15m: 0.001898570058836745
-    1h: 0.0015683324405084047
-    1d: 0.0066330059387813885
+    15m: 0.0013411432955762127
+    1h: 0.001578628430760173
+    1d: 0.006827737137708607
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2386.83
-  volume_1h: 26519.22
-  volume_1d: 537402.72
+  volume_15m: 4723.61
+  volume_1h: 14613.83
+  volume_1d: 657478.84
   arbitrage:
     bid_ask_spread: 0.009999999999999787
-    top_bid: 11.6
-    top_ask: 11.61
-    order_book_depth: 16317.2
+    top_bid: 11.33
+    top_ask: 11.34
+    order_book_depth: 16292.060000000001
 LTCUSDC:
-  market_cap: 5959371918
+  market_cap: 5954708880
   circulating_supply: 75989545.73347135
-  last_price: 78.51
+  last_price: 78.45
   volatility:
-    15m: 0.0013115429983954466
-    1h: 0.0014189457272475593
-    1d: 0.005154061725912665
+    15m: 0.0009791749975711036
+    1h: 0.0012257664440644398
+    1d: 0.005273152019300097
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 481.378
-  volume_1h: 5082.888
-  volume_1d: 94617.048
+  volume_15m: 797.834
+  volume_1h: 2808.92
+  volume_1d: 116503.762
   arbitrage:
     bid_ask_spread: 0.010000000000005116
-    top_bid: 78.5
-    top_ask: 78.51
-    order_book_depth: 285.886
+    top_bid: 78.41
+    top_ask: 78.42
+    order_book_depth: 278.576
 TRXUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2671
+  last_price: 0.2638
   volatility:
-    15m: 0.0003420524357170386
-    1h: 0.0006949036419215013
-    1d: 0.0026795602335892253
+    15m: 0.0004502089429055023
+    1h: 0.0006070834171610808
+    1d: 0.002818697303213254
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 53245.8
-  volume_1h: 603638.7
-  volume_1d: 9084619.2
-  arbitrage:
-    bid_ask_spread: 0.0001000000000000445
-    top_bid: 0.2673
-    top_ask: 0.2674
-    order_book_depth: 261732.30000000002
-ADAUSDC:
-  market_cap: 19077282519
-  circulating_supply: 36110476425.40252
-  last_price: 0.5296
-  volatility:
-    15m: 0.001221406441121856
-    1h: 0.001684425418999944
-    1d: 0.006154917682538374
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 125585.9
-  volume_1h: 1600111.3
-  volume_1d: 43434219.1
+  volume_15m: 142606.7
+  volume_1h: 449524.9
+  volume_1d: 12659469.5
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.5296
-    top_ask: 0.5297
-    order_book_depth: 101905.5
-NEOUSDC:
-  market_cap: 348467026
-  circulating_supply: 70530000.0
-  last_price: 4.95
+    top_bid: 0.2637
+    top_ask: 0.2638
+    order_book_depth: 288528.0
+ADAUSDC:
+  market_cap: 19003604691
+  circulating_supply: 36110476425.40252
+  last_price: 0.5267
   volatility:
-    15m: 0.001340207191103139
-    1h: 0.0018546100151703114
-    1d: 0.0062484168180099026
+    15m: 0.0012309789333418593
+    1h: 0.001418258826574966
+    1d: 0.0062872843673883495
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 269.25
-  volume_1h: 3525.08
-  volume_1d: 61121.91
+  volume_15m: 129185.3
+  volume_1h: 717449.3
+  volume_1d: 50714754.5
   arbitrage:
-    bid_ask_spread: 0.009999999999999787
-    top_bid: 4.94
-    top_ask: 4.95
-    order_book_depth: 3789.98
-ATOMUSDC:
-  market_cap: 1667146057
-  circulating_supply: 455366969.545906
-  last_price: 3.659
+    bid_ask_spread: 9.999999999998899e-05
+    top_bid: 0.5266
+    top_ask: 0.5267
+    order_book_depth: 120624.1
+NEOUSDC:
+  market_cap: 345090903
+  circulating_supply: 70530000.0
+  last_price: 4.9
   volatility:
-    15m: 0.0013954908043526538
-    1h: 0.0015199614160562266
-    1d: 0.005086088861627688
+    15m: 0.0016050489806645435
+    1h: 0.0017356056275041778
+    1d: 0.00679112618560172
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 4103.41
-  volume_1h: 45649.42
-  volume_1d: 469149.5
+  volume_15m: 204.54
+  volume_1h: 1787.15
+  volume_1d: 78201.86
+  arbitrage:
+    bid_ask_spread: 0.010000000000000675
+    top_bid: 4.89
+    top_ask: 4.9
+    order_book_depth: 5345.719999999999
+ATOMUSDC:
+  market_cap: 1667996669
+  circulating_supply: 455392276.535833
+  last_price: 3.663
+  volatility:
+    15m: 0.0012264402842261963
+    1h: 0.0011066478699559396
+    1d: 0.005270330082126442
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 983.78
+  volume_1h: 12792.19
+  volume_1d: 601443.98
   arbitrage:
     bid_ask_spread: 0.0009999999999998899
-    top_bid: 3.661
-    top_ask: 3.662
-    order_book_depth: 6152.85
+    top_bid: 3.666
+    top_ask: 3.667
+    order_book_depth: 6095.88
 ALGOUSDC:
-  market_cap: 1353077549
+  market_cap: 1346054235
   circulating_supply: 8632536347.753084
-  last_price: 0.1566
+  last_price: 0.1561
   volatility:
-    15m: 0.0012161170017148083
-    1h: 0.001519094400409268
-    1d: 0.005871407863897329
+    15m: 0.0013409824525995617
+    1h: 0.001396285837701897
+    1d: 0.005929626937867598
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 24750.0
-  volume_1h: 412621.0
-  volume_1d: 19300009.0
+  volume_15m: 28817.0
+  volume_1h: 270370.0
+  volume_1d: 22404982.0
   arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.1567
-    top_ask: 0.1568
-    order_book_depth: 243040.0
+    bid_ask_spread: 0.00010000000000001674
+    top_bid: 0.1561
+    top_ask: 0.1562
+    order_book_depth: 308294.0
 DOGEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.14792
+  last_price: 0.14829
   volatility:
-    15m: 0.0015628976026318317
-    1h: 0.0015442930695473431
-    1d: 0.00656315054674444
+    15m: 0.001187341055427507
+    1h: 0.0012747654087610074
+    1d: 0.00671030838603659
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 885847.0
-  volume_1h: 6199586.0
-  volume_1d: 153866733.0
+  volume_15m: 779361.0
+  volume_1h: 4832555.0
+  volume_1d: 198161265.0
   arbitrage:
-    bid_ask_spread: 2.0000000000020002e-05
-    top_bid: 0.14789
-    top_ask: 0.14791
-    order_book_depth: 72073.0
+    bid_ask_spread: 1.0000000000010001e-05
+    top_bid: 0.14825
+    top_ask: 0.14826
+    order_book_depth: 134156.0
 ONTUSDC:
-  market_cap: 98229793
+  market_cap: 98555666
   circulating_supply: 913697857.0
-  last_price: 0.1077
+  last_price: 0.1081
   volatility:
-    15m: 0.0014878389671866077
-    1h: 0.0017258170926965498
-    1d: 0.005472356574480508
+    15m: 0.002399511515318552
+    1h: 0.001438651987147806
+    1d: 0.0059307803996974185
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3323.0
-  volume_1h: 9722.0
-  volume_1d: 652681.0
+  volume_15m: 26726.0
+  volume_1h: 40771.0
+  volume_1d: 784212.0
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1076
-    top_ask: 0.1078
-    order_book_depth: 56209.0
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.1081
+    top_ask: 0.1082
+    order_book_depth: 23102.0
 BCHUSDC:
-  market_cap: 8990972796
+  market_cap: 8846466165
   circulating_supply: 19887153.02165078
-  last_price: 453.3
+  last_price: 446.3
   volatility:
-    15m: 0.0012794946324022484
-    1h: 0.0020613912046824902
-    1d: 0.00520652202649636
+    15m: 0.0009011337978949836
+    1h: 0.0010588198990747265
+    1d: 0.005416771309312892
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 30.874
-  volume_1h: 520.088
-  volume_1d: 8602.273
+  volume_15m: 33.091
+  volume_1h: 160.945
+  volume_1d: 10390.958
   arbitrage:
-    bid_ask_spread: 0.0999999999999659
-    top_bid: 453.1
-    top_ask: 453.2
-    order_book_depth: 23.045
+    bid_ask_spread: 0.10000000000002274
+    top_bid: 446.2
+    top_ask: 446.3
+    order_book_depth: 31.529999999999998
 SOLUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 129.61
+  last_price: 129.14
   volatility:
-    15m: 0.0014998486375637657
-    1h: 0.0016383475374116133
-    1d: 0.006245710082449842
+    15m: 0.0012226508761008492
+    1h: 0.001244122228245849
+    1d: 0.006267085799692303
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1942.034
-  volume_1h: 30147.562
-  volume_1d: 653146.455
+  volume_15m: 2841.685
+  volume_1h: 19365.684
+  volume_1d: 785520.022
   arbitrage:
     bid_ask_spread: 0.009999999999990905
-    top_bid: 129.59
-    top_ask: 129.6
-    order_book_depth: 1515.353
+    top_bid: 129.13
+    top_ask: 129.14
+    order_book_depth: 1766.798
 ARBUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2646
+  last_price: 0.2621
   volatility:
-    15m: 0.0014214578882247061
-    1h: 0.0020377469788632275
-    1d: 0.007229479637717243
+    15m: 0.001258092452542421
+    1h: 0.001508759759361642
+    1d: 0.0073541713019152875
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 57703.7
-  volume_1h: 543660.0
-  volume_1d: 14048269.4
+  volume_15m: 50522.3
+  volume_1h: 298832.0
+  volume_1d: 16896347.4
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.2645
-    top_ask: 0.2646
-    order_book_depth: 146739.4
+    top_bid: 0.2621
+    top_ask: 0.2622
+    order_book_depth: 151131.3
 AVAXUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 16.19
+  last_price: 16.01
   volatility:
-    15m: 0.0014643950075672676
-    1h: 0.0017240437794132776
-    1d: 0.006199015249680107
+    15m: 0.0010924559941280561
+    1h: 0.0013644788892978796
+    1d: 0.006426692492146372
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1407.93
-  volume_1h: 10996.34
-  volume_1d: 261046.42
+  volume_15m: 692.51
+  volume_1h: 4558.53
+  volume_1d: 326241.35
   arbitrage:
-    bid_ask_spread: 0.010000000000001563
-    top_bid: 16.2
-    top_ask: 16.21
-    order_book_depth: 5884.53
+    bid_ask_spread: 0.00999999999999801
+    top_bid: 16.01
+    top_ask: 16.02
+    order_book_depth: 5745.6
 DOTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 3.203
+  last_price: 3.157
   volatility:
-    15m: 0.0010340329002388995
-    1h: 0.001640852558727479
-    1d: 0.005995342252895792
+    15m: 0.0013125403427858263
+    1h: 0.0014313709743920626
+    1d: 0.006166097231528089
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2175.07
-  volume_1h: 45665.22
-  volume_1d: 873824.05
+  volume_15m: 3844.7
+  volume_1h: 20854.01
+  volume_1d: 1032255.44
   arbitrage:
-    bid_ask_spread: 0.001000000000000334
-    top_bid: 3.203
-    top_ask: 3.204
-    order_book_depth: 8318.79
+    bid_ask_spread: 0.0009999999999998899
+    top_bid: 3.157
+    top_ask: 3.158
+    order_book_depth: 7673.049999999999
 INJUSDC:
-  market_cap: 920122536
+  market_cap: 899602601
   circulating_supply: 97727220.33
-  last_price: 9.39
+  last_price: 9.21
   volatility:
-    15m: 0.0016499684484634959
-    1h: 0.0018579098448856788
-    1d: 0.007414006677181701
+    15m: 0.0013604428089139212
+    1h: 0.0016359969858880403
+    1d: 0.007496649220259188
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1621.41
-  volume_1h: 8614.88
-  volume_1d: 323428.9
+  volume_15m: 2350.43
+  volume_1h: 16916.26
+  volume_1d: 451959.95
   arbitrage:
     bid_ask_spread: 0.010000000000001563
-    top_bid: 9.37
-    top_ask: 9.38
-    order_book_depth: 15312.14
+    top_bid: 9.2
+    top_ask: 9.21
+    order_book_depth: 13971.06
 OPUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.48
+  last_price: 0.474
   volatility:
-    15m: 0.001714319062537299
-    1h: 0.0018945099834405466
-    1d: 0.008193367874424873
+    15m: 0.001748679692627231
+    1h: 0.0019525682423981476
+    1d: 0.008446996064762525
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 5510.22
-  volume_1h: 62265.93
-  volume_1d: 2260190.85
+  volume_15m: 6356.59
+  volume_1h: 82758.87
+  volume_1d: 2689118.16
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.479
-    top_ask: 0.48
-    order_book_depth: 193245.66999999998
+    top_bid: 0.473
+    top_ask: 0.474
+    order_book_depth: 228497.19000000003
 ORDIUSDC:
-  market_cap: 135781940
+  market_cap: 134652127
   circulating_supply: 21000000.0
-  last_price: 6.445
+  last_price: 6.427
   volatility:
-    15m: 0.0014439156889976853
-    1h: 0.0017783172748352292
-    1d: 0.007794788981456263
+    15m: 0.0015611582106940297
+    1h: 0.0018093660538825013
+    1d: 0.008189286447680673
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 301.16
-  volume_1h: 4943.25
-  volume_1d: 117011.23
+  volume_15m: 989.36
+  volume_1h: 5486.34
+  volume_1d: 141966.15
   arbitrage:
-    bid_ask_spread: 0.0030000000000001137
-    top_bid: 6.444
-    top_ask: 6.447
-    order_book_depth: 532.19
+    bid_ask_spread: 0.001000000000000334
+    top_bid: 6.43
+    top_ask: 6.431
+    order_book_depth: 445.72
 SUIUSDC:
-  market_cap: 8205338864
+  market_cap: 8014580132
   circulating_supply: 3396671135.364443
-  last_price: 2.4181
+  last_price: 2.364
   volatility:
-    15m: 0.0015150072692999754
-    1h: 0.0019329907593506213
-    1d: 0.006922376559163076
+    15m: 0.0018641186963181337
+    1h: 0.0017386639545298652
+    1d: 0.0071481824716601835
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 74421.6
-  volume_1h: 614714.5
-  volume_1d: 17314945.3
+  volume_15m: 112950.6
+  volume_1h: 797999.1
+  volume_1d: 22302099.0
   arbitrage:
-    bid_ask_spread: 0.00010000000000021103
-    top_bid: 2.4191
-    top_ask: 2.4192
-    order_book_depth: 3568.0999999999995
+    bid_ask_spread: 9.999999999976694e-05
+    top_bid: 2.3631
+    top_ask: 2.3632
+    order_book_depth: 4569.4
 TIAUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.389
+  last_price: 1.358
   volatility:
-    15m: 0.0013178364794671194
-    1h: 0.0019917058046594045
-    1d: 0.007732263530384341
+    15m: 0.001997146009464924
+    1h: 0.001813134602036449
+    1d: 0.00806690016239449
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 28039.13
-  volume_1h: 88301.31
-  volume_1d: 1804008.14
+  volume_15m: 4931.57
+  volume_1h: 21061.4
+  volume_1d: 2106051.15
   arbitrage:
     bid_ask_spread: 0.001000000000000112
-    top_bid: 1.388
-    top_ask: 1.389
-    order_book_depth: 42842.81
+    top_bid: 1.357
+    top_ask: 1.358
+    order_book_depth: 45597.46
 MANTAUSDC:
-  market_cap: 67397585
+  market_cap: 67023491
   circulating_supply: 417986318.9555756
-  last_price: 0.161
+  last_price: 0.16
   volatility:
-    15m: 0.0029364899009827706
-    1h: 0.003053714718866749
-    1d: 0.008404952624197574
+    15m: 0.0
+    1h: 0.001411616142335337
+    1d: 0.009046745224280726
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 9637.5
-  volume_1h: 69245.8
-  volume_1d: 2252346.9
+  volume_15m: 1120.5
+  volume_1h: 43252.9
+  volume_1d: 2770774.7
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.161
-    top_ask: 0.162
-    order_book_depth: 154335.40000000002
+    top_bid: 0.16
+    top_ask: 0.161
+    order_book_depth: 121789.8
 BLURUSDC:
-  market_cap: 155174953
-  circulating_supply: 2390524920.6621
-  last_price: 0.0647
+  market_cap: 151325211
+  circulating_supply: 2390789368.436073
+  last_price: 0.0634
   volatility:
-    15m: 0.0023721287529802335
-    1h: 0.0020465610049979844
-    1d: 0.007362216664396469
+    15m: 0.001151045992858995
+    1h: 0.001307362088433524
+    1d: 0.007509814721768749
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 799.2
-  volume_1h: 9320.2
-  volume_1d: 1113875.2
+  volume_15m: 4561.5
+  volume_1h: 27420.0
+  volume_1d: 1295951.9
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0647
-    top_ask: 0.0648
-    order_book_depth: 262294.2
+    top_bid: 0.0634
+    top_ask: 0.0635
+    order_book_depth: 455086.30000000005
 ALTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.027
+  last_price: 0.02693
   volatility:
-    15m: 0.0009728912699164607
-    1h: 0.0020323819573597715
-    1d: 0.006724247605818366
+    15m: 0.0015758053770842286
+    1h: 0.0016943399889043805
+    1d: 0.0071991781036424285
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 15163.0
-  volume_1h: 442094.0
-  volume_1d: 13971399.0
+  volume_15m: 5547.0
+  volume_1h: 114278.0
+  volume_1d: 15796612.0
   arbitrage:
-    bid_ask_spread: 1.9999999999999185e-05
-    top_bid: 0.02697
-    top_ask: 0.02699
-    order_book_depth: 78483.0
+    bid_ask_spread: 9.999999999999593e-06
+    top_bid: 0.02692
+    top_ask: 0.02693
+    order_book_depth: 301253.0
 SEIUSDC:
-  market_cap: 1081311257
+  market_cap: 1096246059
   circulating_supply: 5556944444.0
-  last_price: 0.1943
+  last_price: 0.1978
   volatility:
-    15m: 0.0015576139589409423
-    1h: 0.002015682866395596
-    1d: 0.007571073550020383
+    15m: 0.0013758801270835437
+    1h: 0.0013995255810391382
+    1d: 0.007523536716088149
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 58343.8
-  volume_1h: 1429107.6
-  volume_1d: 57115915.4
+  volume_15m: 1097930.6
+  volume_1h: 1872021.3
+  volume_1d: 69328690.7
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.1942
-    top_ask: 0.1943
-    order_book_depth: 152947.2
+    top_bid: 0.1978
+    top_ask: 0.1979
+    order_book_depth: 246574.5
 JUPUSDC:
-  market_cap: 1003245449
+  market_cap: 985276404
   circulating_supply: 2951327777.76
-  last_price: 0.3398
+  last_price: 0.3341
   volatility:
-    15m: 0.0011447806249203821
-    1h: 0.0019775908334991625
-    1d: 0.007101241420329016
+    15m: 0.0012637757894088102
+    1h: 0.00142665599473189
+    1d: 0.007210126836334927
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 61152.4
-  volume_1h: 188901.3
-  volume_1d: 2640198.5
+  volume_15m: 20548.3
+  volume_1h: 130777.2
+  volume_1d: 3289994.3
   arbitrage:
-    bid_ask_spread: 0.00020000000000003348
-    top_bid: 0.3394
-    top_ask: 0.3396
-    order_book_depth: 20966.1
+    bid_ask_spread: 9.999999999998899e-05
+    top_bid: 0.3342
+    top_ask: 0.3343
+    order_book_depth: 15505.9
 FILUSDC:
-  market_cap: 1415300571
+  market_cap: 1391507973
   circulating_supply: 677081288.0
-  last_price: 2.088
+  last_price: 2.055
   volatility:
-    15m: 0.0015490036700579548
-    1h: 0.0016013912756443428
-    1d: 0.006248165838368396
+    15m: 0.001229545179408739
+    1h: 0.0015103136359349517
+    1d: 0.006573876087793893
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3933.82
-  volume_1h: 26194.61
-  volume_1d: 890686.68
+  volume_15m: 1246.21
+  volume_1h: 14299.42
+  volume_1d: 1098803.31
   arbitrage:
     bid_ask_spread: 0.0009999999999998899
-    top_bid: 2.087
-    top_ask: 2.088
-    order_book_depth: 7520.51
+    top_bid: 2.055
+    top_ask: 2.056
+    order_book_depth: 15244.84
 WLDUSDC:
-  market_cap: 1324304746
+  market_cap: 1295028162
   circulating_supply: 1633961771.739971
-  last_price: 0.807
+  last_price: 0.792
   volatility:
-    15m: 0.0017251938358964114
-    1h: 0.0019364142523444548
-    1d: 0.007725356202546122
+    15m: 0.0015659021735114336
+    1h: 0.002128109234769681
+    1d: 0.008026352478123706
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 7402.4
-  volume_1h: 198347.9
-  volume_1d: 3381978.5
+  volume_15m: 17134.6
+  volume_1h: 184914.3
+  volume_1d: 4543240.5
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.805
-    top_ask: 0.806
-    order_book_depth: 157784.69999999998
+    top_bid: 0.792
+    top_ask: 0.793
+    order_book_depth: 146422.1
 UNIUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 6.253
+  last_price: 6.069
   volatility:
-    15m: 0.0017828470655578113
-    1h: 0.002042520178611204
-    1d: 0.0065164585087374586
+    15m: 0.0017884991944413175
+    1h: 0.001614425346479894
+    1d: 0.006776837017682823
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1794.32
-  volume_1h: 27964.97
-  volume_1d: 529340.04
+  volume_15m: 2133.05
+  volume_1h: 18831.5
+  volume_1d: 668235.82
   arbitrage:
-    bid_ask_spread: 0.0009999999999994458
-    top_bid: 6.256
-    top_ask: 6.257
-    order_book_depth: 811.48
+    bid_ask_spread: 0.0019999999999997797
+    top_bid: 6.069
+    top_ask: 6.071
+    order_book_depth: 2281.04
 PIXELUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.02833
+  last_price: 0.02811
   volatility:
-    15m: 0.0022429710490484635
-    1h: 0.0019354698689239616
-    1d: 0.007551429686777909
+    15m: 0.0014547472243108984
+    1h: 0.0016220562717459257
+    1d: 0.007893364233071404
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 28790.4
-  volume_1h: 201342.8
-  volume_1d: 6679671.8
+  volume_15m: 18304.6
+  volume_1h: 144782.2
+  volume_1d: 7830551.1
   arbitrage:
     bid_ask_spread: 9.999999999999593e-06
-    top_bid: 0.02832
-    top_ask: 0.02833
-    order_book_depth: 125719.0
+    top_bid: 0.02807
+    top_ask: 0.02808
+    order_book_depth: 179654.5
 STRKUSDC:
-  market_cap: 332478052
+  market_cap: 332410472
   circulating_supply: 3351568213.911714
-  last_price: 0.0991
+  last_price: 0.0995
   volatility:
-    15m: 0.0031392430267424905
-    1h: 0.002679121059761288
-    1d: 0.007730875316462756
+    15m: 0.0019247623320663338
+    1h: 0.0016781505147245755
+    1d: 0.007931161438028887
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 104622.6
-  volume_1h: 332441.06
-  volume_1d: 5715202.05
+  volume_15m: 38726.01
+  volume_1h: 169748.07
+  volume_1d: 6889168.53
   arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.099
-    top_ask: 0.0991
-    order_book_depth: 186452.09999999998
+    bid_ask_spread: 0.00019999999999999185
+    top_bid: 0.0994
+    top_ask: 0.0996
+    order_book_depth: 274574.20999999996
 PEPEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 8.75e-06
+  last_price: 8.63e-06
   volatility:
-    15m: 0.002099327596882582
-    1h: 0.002189976492222345
-    1d: 0.008559876767803586
+    15m: 0.0017539620364747156
+    1h: 0.0018610895592732523
+    1d: 0.008527089283242383
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 18040715140.0
-  volume_1h: 149386510303.0
-  volume_1d: 3100698008634.0
+  volume_15m: 13111832765.0
+  volume_1h: 79541307678.0
+  volume_1d: 3788887805393.0
   arbitrage:
     bid_ask_spread: 9.999999999999904e-09
-    top_bid: 8.74e-06
-    top_ask: 8.75e-06
-    order_book_depth: 83653020569.0
+    top_bid: 8.63e-06
+    top_ask: 8.64e-06
+    order_book_depth: 94788456151.0
 SHIBUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.044e-05
+  last_price: 1.037e-05
   volatility:
-    15m: 0.0013478131951437167
-    1h: 0.001429983737934877
-    1d: 0.005368885424645724
+    15m: 0.0014396462148959625
+    1h: 0.0014374541465444902
+    1d: 0.005688707095559051
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 916078469.0
-  volume_1h: 9532290290.0
-  volume_1d: 126137568320.0
+  volume_15m: 293520651.0
+  volume_1h: 4774289886.0
+  volume_1d: 158946181431.0
   arbitrage:
     bid_ask_spread: 9.999999999999904e-09
-    top_bid: 1.043e-05
-    top_ask: 1.044e-05
-    order_book_depth: 5372187675.0
+    top_bid: 1.036e-05
+    top_ask: 1.037e-05
+    order_book_depth: 5132329670.0
 NEARUSDC:
-  market_cap: 2307500443
+  market_cap: 2269729427
   circulating_supply: 1228576070.0
-  last_price: 1.877
+  last_price: 1.848
   volatility:
-    15m: 0.0014447254922811603
-    1h: 0.0019336777409383944
-    1d: 0.006904931201331758
+    15m: 0.0016924435559655569
+    1h: 0.001609277303343923
+    1d: 0.007153701875908828
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 12985.1
-  volume_1h: 176202.2
-  volume_1d: 3647732.3
+  volume_15m: 23270.6
+  volume_1h: 113725.0
+  volume_1d: 4465941.0
   arbitrage:
-    bid_ask_spread: 0.0009999999999998899
-    top_bid: 1.875
-    top_ask: 1.876
-    order_book_depth: 24244.899999999998
+    bid_ask_spread: 0.001000000000000112
+    top_bid: 1.849
+    top_ask: 1.85
+    order_book_depth: 22724.5
 FETUSDC:
-  market_cap: 1521581661
+  market_cap: 1466987442
   circulating_supply: 2604959126.672
-  last_price: 0.581
+  last_price: 0.564
   volatility:
-    15m: 0.0020637651109102675
-    1h: 0.002310047358272322
-    1d: 0.007140169369711716
+    15m: 0.0012976366714562227
+    1h: 0.001469168083693671
+    1d: 0.007400683713598393
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 45344.3
-  volume_1h: 406715.9
-  volume_1d: 7715900.7
+  volume_15m: 31959.3
+  volume_1h: 332632.0
+  volume_1d: 10787792.1
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.58
-    top_ask: 0.581
-    order_book_depth: 323107.4
+    top_bid: 0.563
+    top_ask: 0.564
+    order_book_depth: 363743.3
 EURUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.1534
+  last_price: 1.153
   volatility:
-    15m: 7.603780165313906e-05
-    1h: 6.336423173154705e-05
-    1d: 0.0001396411367888713
+    15m: 6.954979745306428e-05
+    1h: 6.635270023580687e-05
+    1d: 0.00015841250078774436
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 92530.8
-  volume_1h: 1055953.8
-  volume_1d: 15174324.9
+  volume_15m: 135938.3
+  volume_1h: 655024.2
+  volume_1d: 20563239.4
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 1.1534
-    top_ask: 1.1535
-    order_book_depth: 180700.0
+    top_bid: 1.1529
+    top_ask: 1.153
+    order_book_depth: 147327.8
 BONKUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.201e-05
+  last_price: 1.179e-05
   volatility:
-    15m: 0.001648638011913013
-    1h: 0.0022524519946330412
-    1d: 0.008059133522875926
+    15m: 0.0023022403061478372
+    1h: 0.0017448155828282633
+    1d: 0.008207818999725369
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1189670429.0
-  volume_1h: 3249615423.0
-  volume_1d: 210688193318.0
+  volume_15m: 4008673550.0
+  volume_1h: 7299207810.0
+  volume_1d: 262490110247.0
   arbitrage:
     bid_ask_spread: 9.999999999999904e-09
-    top_bid: 1.2e-05
-    top_ask: 1.201e-05
-    order_book_depth: 5249988923.0
+    top_bid: 1.179e-05
+    top_ask: 1.18e-05
+    order_book_depth: 6387468900.0
 FLOKIUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 6.3e-05
+  last_price: 6.116e-05
   volatility:
-    15m: 0.0014897546064113001
-    1h: 0.0019059793587314446
-    1d: 0.0071344921220991165
+    15m: 0.0013908920345976712
+    1h: 0.0016165550971369096
+    1d: 0.007334316738020525
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 133718272.0
-  volume_1h: 1063175131.0
-  volume_1d: 23651558949.0
+  volume_15m: 99852798.0
+  volume_1h: 909742793.0
+  volume_1d: 29186449351.0
   arbitrage:
-    bid_ask_spread: 9.999999999994822e-09
-    top_bid: 6.3e-05
-    top_ask: 6.301e-05
-    order_book_depth: 105285753.0
+    bid_ask_spread: 2.0000000000003197e-08
+    top_bid: 6.112e-05
+    top_ask: 6.114e-05
+    order_book_depth: 119289528.0
 PENDLEUSDC:
-  market_cap: 530309261
-  circulating_supply: 162909216.7179204
-  last_price: 3.249
+  market_cap: 517212813
+  circulating_supply: 162913186.7548139
+  last_price: 3.193
   volatility:
-    15m: 0.001592545633687325
-    1h: 0.0019241633425943505
-    1d: 0.0066604092396860765
+    15m: 0.0015092448294339058
+    1h: 0.0019687517997843927
+    1d: 0.006955288980968736
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 957.1
-  volume_1h: 19642.8
-  volume_1d: 450842.1
-  arbitrage:
-    bid_ask_spread: 0.0009999999999998899
-    top_bid: 3.248
-    top_ask: 3.249
-    order_book_depth: 3833.6000000000004
-BOMEUSDC:
-  market_cap: 89188561
-  circulating_supply: 68999659569.0
-  last_price: 0.001288
-  volatility:
-    15m: 0.0014165412685490707
-    1h: 0.0018814894577105577
-    1d: 0.007918469176514226
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 4411222.0
-  volume_1h: 27175559.0
-  volume_1d: 796754394.0
-  arbitrage:
-    bid_ask_spread: 2.0000000000000486e-06
-    top_bid: 0.001287
-    top_ask: 0.001289
-    order_book_depth: 27658197.0
-JTOUSDC:
-  market_cap: 678945366
-  circulating_supply: 339736102.6
-  last_price: 1.989
-  volatility:
-    15m: 0.0018848876926289093
-    1h: 0.0022197527684292132
-    1d: 0.006361741060534996
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 6658.6
-  volume_1h: 20437.7
-  volume_1d: 372805.4
-  arbitrage:
-    bid_ask_spread: 0.0009999999999998899
-    top_bid: 1.989
-    top_ask: 1.99
-    order_book_depth: 4761.9
-WIFUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.673
-  volatility:
-    15m: 0.0018314258409984328
-    1h: 0.0025347654583533774
-    1d: 0.008759298843494757
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 68015.47
-  volume_1h: 755229.04
-  volume_1d: 15252425.32
-  arbitrage:
-    bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.672
-    top_ask: 0.673
-    order_book_depth: 481286.60000000003
-CKBUSDC:
-  market_cap: 142852634
-  circulating_supply: 46743114534.69585
-  last_price: 0.00306
-  volatility:
-    15m: 0.000769999190771721
-    1h: 0.002006405486576376
-    1d: 0.006774966046369567
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 2897126.0
-  volume_1h: 16520774.0
-  volume_1d: 89609762.0
-  arbitrage:
-    bid_ask_spread: 4.000000000000097e-06
-    top_bid: 0.003059
-    top_ask: 0.003063
-    order_book_depth: 1106045.0
-ENAUSDC:
-  market_cap: 1423183664
-  circulating_supply: 6087500000.0
-  last_price: 0.2331
-  volatility:
-    15m: 0.0015897810443155735
-    1h: 0.0021122789535179755
-    1d: 0.008419618733774805
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 140235.92
-  volume_1h: 1414635.19
-  volume_1d: 42654961.22
-  arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.233
-    top_ask: 0.2331
-    order_book_depth: 276866.48
-ETHFIUSDC:
-  market_cap: 316381595
-  circulating_supply: 374505147.0
-  last_price: 0.841
-  volatility:
-    15m: 0.0014514533760879233
-    1h: 0.002567154674576679
-    1d: 0.008355156561434061
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 1251.7
-  volume_1h: 47534.5
-  volume_1d: 1343038.8
-  arbitrage:
-    bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.84
-    top_ask: 0.841
-    order_book_depth: 78720.4
-YGGUSDC:
-  market_cap: 69117960
-  circulating_supply: 525978312.6642921
-  last_price: 0.1315
-  volatility:
-    15m: 0.0008114930966138441
-    1h: 0.0016698664246023365
-    1d: 0.0071000805563803
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 1253.0
-  volume_1h: 30852.6
-  volume_1d: 1303782.3
-  arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1315
-    top_ask: 0.1317
-    order_book_depth: 27418.2
-CFXUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.0632
-  volatility:
-    15m: 0.001917860387251753
-    1h: 0.002054478467631014
-    1d: 0.007596246220160118
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 10952.0
-  volume_1h: 179095.0
-  volume_1d: 6395670.0
-  arbitrage:
-    bid_ask_spread: 0.00019999999999999185
-    top_bid: 0.0631
-    top_ask: 0.0633
-    order_book_depth: 314180.0
-RUNEUSDC:
-  market_cap: 426308588
-  circulating_supply: 351540266.0
-  last_price: 1.213
-  volatility:
-    15m: 0.0013001551108133627
-    1h: 0.0019130466033027878
-    1d: 0.006017766179526391
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 17493.8
-  volume_1h: 217865.7
-  volume_1d: 4898777.6
-  arbitrage:
-    bid_ask_spread: 0.0009999999999998899
-    top_bid: 1.213
-    top_ask: 1.214
-    order_book_depth: 59767.0
-SAGAUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.1924
-  volatility:
-    15m: 0.0011689260362057817
-    1h: 0.0021819277897334143
-    1d: 0.007632017395456375
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 41169.7
-  volume_1h: 326606.3
-  volume_1d: 5025538.3
-  arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.1923
-    top_ask: 0.1924
-    order_book_depth: 16932.4
-APTUSDC:
-  market_cap: 2496494675
-  circulating_supply: 642648828.7809824
-  last_price: 3.896
-  volatility:
-    15m: 0.0014652643017702774
-    1h: 0.0015685994370479243
-    1d: 0.006702448668110757
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 3260.32
-  volume_1h: 48218.57
-  volume_1d: 1082995.18
-  arbitrage:
-    bid_ask_spread: 0.0009999999999998899
-    top_bid: 3.895
-    top_ask: 3.896
-    order_book_depth: 5127.01
-GALAUSDC:
-  market_cap: 554367819
-  circulating_supply: 44985838671.17015
-  last_price: 0.01229
-  volatility:
-    15m: 0.001475877688746177
-    1h: 0.001923562645077868
-    1d: 0.006916119496174788
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 1371714.0
-  volume_1h: 11979319.0
-  volume_1d: 200646233.0
-  arbitrage:
-    bid_ask_spread: 1.0000000000001327e-05
-    top_bid: 0.01228
-    top_ask: 0.01229
-    order_book_depth: 4585800.0
-STXUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.545
-  volatility:
-    15m: 0.001698055339164635
-    1h: 0.0019713115918707502
-    1d: 0.006702327113365056
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 4906.7
-  volume_1h: 78703.5
-  volume_1d: 873834.1
-  arbitrage:
-    bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.545
-    top_ask: 0.546
-    order_book_depth: 73946.0
-ICPUSDC:
-  market_cap: 2418804425
-  circulating_supply: 534776271.4680626
-  last_price: 4.525
-  volatility:
-    15m: 0.001330615180988126
-    1h: 0.0015750125974801047
-    1d: 0.005565798722773757
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 496.96
-  volume_1h: 27217.33
-  volume_1d: 259781.31
+  volume_15m: 881.0
+  volume_1h: 15778.8
+  volume_1d: 579120.4
   arbitrage:
     bid_ask_spread: 0.0019999999999997797
-    top_bid: 4.525
-    top_ask: 4.527
-    order_book_depth: 3722.1699999999996
-OMNIUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 1.48
+    top_bid: 3.192
+    top_ask: 3.194
+    order_book_depth: 8129.6
+BOMEUSDC:
+  market_cap: 87573313
+  circulating_supply: 68999659569.0
+  last_price: 0.00127
   volatility:
-    15m: 0.0
-    1h: 0.002515664471454862
-    1d: 0.006638720240221656
+    15m: 0.0012305686053214063
+    1h: 0.0014103439976332365
+    1d: 0.00798153191495784
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 733.88
-  volume_1d: 47687.35
+  volume_15m: 1661217.0
+  volume_1h: 16348415.0
+  volume_1d: 936212804.0
   arbitrage:
-    bid_ask_spread: 0.010000000000000009
-    top_bid: 1.47
-    top_ask: 1.48
-    order_book_depth: 39669.96
-TRBUSDC:
-  market_cap: 92756077
-  circulating_supply: 2685081.4776293044
-  last_price: 34.42
+    bid_ask_spread: 2.0000000000000486e-06
+    top_bid: 0.001269
+    top_ask: 0.001271
+    order_book_depth: 30116135.0
+JTOUSDC:
+  market_cap: 661511876
+  circulating_supply: 339736102.6
+  last_price: 1.947
   volatility:
-    15m: 0.0015887622310721287
-    1h: 0.0023832229438332953
-    1d: 0.007541619436299303
+    15m: 0.001481147469506366
+    1h: 0.001263746998276049
+    1d: 0.006606118302825421
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 45.531
-  volume_1h: 589.483
-  volume_1d: 10258.642
+  volume_15m: 1591.4
+  volume_1h: 6658.6
+  volume_1d: 432567.0
   arbitrage:
-    bid_ask_spread: 0.020000000000003126
-    top_bid: 34.41
-    top_ask: 34.43
-    order_book_depth: 137.78300000000002
-ARKMUSDC:
-  market_cap: 169492041
-  circulating_supply: 441999596.0
-  last_price: 0.382
-  volatility:
-    15m: 0.0018244192252026181
-    1h: 0.0023129624632594226
-    1d: 0.008164760044193317
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 2479.0
-  volume_1h: 37979.7
-  volume_1d: 971376.0
-  arbitrage:
-    bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.381
-    top_ask: 0.382
-    order_book_depth: 174227.0
-ARUSDC:
-  market_cap: 304747185
-  circulating_supply: 65454185.5381511
-  last_price: 4.66
-  volatility:
-    15m: 0.002199395585157534
-    1h: 0.0022216655134589484
-    1d: 0.00795259595533928
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 828.26
-  volume_1h: 5671.97
-  volume_1d: 186224.44
-  arbitrage:
-    bid_ask_spread: 0.009999999999999787
-    top_bid: 4.65
-    top_ask: 4.66
-    order_book_depth: 7078.08
-BBUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.0751
-  volatility:
-    15m: 0.001918022202454338
-    1h: 0.0023522784341570803
-    1d: 0.008505695085092387
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 1147.8
-  volume_1h: 11317.5
-  volume_1d: 1592521.7
-  arbitrage:
-    bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.075
-    top_ask: 0.0751
-    order_book_depth: 74451.6
-CRVUSDC:
-  market_cap: 708274166
-  circulating_supply: 1364264649.0
-  last_price: 0.5198
-  volatility:
-    15m: 0.0017913117718862085
-    1h: 0.0020714623938080864
-    1d: 0.007285881621179018
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 31731.3
-  volume_1h: 175176.7
-  volume_1d: 5619269.1
-  arbitrage:
-    bid_ask_spread: 0.00010000000000010001
-    top_bid: 0.5196
-    top_ask: 0.5197
-    order_book_depth: 15961.699999999999
-PEOPLEUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.0155
-  volatility:
-    15m: 0.0014978287680065697
-    1h: 0.001840883260483772
-    1d: 0.007816352107064497
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 28417.6
-  volume_1h: 442959.8
-  volume_1d: 12365818.7
-  arbitrage:
-    bid_ask_spread: 9.999999999999593e-06
-    top_bid: 0.01548
-    top_ask: 0.01549
-    order_book_depth: 1197704.2
-REZUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.00727
-  volatility:
-    15m: 0.001987880630796068
-    1h: 0.001896564346698127
-    1d: 0.007502669252670108
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 32028.0
-  volume_1h: 1247475.4
-  volume_1d: 24027492.9
-  arbitrage:
-    bid_ask_spread: 9.999999999999593e-06
-    top_bid: 0.00725
-    top_ask: 0.00726
-    order_book_depth: 2948744.5000000005
-ENSUSDC:
-  market_cap: 556772951
-  circulating_supply: 33165585.054507963
-  last_price: 16.84
-  volatility:
-    15m: 0.00169737913973075
-    1h: 0.001979794412842326
-    1d: 0.007218833681602212
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 190.83
-  volume_1h: 1205.17
-  volume_1d: 23936.78
-  arbitrage:
-    bid_ask_spread: 0.00999999999999801
-    top_bid: 16.8
-    top_ask: 16.81
-    order_book_depth: 664.6400000000001
-LDOUSDC:
+    bid_ask_spread: 0.0009999999999998899
+    top_bid: 1.947
+    top_ask: 1.948
+    order_book_depth: 4776.900000000001
+WIFUSDC:
   market_cap: null
   circulating_supply: null
   last_price: 0.654
   volatility:
-    15m: 0.0020807762541404278
-    1h: 0.0020629120190983094
-    1d: 0.0077558314577467645
+    15m: 0.001987333850563825
+    1h: 0.001913850200991119
+    1d: 0.00892348214796861
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 7352.6
-  volume_1h: 72601.5
-  volume_1d: 1553327.52
+  volume_15m: 18170.66
+  volume_1h: 182139.84
+  volume_1d: 17822407.51
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
     top_bid: 0.653
     top_ask: 0.654
-    order_book_depth: 82124.14
+    order_book_depth: 605919.72
+CKBUSDC:
+  market_cap: 142481226
+  circulating_supply: 46744201811.19098
+  last_price: 0.003047
+  volatility:
+    15m: 0.00082276732052074
+    1h: 0.001223500523511813
+    1d: 0.007136456625957246
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 103675.0
+  volume_1h: 1531546.0
+  volume_1d: 111590088.0
+  arbitrage:
+    bid_ask_spread: 9.99999999999699e-07
+    top_bid: 0.003046
+    top_ask: 0.003047
+    order_book_depth: 903994.0
+ENAUSDC:
+  market_cap: 1387533037
+  circulating_supply: 6087500000.0
+  last_price: 0.2279
+  volatility:
+    15m: 0.0016503519024817688
+    1h: 0.0016223144531706721
+    1d: 0.008497775320829478
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 202240.18
+  volume_1h: 2249676.9
+  volume_1d: 50806321.61
+  arbitrage:
+    bid_ask_spread: 0.00010000000000001674
+    top_bid: 0.2279
+    top_ask: 0.228
+    order_book_depth: 251221.41
+ETHFIUSDC:
+  market_cap: 306640617
+  circulating_supply: 374505147.0
+  last_price: 0.819
+  volatility:
+    15m: 0.0016751407767433275
+    1h: 0.0016415616579659386
+    1d: 0.00857251119330844
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1888.8
+  volume_1h: 17517.8
+  volume_1d: 1545942.4
+  arbitrage:
+    bid_ask_spread: 0.0010000000000000009
+    top_bid: 0.819
+    top_ask: 0.82
+    order_book_depth: 51929.299999999996
+YGGUSDC:
+  market_cap: 68416491
+  circulating_supply: 525979388.3142921
+  last_price: 0.1302
+  volatility:
+    15m: 0.0012946996563146895
+    1h: 0.0014774925090893186
+    1d: 0.0073523258019810005
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 3073.5
+  volume_1h: 18990.1
+  volume_1d: 1499310.0
+  arbitrage:
+    bid_ask_spread: 0.0002999999999999947
+    top_bid: 0.13
+    top_ask: 0.1303
+    order_book_depth: 38846.399999999994
+CFXUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.0625
+  volatility:
+    15m: 0.0018397578762971622
+    1h: 0.0018724827976227519
+    1d: 0.007844049082699828
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 97903.0
+  volume_1h: 247784.0
+  volume_1d: 7339897.0
+  arbitrage:
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.0624
+    top_ask: 0.0625
+    order_book_depth: 304758.0
+RUNEUSDC:
+  market_cap: 428190187
+  circulating_supply: 351536317.0
+  last_price: 1.221
+  volatility:
+    15m: 0.0009881488769858636
+    1h: 0.001266294167286991
+    1d: 0.006320640615363142
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 27231.5
+  volume_1h: 191813.0
+  volume_1d: 5885421.0
+  arbitrage:
+    bid_ask_spread: 0.0009999999999998899
+    top_bid: 1.221
+    top_ask: 1.222
+    order_book_depth: 71650.1
+SAGAUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.1899
+  volatility:
+    15m: 0.0011786837375292935
+    1h: 0.0013222495636528904
+    1d: 0.007709298801428233
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 77854.2
+  volume_1h: 283131.7
+  volume_1d: 7506577.2
+  arbitrage:
+    bid_ask_spread: 9.999999999998899e-05
+    top_bid: 0.1899
+    top_ask: 0.19
+    order_book_depth: 21525.7
+APTUSDC:
+  market_cap: 2477427707
+  circulating_supply: 642662479.981886
+  last_price: 3.856
+  volatility:
+    15m: 0.0013673427795806924
+    1h: 0.0013094858120998515
+    1d: 0.006846864406335206
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 4727.7
+  volume_1h: 15356.68
+  volume_1d: 1226634.82
+  arbitrage:
+    bid_ask_spread: 0.0009999999999998899
+    top_bid: 3.859
+    top_ask: 3.86
+    order_book_depth: 4468.969999999999
+GALAUSDC:
+  market_cap: 544363768
+  circulating_supply: 44986844884.42673
+  last_price: 0.01208
+  volatility:
+    15m: 0.0015057106534967194
+    1h: 0.0015250312111178088
+    1d: 0.00748034782822652
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1393238.0
+  volume_1h: 6919978.0
+  volume_1d: 260021184.0
+  arbitrage:
+    bid_ask_spread: 9.999999999999593e-06
+    top_bid: 0.01208
+    top_ask: 0.01209
+    order_book_depth: 4093105.0
+STXUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.537
+  volatility:
+    15m: 0.0010310438013242578
+    1h: 0.0014209223568875256
+    1d: 0.006829032060587463
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 11985.5
+  volume_1h: 23588.2
+  volume_1d: 1035422.7
+  arbitrage:
+    bid_ask_spread: 0.0010000000000000009
+    top_bid: 0.538
+    top_ask: 0.539
+    order_book_depth: 85482.7
+ICPUSDC:
+  market_cap: 2388306833
+  circulating_supply: 534776521.118011
+  last_price: 4.465
+  volatility:
+    15m: 0.0014554822210705155
+    1h: 0.00134002056053164
+    1d: 0.00584854804380707
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1470.35
+  volume_1h: 10870.62
+  volume_1d: 351094.17
+  arbitrage:
+    bid_ask_spread: 0.001000000000000334
+    top_bid: 4.468
+    top_ask: 4.469
+    order_book_depth: 1430.19
+OMNIUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 1.47
+  volatility:
+    15m: 0.0026773979337462884
+    1h: 0.002365273358443566
+    1d: 0.006638246790242169
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 396.61
+  volume_1h: 1544.74
+  volume_1d: 52401.02
+  arbitrage:
+    bid_ask_spread: 0.010000000000000009
+    top_bid: 1.46
+    top_ask: 1.47
+    order_book_depth: 41843.7
+TRBUSDC:
+  market_cap: 90519723
+  circulating_supply: 2685243.683062638
+  last_price: 33.65
+  volatility:
+    15m: 0.0012967715110301366
+    1h: 0.0016086259522421203
+    1d: 0.007727439176954124
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 50.496
+  volume_1h: 481.702
+  volume_1d: 13519.092
+  arbitrage:
+    bid_ask_spread: 0.00999999999999801
+    top_bid: 33.64
+    top_ask: 33.65
+    order_book_depth: 104.523
+ARKMUSDC:
+  market_cap: 166414451
+  circulating_supply: 441999596.0
+  last_price: 0.377
+  volatility:
+    15m: 0.0024341662881012488
+    1h: 0.0019933239682827933
+    1d: 0.008640385843078921
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1762.7
+  volume_1h: 12364.0
+  volume_1d: 1208231.1
+  arbitrage:
+    bid_ask_spread: 0.0010000000000000009
+    top_bid: 0.376
+    top_ask: 0.377
+    order_book_depth: 148539.19999999998
+ARUSDC:
+  market_cap: 304264452
+  circulating_supply: 65454185.5381511
+  last_price: 4.65
+  volatility:
+    15m: 0.001781666833427195
+    1h: 0.0016421641156777486
+    1d: 0.008088455672221431
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 301.99
+  volume_1h: 3363.51
+  volume_1d: 227426.26
+  arbitrage:
+    bid_ask_spread: 0.010000000000000675
+    top_bid: 4.64
+    top_ask: 4.65
+    order_book_depth: 7341.57
+BBUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.0755
+  volatility:
+    15m: 0.0016773511126096494
+    1h: 0.0014855167734883947
+    1d: 0.008509423465931594
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 2525.6
+  volume_1h: 10562.5
+  volume_1d: 1685804.1
+  arbitrage:
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.0755
+    top_ask: 0.0756
+    order_book_depth: 91607.9
+CRVUSDC:
+  market_cap: 707532198
+  circulating_supply: 1364371466.0
+  last_price: 0.5197
+  volatility:
+    15m: 0.001643261505712407
+    1h: 0.0017002621289843461
+    1d: 0.007340906400326553
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 37500.9
+  volume_1h: 100903.4
+  volume_1d: 6679657.3
+  arbitrage:
+    bid_ask_spread: 0.00019999999999997797
+    top_bid: 0.5192
+    top_ask: 0.5194
+    order_book_depth: 23862.5
+PEOPLEUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.01537
+  volatility:
+    15m: 0.0014298302066000199
+    1h: 0.0014264664169017511
+    1d: 0.007947132569538273
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 27025.7
+  volume_1h: 82256.2
+  volume_1d: 15285565.0
+  arbitrage:
+    bid_ask_spread: 9.999999999999593e-06
+    top_bid: 0.01536
+    top_ask: 0.01537
+    order_book_depth: 1314048.6
+REZUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.00723
+  volatility:
+    15m: 0.001801221811550554
+    1h: 0.0014806211107881919
+    1d: 0.007971624030931343
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 57012.6
+  volume_1h: 170544.1
+  volume_1d: 29933870.6
+  arbitrage:
+    bid_ask_spread: 1.000000000000046e-05
+    top_bid: 0.00722
+    top_ask: 0.00723
+    order_book_depth: 3278506.6
+ENSUSDC:
+  market_cap: 551026239
+  circulating_supply: 33165585.054507963
+  last_price: 16.64
+  volatility:
+    15m: 0.0011742432186677848
+    1h: 0.0015749377935110759
+    1d: 0.007459185672951088
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 115.96
+  volume_1h: 834.83
+  volume_1d: 29892.54
+  arbitrage:
+    bid_ask_spread: 0.010000000000001563
+    top_bid: 16.63
+    top_ask: 16.64
+    order_book_depth: 755.4199999999998
+LDOUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.641
+  volatility:
+    15m: 0.0014298246163380155
+    1h: 0.0016863605417356696
+    1d: 0.00785787926849623
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 21381.47
+  volume_1h: 34884.43
+  volume_1d: 1824521.94
+  arbitrage:
+    bid_ask_spread: 0.0010000000000000009
+    top_bid: 0.641
+    top_ask: 0.642
+    order_book_depth: 63689.1
 NOTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.001677
+  last_price: 0.00164
   volatility:
-    15m: 0.0015914749392812644
-    1h: 0.0017939227504861946
-    1d: 0.007268609102196056
+    15m: 0.001105829343662555
+    1h: 0.0017012661471767303
+    1d: 0.007714710494265056
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1829387.0
-  volume_1h: 6579277.0
-  volume_1d: 217603190.0
+  volume_15m: 598422.0
+  volume_1h: 5134898.0
+  volume_1d: 248278477.0
   arbitrage:
-    bid_ask_spread: 1.0000000000001327e-06
-    top_bid: 0.001674
-    top_ask: 0.001675
-    order_book_depth: 7980497.0
+    bid_ask_spread: 9.999999999999159e-07
+    top_bid: 0.001639
+    top_ask: 0.00164
+    order_book_depth: 8505026.0
 TNSRUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.098
+  last_price: 0.0961
   volatility:
-    15m: 0.000880046255544369
-    1h: 0.0020128648174924228
-    1d: 0.008762542171568874
+    15m: 0.0005550596924453061
+    1h: 0.0019777837823610218
+    1d: 0.009391822909331554
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2391.8
-  volume_1h: 14755.6
-  volume_1d: 602467.1
+  volume_15m: 1581.2
+  volume_1h: 18781.0
+  volume_1d: 722419.0
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.0979
-    top_ask: 0.0981
-    order_book_depth: 37677.299999999996
+    bid_ask_spread: 0.00019999999999999185
+    top_bid: 0.0961
+    top_ask: 0.0963
+    order_book_depth: 42254.700000000004
 ZKUSDC:
-  market_cap: 140978103
+  market_cap: 139100807
   circulating_supply: 3675000000.0
-  last_price: 0.0383
+  last_price: 0.0378
   volatility:
-    15m: 0.0013922717123557322
-    1h: 0.0020428599778919117
-    1d: 0.0073011033454376635
+    15m: 0.0010362833502928265
+    1h: 0.0013343842766733835
+    1d: 0.007407064372328225
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 7091.6
-  volume_1h: 358622.1
-  volume_1d: 17956846.1
+  volume_15m: 159816.1
+  volume_1h: 722533.0
+  volume_1d: 21144236.8
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0382
-    top_ask: 0.0383
-    order_book_depth: 3506962.5
+    top_bid: 0.0378
+    top_ask: 0.0379
+    order_book_depth: 3138369.8000000003
 ZROUSDC:
-  market_cap: 172008598
+  market_cap: 169435972
   circulating_supply: 111152854.20763355
-  last_price: 1.547
+  last_price: 1.527
   volatility:
-    15m: 0.0015716836924850434
-    1h: 0.002076647330441731
-    1d: 0.007455288659288284
+    15m: 0.0013779959078231848
+    1h: 0.001676652777824539
+    1d: 0.00770675016341698
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1092.29
-  volume_1h: 14199.94
-  volume_1d: 388785.47
+  volume_15m: 1914.7
+  volume_1h: 24630.43
+  volume_1d: 507114.9
   arbitrage:
     bid_ask_spread: 0.001000000000000112
-    top_bid: 1.545
-    top_ask: 1.546
-    order_book_depth: 12785.060000000001
+    top_bid: 1.525
+    top_ask: 1.526
+    order_book_depth: 13682.95
 IOUSDC:
-  market_cap: 99135151
+  market_cap: 98622432
   circulating_supply: 165789684.2482415
-  last_price: 0.597
+  last_price: 0.594
   volatility:
-    15m: 0.0017547061712639461
-    1h: 0.0023047654932617373
-    1d: 0.009602463436086957
+    15m: 0.0009346263361790029
+    1h: 0.0017344474436487216
+    1d: 0.009323951675513763
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 949.99
-  volume_1h: 18450.8
-  volume_1d: 631561.87
+  volume_15m: 1651.1
+  volume_1h: 5098.64
+  volume_1d: 723775.63
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.597
-    top_ask: 0.598
-    order_book_depth: 41089.09
+    top_bid: 0.593
+    top_ask: 0.594
+    order_book_depth: 36193.33
 1000SATSUSDC:
   market_cap: null
   circulating_supply: null
   last_price: 3.29e-05
   volatility:
-    15m: 0.0010987529063657643
-    1h: 0.0022415397855867075
-    1d: 0.007612752298414722
+    15m: 0.0014454382643676324
+    1h: 0.0015430443256397976
+    1d: 0.007798575356103478
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 30699.0
-  volume_1h: 23657612.0
-  volume_1d: 3416338150.0
+  volume_15m: 91619239.0
+  volume_1h: 156185709.0
+  volume_1d: 5361727994.0
   arbitrage:
     bid_ask_spread: 1.0000000000000243e-07
-    top_bid: 3.29e-05
-    top_ask: 3.3e-05
-    order_book_depth: 849759280.0
+    top_bid: 3.28e-05
+    top_ask: 3.29e-05
+    order_book_depth: 1024134953.0
 RENDERUSDC:
-  market_cap: 1419748013
+  market_cap: 1392826569
   circulating_supply: 518128769.0562826
-  last_price: 2.733
+  last_price: 2.686
   volatility:
-    15m: 0.0013285657429817509
-    1h: 0.0018544690272209133
-    1d: 0.006491923509297619
+    15m: 0.0012255313639289403
+    1h: 0.001591883231749346
+    1d: 0.00665868233250266
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 14952.72
-  volume_1h: 70707.07
-  volume_1d: 1321210.84
+  volume_15m: 7947.24
+  volume_1h: 59928.54
+  volume_1d: 1682963.89
   arbitrage:
     bid_ask_spread: 0.0009999999999998899
-    top_bid: 2.733
-    top_ask: 2.734
-    order_book_depth: 12777.109999999999
+    top_bid: 2.686
+    top_ask: 2.687
+    order_book_depth: 14060.68
 TONUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 2.728
+  last_price: 2.694
   volatility:
-    15m: 0.001291377064156491
-    1h: 0.00138917956548824
-    1d: 0.005449933504779163
+    15m: 0.0009519778272786196
+    1h: 0.0010359592699723582
+    1d: 0.005630871020381947
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2022.36
-  volume_1h: 32100.29
-  volume_1d: 461053.35
+  volume_15m: 4158.0
+  volume_1h: 15397.03
+  volume_1d: 573107.59
   arbitrage:
     bid_ask_spread: 0.0009999999999998899
-    top_bid: 2.726
-    top_ask: 2.727
-    order_book_depth: 7538.929999999999
+    top_bid: 2.694
+    top_ask: 2.695
+    order_book_depth: 8315.44
 DOGSUSDC:
-  market_cap: 57215233
+  market_cap: 56148701
   circulating_supply: 516750000000.0
-  last_price: 0.0001104
+  last_price: 0.0001085
   volatility:
-    15m: 0.0010421683999434787
-    1h: 0.0021857896955528046
-    1d: 0.008384823973791354
+    15m: 0.0008078284084462899
+    1h: 0.0013418352188824814
+    1d: 0.00902555807739649
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 348108.0
-  volume_1h: 96707676.0
-  volume_1d: 1260822945.0
+  volume_15m: 2390514.0
+  volume_1h: 55561820.0
+  volume_1d: 1778043736.0
   arbitrage:
-    bid_ask_spread: 9.999999999998888e-08
-    top_bid: 0.0001101
-    top_ask: 0.0001102
-    order_book_depth: 144124784.0
+    bid_ask_spread: 2.0000000000000486e-07
+    top_bid: 0.0001085
+    top_ask: 0.0001087
+    order_book_depth: 189397959.0
 RAREUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0433
+  last_price: 0.043
   volatility:
-    15m: 0.002192809956491751
-    1h: 0.0017836668996438067
-    1d: 0.0066650266045970505
+    15m: 0.000913231733776388
+    1h: 0.001140433784510208
+    1d: 0.00680389989194259
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 23433.2
-  volume_1h: 787003.6
-  volume_1d: 24173608.7
+  volume_15m: 4176.8
+  volume_1h: 32547.6
+  volume_1d: 24845689.7
   arbitrage:
-    bid_ask_spread: 9.999999999999593e-05
-    top_bid: 0.0432
-    top_ask: 0.0433
-    order_book_depth: 278572.3
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.043
+    top_ask: 0.0431
+    order_book_depth: 268325.0
 SLFUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0837
+  last_price: 0.0913
   volatility:
-    15m: 0.005267201112845392
-    1h: 0.0035370491884066393
-    1d: 0.009397053277922604
+    15m: 0.00633614381199648
+    1h: 0.00702108218996692
+    1d: 0.013316408998705603
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 26601.9
-  volume_1h: 58283.2
-  volume_1d: 743574.8
+  volume_15m: 35768.3
+  volume_1h: 312511.0
+  volume_1d: 2503269.7
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.0837
-    top_ask: 0.0839
-    order_book_depth: 40640.5
+    bid_ask_spread: 0.0003999999999999976
+    top_bid: 0.0908
+    top_ask: 0.0912
+    order_book_depth: 143281.40000000002
 AAVEUSDC:
-  market_cap: 3416301642
-  circulating_supply: 15161886.50475288
-  last_price: 224.28
+  market_cap: 3313169916
+  circulating_supply: 15161962.615448847
+  last_price: 218.75
   volatility:
-    15m: 0.002175041144699653
-    1h: 0.00215401548011599
-    1d: 0.007654462669847363
+    15m: 0.001836785318724122
+    1h: 0.001658956466028373
+    1d: 0.0076942869691367455
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 801.744
-  volume_1h: 2246.973
-  volume_1d: 27265.434
+  volume_15m: 104.999
+  volume_1h: 1373.6
+  volume_1d: 33786.645
   arbitrage:
     bid_ask_spread: 0.06999999999999318
-    top_bid: 224.22
-    top_ask: 224.29
-    order_book_depth: 14.371
+    top_bid: 218.68
+    top_ask: 218.75
+    order_book_depth: 58.297000000000004
 POLUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1689
+  last_price: 0.1686
   volatility:
-    15m: 0.0008071223599126529
-    1h: 0.0014983481144321964
-    1d: 0.005408518054487983
+    15m: 0.0011278393549246759
+    1h: 0.0013246584032944363
+    1d: 0.005537284111594209
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 50393.9
-  volume_1h: 315104.0
-  volume_1d: 9305553.4
+  volume_15m: 68329.0
+  volume_1h: 244948.2
+  volume_1d: 10961018.1
   arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.1688
-    top_ask: 0.1689
-    order_book_depth: 132721.3
+    bid_ask_spread: 0.00010000000000001674
+    top_bid: 0.1687
+    top_ask: 0.1688
+    order_book_depth: 165130.1
 ACTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0409
+  last_price: 0.0399
   volatility:
-    15m: 0.004230843358660335
-    1h: 0.0059367905098496555
-    1d: 0.011479315528899737
+    15m: 0.0009818101326383969
+    1h: 0.001829705015315414
+    1d: 0.01157933881597126
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 254298.7
-  volume_1h: 3254301.4
-  volume_1d: 6940792.0
+  volume_15m: 97625.3
+  volume_1h: 145671.9
+  volume_1d: 9298306.0
   arbitrage:
-    bid_ask_spread: 0.0001999999999999988
-    top_bid: 0.0409
-    top_ask: 0.0411
-    order_book_depth: 1045742.6000000001
+    bid_ask_spread: 9.999999999999593e-05
+    top_bid: 0.0398
+    top_ask: 0.0399
+    order_book_depth: 752265.8
 NEIROUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.00031745
+  last_price: 0.00032151
   volatility:
-    15m: 0.0013671496674112524
-    1h: 0.0021672858381936297
-    1d: 0.008850698606503869
+    15m: 0.0012191613984552808
+    1h: 0.0014626908599674278
+    1d: 0.008812398826138651
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 40353833.0
-  volume_1h: 257882463.0
-  volume_1d: 6118055827.0
+  volume_15m: 7000410.0
+  volume_1h: 89692464.0
+  volume_1d: 6933068601.0
   arbitrage:
-    bid_ask_spread: 5.999999999996893e-08
-    top_bid: 0.00031741
-    top_ask: 0.00031747
-    order_book_depth: 1481315.0
+    bid_ask_spread: 1.299999999999869e-07
+    top_bid: 0.00032136
+    top_ask: 0.00032149
+    order_book_depth: 2358420.0
 PNUTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1885
+  last_price: 0.1877
   volatility:
-    15m: 0.001341007995688473
-    1h: 0.0021195104400360807
-    1d: 0.008333698767800976
+    15m: 0.0011484275246262904
+    1h: 0.001363336274947242
+    1d: 0.008322266037929762
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 76282.7
-  volume_1h: 810302.7
-  volume_1d: 8373860.7
+  volume_15m: 76242.3
+  volume_1h: 460727.2
+  volume_1d: 12534188.2
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.1884
-    top_ask: 0.1885
-    order_book_depth: 239480.5
+    top_bid: 0.1875
+    top_ask: 0.1876
+    order_book_depth: 235575.8
 CATIUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0712
+  last_price: 0.0717
   volatility:
-    15m: 0.006998102563145283
-    1h: 0.004005204053904605
-    1d: 0.00617050051159584
+    15m: 0.0009261021585485544
+    1h: 0.0010343483813279608
+    1d: 0.006850362807276225
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 66327.8
-  volume_1h: 126952.3
-  volume_1d: 624501.7
+  volume_15m: 20218.5
+  volume_1h: 29103.4
+  volume_1d: 1285563.3
   arbitrage:
-    bid_ask_spread: 0.00019999999999999185
-    top_bid: 0.0713
-    top_ask: 0.0715
-    order_book_depth: 53777.49999999999
+    bid_ask_spread: 0.00020000000000000573
+    top_bid: 0.0715
+    top_ask: 0.0717
+    order_book_depth: 112118.49999999999
 FDUSDUSDC:
-  market_cap: 1492647028
+  market_cap: 1493877602
   circulating_supply: 1497233482.021479
-  last_price: 0.9977
+  last_price: 0.9979
   volatility:
-    15m: 8.306837437431386e-05
-    1h: 7.784789083895664e-05
-    1d: 9.693949990333506e-05
+    15m: 4.755672035437308e-05
+    1h: 3.721442708865388e-05
+    1d: 0.00010232487103031339
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1961095.0
-  volume_1h: 11460497.0
-  volume_1d: 96385590.0
+  volume_15m: 489350.0
+  volume_1h: 3239318.0
+  volume_1d: 126905886.0
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.9977
-    top_ask: 0.9978
-    order_book_depth: 8484395.0
+    top_bid: 0.9979
+    top_ask: 0.998
+    order_book_depth: 8793540.0
 HBARUSDC:
-  market_cap: 5512496406
-  circulating_supply: 42239959710.77457
-  last_price: 0.13056
+  market_cap: 5478082793
+  circulating_supply: 42239959710.78075
+  last_price: 0.12978
   volatility:
-    15m: 0.0014914575727942537
-    1h: 0.0017170189422630892
-    1d: 0.0057497364899702615
+    15m: 0.0011338209050751726
+    1h: 0.001209657298485846
+    1d: 0.0058302563083519315
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 508075.0
-  volume_1h: 3172930.0
-  volume_1d: 69443327.0
+  volume_15m: 316646.0
+  volume_1h: 2082977.0
+  volume_1d: 91100507.0
   arbitrage:
-    bid_ask_spread: 1.9999999999992246e-05
-    top_bid: 0.13053
-    top_ask: 0.13055
-    order_book_depth: 26925.0
+    bid_ask_spread: 1.0000000000010001e-05
+    top_bid: 0.12974
+    top_ask: 0.12975
+    order_book_depth: 39322.0
 OMUSDC:
-  market_cap: 195759319
-  circulating_supply: 971974294.3116889
+  market_cap: 195035109
+  circulating_supply: 971983986.7954168
   last_price: 0.2004
   volatility:
-    15m: 0.001287272208405817
-    1h: 0.002206965950106895
-    1d: 0.00805366796971078
+    15m: 0.0010923456838377939
+    1h: 0.001309352189132971
+    1d: 0.008281096295775293
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 18225.2
-  volume_1h: 252125.5
-  volume_1d: 5661677.9
+  volume_15m: 13223.9
+  volume_1h: 191580.4
+  volume_1d: 6590230.7
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
     top_bid: 0.2003
     top_ask: 0.2004
-    order_book_depth: 216457.8
+    order_book_depth: 242116.8
 RAYUSDC:
-  market_cap: 481708272
+  market_cap: 477046319
   circulating_supply: 267623801.842338
-  last_price: 1.804
+  last_price: 1.786
   volatility:
-    15m: 0.0024666618827948955
-    1h: 0.002093186018675885
-    1d: 0.007240202178337836
+    15m: 0.0011590365857387511
+    1h: 0.0014828162023550963
+    1d: 0.007293247392174366
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 27919.4
-  volume_1h: 80832.7
-  volume_1d: 1446796.1
+  volume_15m: 5682.2
+  volume_1h: 25355.5
+  volume_1d: 1733152.5
   arbitrage:
-    bid_ask_spread: 0.001000000000000112
-    top_bid: 1.803
-    top_ask: 1.804
-    order_book_depth: 7344.9
+    bid_ask_spread: 0.0009999999999998899
+    top_bid: 1.784
+    top_ask: 1.785
+    order_book_depth: 8335.8
 TAOUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 300.9
+  last_price: 293.6
   volatility:
-    15m: 0.0015448293210437289
-    1h: 0.002214263557580329
-    1d: 0.00727413291131259
+    15m: 0.0016706354965102435
+    1h: 0.0017865737141191964
+    1d: 0.007235133349053026
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 236.7535
-  volume_1h: 1926.8368
-  volume_1d: 32718.6666
+  volume_15m: 277.8155
+  volume_1h: 997.0555
+  volume_1d: 38993.9809
   arbitrage:
-    bid_ask_spread: 0.0999999999999659
-    top_bid: 300.8
-    top_ask: 300.9
-    order_book_depth: 138.9425
+    bid_ask_spread: 0.19999999999998863
+    top_bid: 293.8
+    top_ask: 294.0
+    order_book_depth: 166.0063
 APEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.5567
+  last_price: 0.5447
   volatility:
-    15m: 0.001175416192811482
-    1h: 0.0014839997665406814
-    1d: 0.005941629230232841
+    15m: 0.0011140884002117063
+    1h: 0.001150920318890935
+    1d: 0.006151060275581099
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3277.67
-  volume_1h: 36274.54
-  volume_1d: 992372.83
+  volume_15m: 4174.69
+  volume_1h: 22774.16
+  volume_1d: 1161850.49
   arbitrage:
-    bid_ask_spread: 0.00019999999999997797
-    top_bid: 0.5564
-    top_ask: 0.5566
-    order_book_depth: 11723.19
+    bid_ask_spread: 9.999999999998899e-05
+    top_bid: 0.5442
+    top_ask: 0.5443
+    order_book_depth: 8155.360000000001
 EIGENUSDC:
-  market_cap: 311600864
+  market_cap: 304782995
   circulating_supply: 309329212.8729616
-  last_price: 1.008
+  last_price: 0.986
   volatility:
-    15m: 0.001486688728475443
-    1h: 0.0025705364860679077
-    1d: 0.008505439913355102
+    15m: 0.0014242674458672248
+    1h: 0.001651202722073567
+    1d: 0.008566823003843758
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 4147.54
-  volume_1h: 35294.37
-  volume_1d: 1058453.39
+  volume_15m: 2136.19
+  volume_1h: 22967.96
+  volume_1d: 1244118.4
   arbitrage:
-    bid_ask_spread: 0.001000000000000112
-    top_bid: 1.005
-    top_ask: 1.006
-    order_book_depth: 44837.09000000001
+    bid_ask_spread: 0.0010000000000000009
+    top_bid: 0.984
+    top_ask: 0.985
+    order_book_depth: 45811.29
 MEMEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.001306
+  last_price: 0.001285
   volatility:
-    15m: 0.0017295484590966988
-    1h: 0.0020497954904326967
-    1d: 0.008265090523569215
+    15m: 0.0017259459846081676
+    1h: 0.0018290455050102821
+    1d: 0.008479471391073792
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 121663.0
-  volume_1h: 4747982.0
-  volume_1d: 84110585.0
+  volume_15m: 253668.0
+  volume_1h: 912892.0
+  volume_1d: 93304385.0
   arbitrage:
     bid_ask_spread: 9.999999999999159e-07
-    top_bid: 0.001302
-    top_ask: 0.001303
-    order_book_depth: 3696892.0
+    top_bid: 0.001283
+    top_ask: 0.001284
+    order_book_depth: 2592411.0
 1MBABYDOGEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0010075
+  last_price: 0.000997
   volatility:
-    15m: 0.0014607505668506307
-    1h: 0.00173600894724207
-    1d: 0.00649317620105672
+    15m: 0.00029969922355831813
+    1h: 0.0010916014379086624
+    1d: 0.006896060817117908
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 99068.0
-  volume_1h: 5278037.0
-  volume_1d: 111474125.0
+  volume_15m: 508398.0
+  volume_1h: 2547753.0
+  volume_1d: 131628841.0
   arbitrage:
-    bid_ask_spread: 2.199999999999945e-06
-    top_bid: 0.0010038
-    top_ask: 0.001006
-    order_book_depth: 6010403.0
+    bid_ask_spread: 2.1000000000001053e-06
+    top_bid: 0.0009953
+    top_ask: 0.0009974
+    order_book_depth: 3214350.0
 CETUSUSDC:
-  market_cap: 65043279
+  market_cap: 64187131
   circulating_supply: 808333333.0
-  last_price: 0.0803
+  last_price: 0.0793
   volatility:
-    15m: 0.0018624246135251464
-    1h: 0.0021267486820903273
-    1d: 0.007229219118492927
+    15m: 0.0010906566432938446
+    1h: 0.0019045592836499144
+    1d: 0.007490668980259968
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 7217.6
-  volume_1h: 97193.9
-  volume_1d: 4202874.8
+  volume_15m: 18929.1
+  volume_1h: 442391.8
+  volume_1d: 6172576.1
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.0802
-    top_ask: 0.0804
-    order_book_depth: 139678.1
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.079
+    top_ask: 0.0791
+    order_book_depth: 168928.7
 COWUSDC:
-  market_cap: 119776040
-  circulating_supply: 482876728.5661713
-  last_price: 0.249
+  market_cap: 118969191
+  circulating_supply: 482941142.5567769
+  last_price: 0.2465
   volatility:
-    15m: 0.0021952745825630495
-    1h: 0.0022199085348596687
-    1d: 0.007143658968239026
+    15m: 0.000646290307644698
+    1h: 0.0013902216555146882
+    1d: 0.007500030102448187
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1413.0
-  volume_1h: 10668.2
-  volume_1d: 360417.1
+  volume_15m: 5828.8
+  volume_1h: 17783.0
+  volume_1d: 424430.7
   arbitrage:
     bid_ask_spread: 0.00040000000000001146
-    top_bid: 0.248
-    top_ask: 0.2484
-    order_book_depth: 35837.9
+    top_bid: 0.2453
+    top_ask: 0.2457
+    order_book_depth: 23786.199999999997
 DYDXUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.4348
+  last_price: 0.4295
   volatility:
-    15m: 0.0016440337690897548
-    1h: 0.001864793291196303
-    1d: 0.00737648278879871
+    15m: 0.0013326371481881694
+    1h: 0.0014431161267938666
+    1d: 0.007782894909846251
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 4004.71
-  volume_1h: 42571.69
-  volume_1d: 1027299.85
+  volume_15m: 6145.39
+  volume_1h: 23801.3
+  volume_1d: 1324179.51
   arbitrage:
-    bid_ask_spread: 0.0001000000000000445
-    top_bid: 0.4347
-    top_ask: 0.4348
-    order_book_depth: 18183.27
+    bid_ask_spread: 0.00020000000000003348
+    top_bid: 0.4285
+    top_ask: 0.4287
+    order_book_depth: 19154.86
 HMSTRUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.000671
+  last_price: 0.000674
   volatility:
-    15m: 0.004091812161634941
-    1h: 0.0027904553760924023
-    1d: 0.0072160866140629125
+    15m: 0.0008229986178286279
+    1h: 0.0013397517746592885
+    1d: 0.007343780116500479
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1902000.0
-  volume_1h: 4736822.0
-  volume_1d: 124807618.0
+  volume_15m: 640951.0
+  volume_1h: 4077981.0
+  volume_1d: 144480649.0
   arbitrage:
-    bid_ask_spread: 1.0000000000000243e-06
-    top_bid: 0.00067
-    top_ask: 0.000671
-    order_book_depth: 47211473.0
+    bid_ask_spread: 2.0000000000000486e-06
+    top_bid: 0.000672
+    top_ask: 0.000674
+    order_book_depth: 53309606.0
 TURBOUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.003011
+  last_price: 0.002988
   volatility:
-    15m: 0.001894976791554137
-    1h: 0.002679274812899885
-    1d: 0.00820231299207357
+    15m: 0.0016068235468086705
+    1h: 0.0018871637001857124
+    1d: 0.00866495249240789
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1168314.0
-  volume_1h: 7958318.0
-  volume_1d: 288319214.0
+  volume_15m: 1501425.0
+  volume_1h: 12761943.0
+  volume_1d: 359236458.0
   arbitrage:
-    bid_ask_spread: 1.0000000000001327e-06
-    top_bid: 0.003013
-    top_ask: 0.003014
-    order_book_depth: 2458137.0
+    bid_ask_spread: 2.0000000000002655e-06
+    top_bid: 0.002989
+    top_ask: 0.002991
+    order_book_depth: 4741734.0
 KAIAUSDC:
-  market_cap: 993832774
+  market_cap: 1014051151
   circulating_supply: 5856641747.106198
-  last_price: 0.1698
+  last_price: 0.1739
   volatility:
-    15m: 0.001035873631349362
-    1h: 0.002363031701247045
-    1d: 0.008671548505577309
+    15m: 0.0010732712794422124
+    1h: 0.0012847972550310066
+    1d: 0.009372451991750592
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 294.1
-  volume_1h: 136456.4
-  volume_1d: 1925515.8
+  volume_15m: 4291.6
+  volume_1h: 37617.9
+  volume_1d: 2248605.2
   arbitrage:
-    bid_ask_spread: 0.0002999999999999947
-    top_bid: 0.1694
-    top_ask: 0.1697
-    order_book_depth: 39881.5
+    bid_ask_spread: 0.00020000000000000573
+    top_bid: 0.1729
+    top_ask: 0.1731
+    order_book_depth: 28570.199999999997
 SANDUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2286
+  last_price: 0.2256
   volatility:
-    15m: 0.0010902821508093734
-    1h: 0.0017094179520793927
-    1d: 0.005959811706878933
+    15m: 0.0008053700721794816
+    1h: 0.001216718185930173
+    1d: 0.006154989270070421
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 5093.0
-  volume_1h: 81284.0
-  volume_1d: 1881135.0
+  volume_15m: 13421.0
+  volume_1h: 112178.0
+  volume_1d: 2223288.0
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.2286
-    top_ask: 0.2287
-    order_book_depth: 43693.0
+    top_bid: 0.225
+    top_ask: 0.2251
+    order_book_depth: 35110.0
 CHZUSDC:
-  market_cap: 308427086
-  circulating_supply: 9676117064.0
-  last_price: 0.03187
+  market_cap: 305379599
+  circulating_supply: 9676434294.0
+  last_price: 0.03162
   volatility:
-    15m: 0.001552302020571761
-    1h: 0.0016356251123151712
-    1d: 0.005988103503240402
+    15m: 0.0009105791430404472
+    1h: 0.0010579348490596728
+    1d: 0.006200738368698951
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 6927.0
-  volume_1h: 186562.0
-  volume_1d: 6664826.0
+  volume_15m: 26539.0
+  volume_1h: 232705.0
+  volume_1d: 8158576.0
   arbitrage:
-    bid_ask_spread: 3.0000000000002247e-05
-    top_bid: 0.03184
-    top_ask: 0.03187
-    order_book_depth: 212411.0
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.03153
+    top_ask: 0.03155
+    order_book_depth: 204245.0
 PYTHUSDC:
-  market_cap: 485031379
-  circulating_supply: 5749986245.951566
-  last_price: 0.0842
+  market_cap: 478815841
+  circulating_supply: 5749986244.351566
+  last_price: 0.0831
   volatility:
-    15m: 0.0020069767470349683
-    1h: 0.0018955023509552732
-    1d: 0.006799131851602721
+    15m: 0.0013322194043653025
+    1h: 0.001465454747972148
+    1d: 0.006972170563664134
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 78925.9
-  volume_1h: 377750.7
-  volume_1d: 7553750.7
+  volume_15m: 35060.5
+  volume_1h: 138974.6
+  volume_1d: 8971199.6
   arbitrage:
-    bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0841
-    top_ask: 0.0842
-    order_book_depth: 376866.39999999997
+    bid_ask_spread: 9.999999999998899e-05
+    top_bid: 0.083
+    top_ask: 0.0831
+    order_book_depth: 504012.7
 RSRUSDC:
-  market_cap: 315936235
+  market_cap: 312324283
   circulating_supply: 57911733088.0
-  last_price: 0.005425
+  last_price: 0.005381
   volatility:
-    15m: 0.0018229058888333239
-    1h: 0.002194519042488888
-    1d: 0.006885109216176657
+    15m: 0.0012131532346764816
+    1h: 0.0014518510703852067
+    1d: 0.007119463806761136
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2116116.6
-  volume_1h: 21318328.1
-  volume_1d: 145620942.3
+  volume_15m: 3555285.2
+  volume_1h: 10794942.6
+  volume_1d: 208739304.5
   arbitrage:
-    bid_ask_spread: 2.0000000000002655e-06
-    top_bid: 0.005422
-    top_ask: 0.005424
-    order_book_depth: 437165.5
+    bid_ask_spread: 2.999999999999531e-06
+    top_bid: 0.005374
+    top_ask: 0.005377
+    order_book_depth: 802470.3
 WUSDC:
-  market_cap: 249562660
+  market_cap: 245813802
   circulating_supply: 4636627610.0
-  last_price: 0.054
+  last_price: 0.0529
   volatility:
-    15m: 0.002166862275484472
-    1h: 0.003257946967671513
-    1d: 0.008606124119409688
+    15m: 0.002025092243336808
+    1h: 0.00295795541606561
+    1d: 0.008454270260238416
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2863.2
-  volume_1h: 74824.0
-  volume_1d: 4059875.4
-  arbitrage:
-    bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0538
-    top_ask: 0.0539
-    order_book_depth: 405045.1
-XTZUSDC:
-  market_cap: 514323381
-  circulating_supply: 1048166768.208405
-  last_price: 0.4919
-  volatility:
-    15m: 0.000736872289749059
-    1h: 0.001469602421862503
-    1d: 0.004570320236943288
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 1497.0
-  volume_1h: 22020.0
-  volume_1d: 166335.9
-  arbitrage:
-    bid_ask_spread: 0.00040000000000001146
-    top_bid: 0.4916
-    top_ask: 0.492
-    order_book_depth: 7918.599999999999
-ACXUSDC:
-  market_cap: 60012882
-  circulating_supply: 441689310.6781401
-  last_price: 0.1357
-  volatility:
-    15m: 0.0007483246891258128
-    1h: 0.0012937502933262996
-    1d: 0.0062762772548338635
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 1142.2
-  volume_1h: 23320.4
-  volume_1d: 539529.0
+  volume_15m: 3391.7
+  volume_1h: 12249.6
+  volume_1d: 4330581.2
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1356
-    top_ask: 0.1358
-    order_book_depth: 17731.800000000003
-ORCAUSDC:
-  market_cap: 105878733
-  circulating_supply: 59957265.669254
-  last_price: 1.762
+    top_bid: 0.0527
+    top_ask: 0.0529
+    order_book_depth: 467598.2
+XTZUSDC:
+  market_cap: 507574150
+  circulating_supply: 1048176382.858001
+  last_price: 0.4844
   volatility:
-    15m: 0.0013272678930879513
-    1h: 0.0018587609975677624
-    1d: 0.0072821721191744185
+    15m: 0.0006723585110328152
+    1h: 0.00066752389644594
+    1d: 0.005026412497732538
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 222.77
-  volume_1h: 1475.57
-  volume_1d: 64082.95
+  volume_15m: 671.3
+  volume_1h: 3682.3
+  volume_1d: 223643.4
+  arbitrage:
+    bid_ask_spread: 0.00040000000000001146
+    top_bid: 0.4836
+    top_ask: 0.484
+    order_book_depth: 6512.4
+ACXUSDC:
+  market_cap: 59567242
+  circulating_supply: 441706423.1534235
+  last_price: 0.1346
+  volatility:
+    15m: 0.0011197387312207108
+    1h: 0.0013847737204911253
+    1d: 0.006717522882889648
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1300.9
+  volume_1h: 13081.1
+  volume_1d: 715229.6
+  arbitrage:
+    bid_ask_spread: 0.00020000000000000573
+    top_bid: 0.1344
+    top_ask: 0.1346
+    order_book_depth: 34742.8
+ORCAUSDC:
+  market_cap: 104818804
+  circulating_supply: 59957265.661324
+  last_price: 1.744
+  volatility:
+    15m: 0.0009214202281241839
+    1h: 0.0013394873646361157
+    1d: 0.0073253659921914014
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 188.12
+  volume_1h: 1799.58
+  volume_1d: 82269.38
   arbitrage:
     bid_ask_spread: 0.0020000000000000018
-    top_bid: 1.761
-    top_ask: 1.763
-    order_book_depth: 2805.83
+    top_bid: 1.742
+    top_ask: 1.744
+    order_book_depth: 3749.9799999999996
 HIVEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1813
+  last_price: 0.18
   volatility:
-    15m: 0.0016988013343548745
-    1h: 0.0018147498134138637
-    1d: 0.005370741587975395
+    15m: 0.0007444602838786082
+    1h: 0.0008908676319982082
+    1d: 0.005775201802971787
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2466.0
-  volume_1h: 23893.0
-  volume_1d: 444036.0
+  volume_15m: 33.0
+  volume_1h: 14137.0
+  volume_1d: 577591.0
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1807
-    top_ask: 0.1809
-    order_book_depth: 45225.0
+    bid_ask_spread: 0.00019999999999997797
+    top_bid: 0.1796
+    top_ask: 0.1798
+    order_book_depth: 41575.0
 IDEXUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.01794
+  last_price: 0.01778
   volatility:
     15m: 0.0
-    1h: 0.0019184327607941428
-    1d: 0.007066729515885163
+    1h: 0.001765529715316035
+    1d: 0.007367157214274548
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
   volume_15m: 0.0
-  volume_1h: 78218.5
-  volume_1d: 769230.5
+  volume_1h: 19052.7
+  volume_1d: 901147.1
   arbitrage:
-    bid_ask_spread: 0.00014000000000000123
-    top_bid: 0.01772
-    top_ask: 0.01786
-    order_book_depth: 1232972.5999999999
+    bid_ask_spread: 0.00012999999999999817
+    top_bid: 0.0177
+    top_ask: 0.01783
+    order_book_depth: 1211114.6
 TLMUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.00364
+  last_price: 0.00361
   volatility:
-    15m: 0.002244484143331472
-    1h: 0.0021492685724812314
-    1d: 0.008174486026673079
+    15m: 0.0007382907235149974
+    1h: 0.001168690870545586
+    1d: 0.007763452667905923
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 468931.0
-  volume_1d: 5358019.0
+  volume_15m: 62182.0
+  volume_1h: 75802.0
+  volume_1d: 6266297.0
   arbitrage:
-    bid_ask_spread: 1.0000000000000026e-05
-    top_bid: 0.00364
-    top_ask: 0.00365
-    order_book_depth: 1329079.0
+    bid_ask_spread: 2.0000000000000052e-05
+    top_bid: 0.0036
+    top_ask: 0.00362
+    order_book_depth: 7806760.0
 1000CATUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.00537
+  last_price: 0.00531
   volatility:
-    15m: 0.002125862834988104
-    1h: 0.002314268079409393
-    1d: 0.007745410702415913
+    15m: 0.0
+    1h: 0.0012033886188584438
+    1d: 0.007845887260853786
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 9504.8
-  volume_1h: 239542.6
-  volume_1d: 9924934.9
+  volume_15m: 0.0
+  volume_1h: 33210.5
+  volume_1d: 11312892.0
   arbitrage:
-    bid_ask_spread: 1.000000000000046e-05
-    top_bid: 0.00535
-    top_ask: 0.00536
-    order_book_depth: 6177274.7
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.00529
+    top_ask: 0.00531
+    order_book_depth: 6525135.300000001
 PENGUUSDC:
-  market_cap: 503920157
+  market_cap: 498821404
   circulating_supply: 62860396090.0
-  last_price: 0.007988
+  last_price: 0.007907
   volatility:
-    15m: 0.0019628938247077624
-    1h: 0.002408394490954647
-    1d: 0.008221801445997658
+    15m: 0.0013885238649043491
+    1h: 0.0016002422834697735
+    1d: 0.00831292781302257
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1387933.0
-  volume_1h: 8880556.0
-  volume_1d: 201394535.0
+  volume_15m: 2143817.0
+  volume_1h: 10285214.0
+  volume_1d: 253140440.0
   arbitrage:
-    bid_ask_spread: 9.999999999992654e-07
-    top_bid: 0.007985
-    top_ask: 0.007986
-    order_book_depth: 882310.0
+    bid_ask_spread: 3.999999999998796e-06
+    top_bid: 0.00791
+    top_ask: 0.007914
+    order_book_depth: 1510234.0
 BIOUSDC:
-  market_cap: 77854749
-  circulating_supply: 1791320718.7289512
-  last_price: 0.0434
+  market_cap: 76714031
+  circulating_supply: 1791355330.5894833
+  last_price: 0.0428
   volatility:
-    15m: 0.000833839902392223
-    1h: 0.0025125888686295026
-    1d: 0.007828671861190474
+    15m: 0.0011088307852879463
+    1h: 0.001134436267317737
+    1d: 0.008073446078744129
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 26649.4
-  volume_1h: 242841.2
-  volume_1d: 2419960.0
+  volume_15m: 13578.2
+  volume_1h: 59129.6
+  volume_1d: 2851170.5
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0433
-    top_ask: 0.0434
-    order_book_depth: 580404.5
+    top_bid: 0.0426
+    top_ask: 0.0427
+    order_book_depth: 564291.2000000001
 MOVEUSDC:
-  market_cap: 297780015
+  market_cap: 296393311
   circulating_supply: 2600000000.0
   last_price: 0.1141
   volatility:
-    15m: 0.002109056890374397
-    1h: 0.00211198331566293
-    1d: 0.00846987296419715
+    15m: 0.00104301236189534
+    1h: 0.001198429887893503
+    1d: 0.008744856615030359
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 15542.0
-  volume_1h: 53970.8
-  volume_1d: 1120141.5
+  volume_15m: 4097.4
+  volume_1h: 14635.3
+  volume_1d: 1412366.5
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.1139
-    top_ask: 0.114
-    order_book_depth: 109578.7
+    top_bid: 0.1137
+    top_ask: 0.1138
+    order_book_depth: 99109.70000000001
 PHAUSDC:
-  market_cap: 67815052
-  circulating_supply: 800029328.4009095
-  last_price: 0.0843
+  market_cap: 68329347
+  circulating_supply: 800050149.3659006
+  last_price: 0.0859
   volatility:
-    15m: 0.0024885286100185945
-    1h: 0.002136839770470578
-    1d: 0.006033081847945247
+    15m: 0.0012766561687102003
+    1h: 0.0010755747662580658
+    1d: 0.006183621112483109
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 30978.0
-  volume_1h: 104381.0
-  volume_1d: 976994.0
+  volume_15m: 3156.0
+  volume_1h: 16948.0
+  volume_1d: 1278455.0
+  arbitrage:
+    bid_ask_spread: 0.00019999999999999185
+    top_bid: 0.0858
+    top_ask: 0.086
+    order_book_depth: 251516.0
+STEEMUSDC:
+  market_cap: 58335662
+  circulating_supply: 516206170.726
+  last_price: 0.113
+  volatility:
+    15m: 0.0005872927166313481
+    1h: 0.0006645573677172575
+    1d: 0.004909010234981302
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1610.7
+  volume_1h: 7818.3
+  volume_1d: 244166.2
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.0842
-    top_ask: 0.0844
-    order_book_depth: 256166.0
-STEEMUSDC:
-  market_cap: 58885917
-  circulating_supply: 516206170.726
-  last_price: 0.1138
-  volatility:
-    15m: 0.0006524713954295479
-    1h: 0.0015478331228505073
-    1d: 0.00491180877106612
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 3003.2
-  volume_1d: 200484.0
-  arbitrage:
-    bid_ask_spread: 0.00019999999999999185
-    top_bid: 0.1136
-    top_ask: 0.1138
-    order_book_depth: 43450.399999999994
+    top_bid: 0.1128
+    top_ask: 0.113
+    order_book_depth: 45163.4
 USUALUSDC:
-  market_cap: 63472079
-  circulating_supply: 1013749404.3373555
-  last_price: 0.0624
+  market_cap: 62728834
+  circulating_supply: 1014570931.4016992
+  last_price: 0.0617
   volatility:
-    15m: 0.0017257786744790612
-    1h: 0.002327728894367907
-    1d: 0.008677148076755894
+    15m: 0.0012693648459840342
+    1h: 0.001430476374357204
+    1d: 0.008407519234538034
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1676.2
-  volume_1h: 260554.5
-  volume_1d: 3450513.5
+  volume_15m: 5078.3
+  volume_1h: 163927.8
+  volume_1d: 4673385.9
   arbitrage:
     bid_ask_spread: 9.999999999999593e-05
-    top_bid: 0.0623
-    top_ask: 0.0624
-    order_book_depth: 517273.00000000006
+    top_bid: 0.0616
+    top_ask: 0.0617
+    order_book_depth: 612554.5
 AIXBTUSDC:
-  market_cap: 108578439
+  market_cap: 105952906
   circulating_supply: 945402931.6771805
-  last_price: 0.1136
+  last_price: 0.1115
   volatility:
-    15m: 0.001778142778547537
-    1h: 0.0021633395906421426
-    1d: 0.008614314683005437
+    15m: 0.0015021875730865716
+    1h: 0.0015189666577444603
+    1d: 0.008928028478502896
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 43441.7
-  volume_1h: 119439.7
-  volume_1d: 6663751.4
-  arbitrage:
-    bid_ask_spread: 0.00019999999999999185
-    top_bid: 0.1136
-    top_ask: 0.1138
-    order_book_depth: 191507.5
-CGPTUSDC:
-  market_cap: 62351345
-  circulating_supply: 837242044.0
-  last_price: 0.074
-  volatility:
-    15m: 0.0012589774849608337
-    1h: 0.0020937041364999555
-    1d: 0.008566833756891558
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 3494.3
-  volume_1h: 19284.1
-  volume_1d: 3595287.0
+  volume_15m: 54702.0
+  volume_1h: 145122.9
+  volume_1d: 7828772.4
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0739
-    top_ask: 0.074
-    order_book_depth: 376549.5
+    top_bid: 0.1114
+    top_ask: 0.1115
+    order_book_depth: 194693.8
+CGPTUSDC:
+  market_cap: 61127547
+  circulating_supply: 837251568.0
+  last_price: 0.0731
+  volatility:
+    15m: 0.0010547653984817034
+    1h: 0.001346515273410992
+    1d: 0.00856819923541937
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 8439.5
+  volume_1h: 187758.3
+  volume_1d: 4203646.3
+  arbitrage:
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.073
+    top_ask: 0.0731
+    order_book_depth: 372153.19999999995
 COOKIEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1509
+  last_price: 0.149
   volatility:
-    15m: 0.001226491197646892
-    1h: 0.0018998827718638147
-    1d: 0.007785619927903644
+    15m: 0.0008543901196513629
+    1h: 0.0014838617244941016
+    1d: 0.008301058012167451
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 28069.0
-  volume_1h: 104210.2
-  volume_1d: 2203988.5
+  volume_15m: 10777.7
+  volume_1h: 41749.1
+  volume_1d: 3588837.9
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1507
-    top_ask: 0.1509
-    order_book_depth: 102154.0
+    top_bid: 0.1488
+    top_ask: 0.149
+    order_book_depth: 85336.19999999998
 SUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2532
+  last_price: 0.2501
   volatility:
-    15m: 0.0012678130485068197
-    1h: 0.0017649923904139752
-    1d: 0.006697133352538642
+    15m: 0.0005464659818796472
+    1h: 0.0010379439331013919
+    1d: 0.0066863564949538835
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 63481.3
-  volume_1h: 606910.2
-  volume_1d: 14261003.6
+  volume_15m: 55686.8
+  volume_1h: 1506780.0
+  volume_1d: 17748539.3
   arbitrage:
-    bid_ask_spread: 0.0001000000000000445
-    top_bid: 0.2532
-    top_ask: 0.2533
-    order_book_depth: 78552.4
+    bid_ask_spread: 9.999999999998899e-05
+    top_bid: 0.25
+    top_ask: 0.2501
+    order_book_depth: 83621.0
 TRUMPUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 8.54
+  last_price: 8.49
   volatility:
-    15m: 0.0017867852249948489
-    1h: 0.0014225146703824383
-    1d: 0.004985378964160779
+    15m: 0.0013837193575592073
+    1h: 0.0009832912605670973
+    1d: 0.005085391154163283
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2293.267
-  volume_1h: 25939.601
-  volume_1d: 668422.136
+  volume_15m: 1214.888
+  volume_1h: 10204.85
+  volume_1d: 769773.383
   arbitrage:
     bid_ask_spread: 0.009999999999999787
-    top_bid: 8.53
-    top_ask: 8.54
-    order_book_depth: 34810.755000000005
+    top_bid: 8.49
+    top_ask: 8.5
+    order_book_depth: 28715.140999999996
 ANIMEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.01804
+  last_price: 0.01764
   volatility:
-    15m: 0.0027406897319257784
-    1h: 0.002428213806887133
-    1d: 0.008005825330664535
+    15m: 0.0009819235315602084
+    1h: 0.0016129895586112378
+    1d: 0.008350026163469937
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 20702.4
-  volume_1h: 86449.9
-  volume_1d: 3557860.1
+  volume_15m: 19499.5
+  volume_1h: 337138.6
+  volume_1d: 4420455.3
   arbitrage:
-    bid_ask_spread: 3.0000000000002247e-05
-    top_bid: 0.01799
-    top_ask: 0.01802
-    order_book_depth: 1097922.3
+    bid_ask_spread: 2.0000000000002655e-05
+    top_bid: 0.01757
+    top_ask: 0.01759
+    order_book_depth: 694513.4
 BERAUSDC:
-  market_cap: 185292771
-  circulating_supply: 120098758.9931521
+  market_cap: 185789376
+  circulating_supply: 120100125.9525506
   last_price: 1.542
   volatility:
-    15m: 0.0016978939284048203
-    1h: 0.0022556334612919824
-    1d: 0.007304815828233588
+    15m: 0.0012266817634745371
+    1h: 0.0013902525034915035
+    1d: 0.007599813035538717
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1635.844
-  volume_1h: 17027.071
-  volume_1d: 293266.175
+  volume_15m: 1029.768
+  volume_1h: 5416.204
+  volume_1d: 345391.546
   arbitrage:
-    bid_ask_spread: 0.0020000000000000018
-    top_bid: 1.54
+    bid_ask_spread: 0.001000000000000112
+    top_bid: 1.541
     top_ask: 1.542
-    order_book_depth: 7354.544
+    order_book_depth: 6774.75
 1000CHEEMSUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.001343
+  last_price: 0.001327
   volatility:
     15m: 0.0
-    1h: 0.0014264024674462224
-    1d: 0.0032128648817894836
+    1h: 0.0011634095493920245
+    1d: 0.0035277695592911295
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
   volume_15m: 0.0
-  volume_1h: 485871.0
-  volume_1d: 9017005.0
+  volume_1h: 116482.0
+  volume_1d: 10085419.0
   arbitrage:
     bid_ask_spread: 2.9999999999999645e-06
-    top_bid: 0.001336
-    top_ask: 0.001339
-    order_book_depth: 2264203.0
+    top_bid: 0.001327
+    top_ask: 0.00133
+    order_book_depth: 2734461.0
 TSTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.04279
+  last_price: 0.04268
   volatility:
-    15m: 0.0003330707415497328
-    1h: 0.0017189364364184568
-    1d: 0.004296276471308947
+    15m: 0.0011834439486917876
+    1h: 0.001217262332167964
+    1d: 0.006450475239984468
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 564.9
-  volume_1h: 253781.0
-  volume_1d: 3696491.5
+  volume_15m: 1812.7
+  volume_1h: 45519.9
+  volume_1d: 6369895.6
   arbitrage:
-    bid_ask_spread: 3.999999999999837e-05
-    top_bid: 0.0427
-    top_ask: 0.04274
-    order_book_depth: 44416.1
+    bid_ask_spread: 4.000000000000531e-05
+    top_bid: 0.04266
+    top_ask: 0.0427
+    order_book_depth: 42850.4
 LAYERUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.661
+  last_price: 0.6689
   volatility:
-    15m: 0.002356980360649904
-    1h: 0.002760029862205457
-    1d: 0.01273930407805568
+    15m: 0.0017193012570231466
+    1h: 0.001919708566544821
+    1d: 0.012432500610451445
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3963.89
-  volume_1h: 75216.58
-  volume_1d: 2343374.65
+  volume_15m: 6891.56
+  volume_1h: 37293.58
+  volume_1d: 2865016.86
   arbitrage:
-    bid_ask_spread: 0.00039999999999995595
-    top_bid: 0.6603
-    top_ask: 0.6607
-    order_book_depth: 1391.15
+    bid_ask_spread: 0.0007000000000000339
+    top_bid: 0.6683
+    top_ask: 0.669
+    order_book_depth: 1692.62
 CAKEUSDC:
-  market_cap: 642132686
-  circulating_supply: 321331127.4333186
-  last_price: 1.995
+  market_cap: 633536075
+  circulating_supply: 321335708.3678145
+  last_price: 1.972
   volatility:
-    15m: 0.0009736754222196355
-    1h: 0.0012788533229705936
-    1d: 0.004990700553762873
+    15m: 0.0006945164471332443
+    1h: 0.0008911597043864875
+    1d: 0.005134569397061842
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1192.26
-  volume_1h: 25072.69
-  volume_1d: 308266.71
+  volume_15m: 756.87
+  volume_1h: 3073.24
+  volume_1d: 355231.77
   arbitrage:
-    bid_ask_spread: 0.001000000000000112
-    top_bid: 1.992
-    top_ask: 1.993
-    order_book_depth: 5989.56
+    bid_ask_spread: 0.0009999999999998899
+    top_bid: 1.969
+    top_ask: 1.97
+    order_book_depth: 4973.55
 HEIUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2938
+  last_price: 0.2843
   volatility:
-    15m: 0.0
-    1h: 0.0013650661599407881
-    1d: 0.005203979666029002
+    15m: 0.0003754987592728377
+    1h: 0.0013915569666925677
+    1d: 0.005687364222692283
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 3696.8
-  volume_1d: 95100.6
+  volume_15m: 42.2
+  volume_1h: 983.3
+  volume_1d: 137764.7
   arbitrage:
-    bid_ask_spread: 0.00040000000000001146
-    top_bid: 0.2903
-    top_ask: 0.2907
-    order_book_depth: 4072.2000000000003
+    bid_ask_spread: 0.00030000000000002247
+    top_bid: 0.2845
+    top_ask: 0.2848
+    order_book_depth: 2569.2999999999997
 KAITOUSDC:
-  market_cap: 302818162
+  market_cap: 296344334
   circulating_supply: 241388889.0
-  last_price: 1.2389
+  last_price: 1.2249
   volatility:
-    15m: 0.0018967071377135238
-    1h: 0.002350954105702001
-    1d: 0.007506606420772951
+    15m: 0.0009344980466274474
+    1h: 0.001141126726228109
+    1d: 0.007683198142358111
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 4985.2
-  volume_1h: 21742.6
-  volume_1d: 562558.7
+  volume_15m: 714.1
+  volume_1h: 10482.1
+  volume_1d: 654435.3
   arbitrage:
-    bid_ask_spread: 0.0015000000000000568
-    top_bid: 1.2376
-    top_ask: 1.2391
-    order_book_depth: 3119.8
+    bid_ask_spread: 0.001100000000000101
+    top_bid: 1.2242
+    top_ask: 1.2253
+    order_book_depth: 2353.7999999999997
 SHELLUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1231
+  last_price: 0.1229
   volatility:
-    15m: 0.004280467660050257
-    1h: 0.0032579874527729363
-    1d: 0.008370052186539544
+    15m: 0.00031927746283673386
+    1h: 0.0011691180498175227
+    1d: 0.008286594983798624
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 232.2
-  volume_1h: 9378.2
-  volume_1d: 560835.8
+  volume_15m: 846.8
+  volume_1h: 12948.3
+  volume_1d: 650405.8
   arbitrage:
-    bid_ask_spread: 0.0002999999999999947
-    top_bid: 0.1228
-    top_ask: 0.1231
-    order_book_depth: 138713.2
+    bid_ask_spread: 0.0003000000000000086
+    top_bid: 0.1225
+    top_ask: 0.1228
+    order_book_depth: 38755.9
 GPSUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0267
+  last_price: 0.0265
   volatility:
-    15m: 0.0025397158374994
-    1h: 0.002503027371138915
-    1d: 0.009722589974790988
+    15m: 0.0014773418363467038
+    1h: 0.004245152847967548
+    1d: 0.010099929221352544
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 19526.2
-  volume_1h: 251480.4
-  volume_1d: 9445343.6
+  volume_15m: 35325.6
+  volume_1h: 227529.3
+  volume_1d: 11764815.4
   arbitrage:
-    bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0266
-    top_ask: 0.0267
-    order_book_depth: 1625720.7000000002
+    bid_ask_spread: 9.99999999999994e-05
+    top_bid: 0.0264
+    top_ask: 0.0265
+    order_book_depth: 1492543.0
 REDUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2386
+  last_price: 0.24
   volatility:
-    15m: 0.001838441339858992
-    1h: 0.0019010765206486405
-    1d: 0.007141283800912603
+    15m: 0.00011140526965919937
+    1h: 0.0012033192147586295
+    1d: 0.007182562165371905
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2339.1
-  volume_1h: 8560.3
-  volume_1d: 149284.0
+  volume_15m: 0.0
+  volume_1h: 2113.5
+  volume_1d: 169653.4
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.238
-    top_ask: 0.2382
-    order_book_depth: 10890.300000000001
+    top_bid: 0.24
+    top_ask: 0.2402
+    order_book_depth: 9706.3
 CHESSUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0656
+  last_price: 0.0659
   volatility:
-    15m: 0.0012166672621202622
-    1h: 0.0018026204574566654
-    1d: 0.006342031694238023
+    15m: 0.002225340900535451
+    1h: 0.0016223585115100229
+    1d: 0.006237192451875235
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 5912.2
-  volume_1h: 42772.7
-  volume_1d: 1350992.2
+  volume_15m: 12985.4
+  volume_1h: 41732.3
+  volume_1d: 1528027.7
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.0654
-    top_ask: 0.0656
-    order_book_depth: 250535.30000000002
+    top_bid: 0.0657
+    top_ask: 0.0659
+    order_book_depth: 431074.1
 EGLDUSDC:
-  market_cap: 340097228
-  circulating_supply: 28359751.0
-  last_price: 11.98
+  market_cap: 334973591
+  circulating_supply: 28363123.0
+  last_price: 11.8
   volatility:
-    15m: 0.0011748632042216816
-    1h: 0.0015300362240684734
-    1d: 0.006245537649682395
+    15m: 0.0010217184348833264
+    1h: 0.0013208644920074824
+    1d: 0.006537466127493806
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2865.59
-  volume_1h: 5899.66
-  volume_1d: 81703.37
+  volume_15m: 2162.7
+  volume_1h: 5750.25
+  volume_1d: 109263.85
   arbitrage:
-    bid_ask_spread: 0.009999999999999787
-    top_bid: 11.98
-    top_ask: 11.99
-    order_book_depth: 1685.54
+    bid_ask_spread: 0.010000000000001563
+    top_bid: 11.79
+    top_ask: 11.8
+    order_book_depth: 1192.13
 OSMOUSDC:
-  market_cap: 112471678
+  market_cap: 111357579
   circulating_supply: 733793700.0
-  last_price: 0.153
+  last_price: 0.151
   volatility:
-    15m: 0.0009422826510412216
-    1h: 0.0010034650970526607
-    1d: 0.005374561318549622
+    15m: 0.0007195044649546397
+    1h: 0.0008493514215242915
+    1d: 0.005774852480524963
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 791.48
-  volume_1h: 9093.82
-  volume_1d: 894904.92
+  volume_15m: 16732.27
+  volume_1h: 31008.59
+  volume_1d: 1060665.68
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1528
-    top_ask: 0.153
-    order_book_depth: 13362.69
+    top_bid: 0.151
+    top_ask: 0.1512
+    order_book_depth: 33117.12
 UTKUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.02402
+  last_price: 0.02368
   volatility:
-    15m: 0.001115428039918342
-    1h: 0.0013609956758010423
-    1d: 0.005979147877304747
+    15m: 0.0006850815617154083
+    1h: 0.0009735661575234973
+    1d: 0.006198422913096863
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 16638.0
-  volume_1h: 28700.0
-  volume_1d: 1441657.0
-  arbitrage:
-    bid_ask_spread: 3.0000000000002247e-05
-    top_bid: 0.02395
-    top_ask: 0.02398
-    order_book_depth: 64083.0
-TUSDC:
-  market_cap: 173841266
-  circulating_supply: 10129331389.15684
-  last_price: 0.01698
-  volatility:
-    15m: 0.0014091102385540726
-    1h: 0.0025516338874981013
-    1d: 0.008787117436829976
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 224478.2
-  volume_1d: 19726815.3
+  volume_15m: 4815.0
+  volume_1h: 64175.0
+  volume_1d: 1907262.0
   arbitrage:
     bid_ask_spread: 3.999999999999837e-05
-    top_bid: 0.0171
-    top_ask: 0.01714
-    order_book_depth: 236134.1
-CVCUSDC:
-  market_cap: 64513217
-  circulating_supply: 802000010.0
-  last_price: 0.0806
+    top_bid: 0.02363
+    top_ask: 0.02367
+    order_book_depth: 55695.0
+TUSDC:
+  market_cap: 175027369
+  circulating_supply: 10129331389.15684
+  last_price: 0.01732
   volatility:
-    15m: 0.0008437593543686096
-    1h: 0.0018126374882409845
-    1d: 0.006007406904233566
+    15m: 0.0009290657308658784
+    1h: 0.001357891118749895
+    1d: 0.008999788730845311
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2986.0
-  volume_1h: 35265.0
-  volume_1d: 1334135.0
+  volume_15m: 16033.0
+  volume_1h: 68359.9
+  volume_1d: 21245309.5
+  arbitrage:
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.01734
+    top_ask: 0.01736
+    order_book_depth: 252709.9
+CVCUSDC:
+  market_cap: 65269517
+  circulating_supply: 802000010.0
+  last_price: 0.0815
+  volatility:
+    15m: 0.0007571507406358618
+    1h: 0.0007218543521198569
+    1d: 0.006365256332870808
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 145.0
+  volume_1h: 25293.0
+  volume_1d: 1590324.0
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0805
-    top_ask: 0.0806
-    order_book_depth: 73334.0
+    top_bid: 0.0814
+    top_ask: 0.0815
+    order_book_depth: 157916.0
 EURIUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.1531
+  last_price: 1.1528
   volatility:
-    15m: 5.8920763547750287e-05
-    1h: 0.00010292439554488843
-    1d: 0.00022406126326797077
+    15m: 4.81155568930143e-05
+    1h: 0.0001442051094537597
+    1d: 0.0002583935889645491
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 11001.4
-  volume_1h: 27716.1
-  volume_1d: 589552.5
+  volume_15m: 4948.1
+  volume_1h: 28145.0
+  volume_1d: 909751.8
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 1.153
-    top_ask: 1.1531
-    order_book_depth: 24416.7
+    top_bid: 1.1528
+    top_ask: 1.1529
+    order_book_depth: 22691.0
 SYNUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.101
+  last_price: 0.0993
   volatility:
-    15m: 0.0012651352176927244
-    1h: 0.0024167525505467036
-    1d: 0.007041680020750893
+    15m: 0.0015305881490413368
+    1h: 0.0017616379193349239
+    1d: 0.007239249074763091
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2376.6
-  volume_1h: 36054.4
-  volume_1d: 679497.7
+  volume_15m: 2474.0
+  volume_1h: 14186.8
+  volume_1d: 838592.0
   arbitrage:
-    bid_ask_spread: 0.00019999999999999185
-    top_bid: 0.1009
-    top_ask: 0.1011
-    order_book_depth: 136603.30000000002
+    bid_ask_spread: 0.00020000000000000573
+    top_bid: 0.0993
+    top_ask: 0.0995
+    order_book_depth: 30902.1
 VELODROMEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.041
+  last_price: 0.0398
   volatility:
-    15m: 0.0006502706615873768
-    1h: 0.00199046753482071
-    1d: 0.007264951990617076
+    15m: 0.0006698276739659611
+    1h: 0.002292508252685206
+    1d: 0.007255189931217435
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 63159.4
-  volume_1d: 966952.4
+  volume_15m: 573.2
+  volume_1h: 114424.6
+  volume_1d: 1358362.7
   arbitrage:
-    bid_ask_spread: 9.999999999999593e-05
-    top_bid: 0.0408
-    top_ask: 0.0409
-    order_book_depth: 774278.2
+    bid_ask_spread: 0.00010000000000000286
+    top_bid: 0.0397
+    top_ask: 0.0398
+    order_book_depth: 811545.5999999999
 DFUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0331
+  last_price: 0.03352
   volatility:
-    15m: 0.0012886989375246588
-    1h: 0.0042063557518175676
-    1d: 0.008087016474476233
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 879.0
-  volume_1h: 110105.0
-  volume_1d: 1174412.0
-  arbitrage:
-    bid_ask_spread: 3.999999999999837e-05
-    top_bid: 0.03309
-    top_ask: 0.03313
-    order_book_depth: 26844.0
-EPICUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 0.796
-  volatility:
-    15m: 0.0011189136263156233
-    1h: 0.0015046327291478717
-    1d: 0.009291080058097815
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 395.1
-  volume_1h: 7105.7
-  volume_1d: 150670.6
-  arbitrage:
-    bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.795
-    top_ask: 0.796
-    order_book_depth: 5169.7
-GMXUSDC:
-  market_cap: 130437710
-  circulating_supply: 10179809.50933556
-  last_price: 12.86
-  volatility:
-    15m: 0.0017917279918234707
-    1h: 0.0018772220535881166
-    1d: 0.007101665720529054
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 34.747
-  volume_1h: 394.755
-  volume_1d: 3453.989
-  arbitrage:
-    bid_ask_spread: 0.019999999999999574
-    top_bid: 12.8
-    top_ask: 12.82
-    order_book_depth: 154.40800000000002
-MKRUSDC:
-  market_cap: null
-  circulating_supply: null
-  last_price: 1694.0
-  volatility:
-    15m: 0.0015404333486666142
-    1h: 0.0015866803868376284
-    1d: 0.006467465719245166
-  stop_loss: 0.02
-  target_pnl: 0.03
-  trailing_stop: 0.01
-  max_hold_time: 600
-  taxes: 0.0
-  volume_15m: 0.1917
-  volume_1h: 6.0523
-  volume_1d: 93.3702
-  arbitrage:
-    bid_ask_spread: 3.0
-    top_bid: 1691.0
-    top_ask: 1694.0
-    order_book_depth: 4.4514000000000005
-RPLUSDC:
-  market_cap: 102511766
-  circulating_supply: 21464863.96122068
-  last_price: 4.76
-  volatility:
-    15m: 0.0019345012982047009
-    1h: 0.0019565073501188667
-    1d: 0.007694581311037849
+    15m: 0.0
+    1h: 0.0008412437965128096
+    1d: 0.008173714165753895
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
   volume_15m: 0.0
-  volume_1h: 239.89
-  volume_1d: 16971.34
+  volume_1h: 5867.0
+  volume_1d: 1279285.0
+  arbitrage:
+    bid_ask_spread: 8.99999999999998e-05
+    top_bid: 0.0334
+    top_ask: 0.03349
+    order_book_depth: 38296.0
+EPICUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 0.808
+  volatility:
+    15m: 0.0024416709050673396
+    1h: 0.0017089148126886325
+    1d: 0.00926403973123197
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1654.1
+  volume_1h: 4347.7
+  volume_1d: 159811.9
+  arbitrage:
+    bid_ask_spread: 0.0030000000000000027
+    top_bid: 0.808
+    top_ask: 0.811
+    order_book_depth: 23506.0
+GMXUSDC:
+  market_cap: 128689755
+  circulating_supply: 10179877.17005074
+  last_price: 12.67
+  volatility:
+    15m: 0.00028695109392031816
+    1h: 0.0007592110990462212
+    1d: 0.007468427244929884
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 8.366
+  volume_1h: 27.711
+  volume_1d: 4365.153
   arbitrage:
     bid_ask_spread: 0.019999999999999574
-    top_bid: 4.75
-    top_ask: 4.77
-    order_book_depth: 3642.620000000001
+    top_bid: 12.63
+    top_ask: 12.65
+    order_book_depth: 133.40800000000002
+MKRUSDC:
+  market_cap: null
+  circulating_supply: null
+  last_price: 1678.0
+  volatility:
+    15m: 0.0010705871767314606
+    1h: 0.0009914147380852471
+    1d: 0.006465582630256421
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 0.1193
+  volume_1h: 0.3218
+  volume_1d: 104.2326
+  arbitrage:
+    bid_ask_spread: 3.0
+    top_bid: 1671.0
+    top_ask: 1674.0
+    order_book_depth: 4.899900000000001
+RPLUSDC:
+  market_cap: 101466309
+  circulating_supply: 21464863.96122068
+  last_price: 4.71
+  volatility:
+    15m: 0.0005662314447297112
+    1h: 0.0006104154086592559
+    1d: 0.007862922282487873
+  stop_loss: 0.02
+  target_pnl: 0.03
+  trailing_stop: 0.01
+  max_hold_time: 600
+  taxes: 0.0
+  volume_15m: 1.56
+  volume_1h: 15.76
+  volume_1d: 18321.83
+  arbitrage:
+    bid_ask_spread: 0.009999999999999787
+    top_bid: 4.7
+    top_ask: 4.71
+    order_book_depth: 3722.1800000000003
 BMTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1247
+  last_price: 0.1261
   volatility:
-    15m: 0.0018465310071432237
-    1h: 0.0016436937919683892
-    1d: 0.006139044148145385
+    15m: 0.001814636956673894
+    1h: 0.0014918227999308408
+    1d: 0.006125134778310918
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 11094.6
-  volume_1h: 235672.9
-  volume_1d: 5516633.0
+  volume_15m: 63978.3
+  volume_1h: 331839.7
+  volume_1d: 6382962.8
   arbitrage:
-    bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.1246
-    top_ask: 0.1247
-    order_book_depth: 180636.2
+    bid_ask_spread: 0.00020000000000000573
+    top_bid: 0.1261
+    top_ask: 0.1263
+    order_book_depth: 183052.40000000002
 FORMUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 2.3697
+  last_price: 2.3532
   volatility:
-    15m: 0.001683167055388167
-    1h: 0.0021712883048333226
-    1d: 0.004253536414996922
+    15m: 0.000850283184129657
+    1h: 0.0004887208242286382
+    1d: 0.004309991836364915
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 384.2
-  volume_1h: 1380.2
-  volume_1d: 129903.4
+  volume_15m: 915.5
+  volume_1h: 1100.9
+  volume_1d: 138065.8
   arbitrage:
-    bid_ask_spread: 0.007699999999999818
-    top_bid: 2.362
-    top_ask: 2.3697
-    order_book_depth: 823.8
+    bid_ask_spread: 0.0038000000000000256
+    top_bid: 2.3547
+    top_ask: 2.3585
+    order_book_depth: 678.1000000000001
 IOTAUSDC:
-  market_cap: 551855518
+  market_cap: 549523689
   circulating_supply: 3840452018.0
-  last_price: 0.1436
+  last_price: 0.1428
   volatility:
-    15m: 0.0011095355904374238
-    1h: 0.0017503324059386955
-    1d: 0.006347040355619102
+    15m: 0.0011244599801203614
+    1h: 0.0013348341697708016
+    1d: 0.006516538769721769
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 29288.0
-  volume_1h: 340938.0
-  volume_1d: 1577411.0
+  volume_15m: 875.0
+  volume_1h: 11634.0
+  volume_1d: 2181269.0
   arbitrage:
     bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.1431
-    top_ask: 0.1432
-    order_book_depth: 60734.0
+    top_bid: 0.1428
+    top_ask: 0.1429
+    order_book_depth: 84325.0
 JUVUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.84
+  last_price: 0.85
   volatility:
-    15m: 0.0022087705943175493
-    1h: 0.0014480624002207135
-    1d: 0.005897270420838767
+    15m: 0.0009399574744868484
+    1h: 0.0010781792008844357
+    1d: 0.005967141206787034
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 111.56
-  volume_1h: 182.58
-  volume_1d: 48911.68
+  volume_15m: 40.14
+  volume_1h: 1183.78
+  volume_1d: 65137.51
   arbitrage:
-    bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.84
-    top_ask: 0.841
-    order_book_depth: 8640.76
+    bid_ask_spread: 0.0030000000000000027
+    top_bid: 0.848
+    top_ask: 0.851
+    order_book_depth: 3467.41
 THEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.231
+  last_price: 0.2312
   volatility:
-    15m: 0.00026675475037290526
-    1h: 0.0016113643818980138
-    1d: 0.006541114445920995
+    15m: 0.0010444425432964862
+    1h: 0.0013314960406255844
+    1d: 0.00658794408051972
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 2379.7
-  volume_1h: 9338.4
-  volume_1d: 273468.5
+  volume_15m: 432.0
+  volume_1h: 6093.1
+  volume_1d: 347977.1
   arbitrage:
-    bid_ask_spread: 0.0003999999999999837
-    top_bid: 0.231
-    top_ask: 0.2314
-    order_book_depth: 12847.9
+    bid_ask_spread: 0.00040000000000001146
+    top_bid: 0.2304
+    top_ask: 0.2308
+    order_book_depth: 23198.8
 VANRYUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0227
+  last_price: 0.0228
   volatility:
-    15m: 0.0032085317869292793
-    1h: 0.0035630723054173082
-    1d: 0.008749337264850119
+    15m: 0.0027073225433918353
+    1h: 0.0018941872800112636
+    1d: 0.008891871582158406
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 6894.0
-  volume_1h: 49205.0
-  volume_1d: 6701401.0
+  volume_15m: 137788.0
+  volume_1h: 276794.0
+  volume_1d: 8801864.0
   arbitrage:
-    bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0226
-    top_ask: 0.0227
-    order_book_depth: 766028.0
+    bid_ask_spread: 9.99999999999994e-05
+    top_bid: 0.0227
+    top_ask: 0.0228
+    order_book_depth: 917772.0
 NILUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.2575
+  last_price: 0.2461
   volatility:
-    15m: 0.001387639562587266
-    1h: 0.0016413517671675167
-    1d: 0.008381198867596104
+    15m: 0.0023758977408988332
+    1h: 0.0026382420425691425
+    1d: 0.008758719686367789
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1091.2
-  volume_1h: 5119.5
-  volume_1d: 535924.3
+  volume_15m: 8755.1
+  volume_1h: 81350.6
+  volume_1d: 738047.3
   arbitrage:
-    bid_ask_spread: 0.00019999999999997797
-    top_bid: 0.2575
-    top_ask: 0.2577
-    order_book_depth: 9521.7
+    bid_ask_spread: 0.00020000000000000573
+    top_bid: 0.2463
+    top_ask: 0.2465
+    order_book_depth: 10864.3
 BEAMXUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.00442
+  last_price: 0.00437
   volatility:
-    15m: 0.0018746897645325158
-    1h: 0.0025544969107737935
-    1d: 0.008338005534231856
+    15m: 0.0010828506967558967
+    1h: 0.00224948265573034
+    1d: 0.008541249504089743
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 703999.0
-  volume_1h: 1116454.0
-  volume_1d: 55910250.0
+  volume_15m: 363279.0
+  volume_1h: 7089665.0
+  volume_1d: 76482841.0
   arbitrage:
-    bid_ask_spread: 9.999999999999593e-06
-    top_bid: 0.00442
-    top_ask: 0.00443
-    order_book_depth: 4199213.0
+    bid_ask_spread: 1.000000000000046e-05
+    top_bid: 0.00435
+    top_ask: 0.00436
+    order_book_depth: 5385858.0
 VANAUSDC:
-  market_cap: 123514917
+  market_cap: 121818150
   circulating_supply: 30800000.0
-  last_price: 3.988
+  last_price: 3.935
   volatility:
-    15m: 0.0012668071772395854
-    1h: 0.0017957980941504916
-    1d: 0.008527359355600943
+    15m: 0.0013754760718711714
+    1h: 0.0019817949651733447
+    1d: 0.008623173144727712
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 74.1
-  volume_1h: 874.68
-  volume_1d: 10401.71
+  volume_15m: 26.88
+  volume_1h: 111.68
+  volume_1d: 12311.95
   arbitrage:
-    bid_ask_spread: 0.0030000000000001137
-    top_bid: 3.983
-    top_ask: 3.986
-    order_book_depth: 224.76999999999998
+    bid_ask_spread: 0.0040000000000000036
+    top_bid: 3.933
+    top_ask: 3.937
+    order_book_depth: 275.59000000000003
 PARTIUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1933
+  last_price: 0.1954
   volatility:
-    15m: 0.0003188289255838904
-    1h: 0.0015869433216142937
-    1d: 0.006225667690121785
+    15m: 0.0008405608662736033
+    1h: 0.0008998515773034217
+    1d: 0.006040669683655878
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1060.8
-  volume_1h: 14348.5
-  volume_1d: 481988.8
+  volume_15m: 3689.9
+  volume_1h: 6978.9
+  volume_1d: 541574.4
   arbitrage:
-    bid_ask_spread: 0.0002999999999999947
-    top_bid: 0.1927
-    top_ask: 0.193
-    order_book_depth: 13643.400000000001
+    bid_ask_spread: 0.00030000000000002247
+    top_bid: 0.1954
+    top_ask: 0.1957
+    order_book_depth: 12318.099999999999
 MUBARAKUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0285
+  last_price: 0.0288
   volatility:
-    15m: 0.0023795903325543816
-    1h: 0.0030593914456561633
-    1d: 0.01052832392736678
+    15m: 0.0009247793837799997
+    1h: 0.0020678803511635768
+    1d: 0.010138936227356505
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 94076.4
-  volume_1h: 813251.0
-  volume_1d: 32236059.4
+  volume_15m: 64070.4
+  volume_1h: 545249.8
+  volume_1d: 40028142.5
   arbitrage:
     bid_ask_spread: 9.99999999999994e-05
-    top_bid: 0.0285
-    top_ask: 0.0286
-    order_book_depth: 1921109.8000000003
+    top_bid: 0.0287
+    top_ask: 0.0288
+    order_book_depth: 1482683.9
 TUTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0363
+  last_price: 0.0364
   volatility:
-    15m: 0.002018818859647781
-    1h: 0.0015273467409584757
-    1d: 0.005738760263251652
+    15m: 0.0002933712864022141
+    1h: 0.0011235461546553432
+    1d: 0.005679389625608947
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 105967.0
-  volume_1h: 181768.0
-  volume_1d: 6013384.0
+  volume_15m: 4635.0
+  volume_1h: 42044.0
+  volume_1d: 6617805.0
   arbitrage:
-    bid_ask_spread: 2.9999999999995308e-05
-    top_bid: 0.03622
-    top_ask: 0.03625
-    order_book_depth: 26154.0
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.03639
+    top_ask: 0.03641
+    order_book_depth: 27860.0
 BANANAS31USDC:
-  market_cap: 72227704
+  market_cap: 74937277
   circulating_supply: 10000000000.0
-  last_price: 0.007179
+  last_price: 0.007502
   volatility:
-    15m: 0.0015277323972120625
-    1h: 0.00308899447865429
-    1d: 0.01313019265818993
+    15m: 0.0011901612530562462
+    1h: 0.0024076111179453965
+    1d: 0.011599294685293351
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 376580.0
-  volume_1h: 2585625.0
-  volume_1d: 172668695.0
+  volume_15m: 2249732.0
+  volume_1h: 9265674.0
+  volume_1d: 219484491.0
   arbitrage:
-    bid_ask_spread: 8.000000000000194e-06
-    top_bid: 0.007168
-    top_ask: 0.007176
-    order_book_depth: 50445.0
+    bid_ask_spread: 3.000000000000398e-06
+    top_bid: 0.007501
+    top_ask: 0.007504
+    order_book_depth: 164947.0
 BROCCOLI714USDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.02011
+  last_price: 0.01951
   volatility:
-    15m: 0.0014738917910507444
-    1h: 0.0030631522434049906
-    1d: 0.009065914569891833
+    15m: 0.0017927740685559754
+    1h: 0.0018240794693406039
+    1d: 0.009159305214298485
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 9312.0
-  volume_1h: 611028.0
-  volume_1d: 4847524.0
+  volume_15m: 528.0
+  volume_1h: 131786.0
+  volume_1d: 6617600.0
   arbitrage:
-    bid_ask_spread: 4.999999999999796e-05
-    top_bid: 0.02
-    top_ask: 0.02005
-    order_book_depth: 320284.0
+    bid_ask_spread: 2.0000000000002655e-05
+    top_bid: 0.01944
+    top_ask: 0.01946
+    order_book_depth: 151069.0
 THETAUSDC:
-  market_cap: 590319310
+  market_cap: 585648374
   circulating_supply: 1000000000.0
-  last_price: 0.589
+  last_price: 0.585
   volatility:
-    15m: 0.0013058103397812339
-    1h: 0.002160409438035724
-    1d: 0.00737837404407371
+    15m: 0.0
+    1h: 0.001630733989698371
+    1d: 0.007597307687503374
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 13035.0
-  volume_1h: 30868.3
-  volume_1d: 567661.1
+  volume_15m: 306.5
+  volume_1h: 14218.6
+  volume_1d: 668249.5
   arbitrage:
     bid_ask_spread: 0.0010000000000000009
-    top_bid: 0.588
-    top_ask: 0.589
-    order_book_depth: 72013.8
+    top_bid: 0.583
+    top_ask: 0.584
+    order_book_depth: 70375.79999999999
 API3USDC:
-  market_cap: 67492557
+  market_cap: 66560397
   circulating_supply: 123194626.7473809
-  last_price: 0.543
+  last_price: 0.539
   volatility:
-    15m: 0.001977576700682973
-    1h: 0.0023456157161176328
-    1d: 0.008748619938707217
+    15m: 0.0009880267723195112
+    1h: 0.0010285585148240852
+    1d: 0.008874939223852055
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 574.57
-  volume_1h: 2301.8
-  volume_1d: 148792.77
+  volume_15m: 752.88
+  volume_1h: 1243.7
+  volume_1d: 176193.31
   arbitrage:
     bid_ask_spread: 0.0020000000000000018
-    top_bid: 0.542
-    top_ask: 0.544
-    order_book_depth: 47968.270000000004
+    top_bid: 0.539
+    top_ask: 0.541
+    order_book_depth: 48530.08
 AUCTIONUSDC:
-  market_cap: 53544874
+  market_cap: 53224471
   circulating_supply: 6590144.312257191
-  last_price: 8.09
+  last_price: 8.04
   volatility:
-    15m: 0.0012828735564813663
-    1h: 0.0024019041357859223
-    1d: 0.007097068712567097
+    15m: 0.0008224198292886707
+    1h: 0.0011210469520683765
+    1d: 0.007276382961432698
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 13.77
-  volume_1h: 216.12
-  volume_1d: 4210.38
+  volume_15m: 9.37
+  volume_1h: 733.1
+  volume_1d: 6437.27
   arbitrage:
     bid_ask_spread: 0.009999999999999787
-    top_bid: 8.09
-    top_ask: 8.1
-    order_book_depth: 745.85
+    top_bid: 8.05
+    top_ask: 8.06
+    order_book_depth: 1950.93
 BANANAUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 13.98
+  last_price: 14.1
   volatility:
-    15m: 0.0013874235475178998
-    1h: 0.001933079669067082
-    1d: 0.008618305811771216
+    15m: 0.0
+    1h: 0.000819759538429068
+    1d: 0.008427377955146078
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3.695
-  volume_1h: 273.903
-  volume_1d: 9407.507
+  volume_15m: 0.0
+  volume_1h: 1.047
+  volume_1d: 12495.195
   arbitrage:
-    bid_ask_spread: 0.02999999999999936
-    top_bid: 13.98
-    top_ask: 14.01
-    order_book_depth: 476.91999999999996
+    bid_ask_spread: 0.030000000000001137
+    top_bid: 14.11
+    top_ask: 14.14
+    order_book_depth: 396.899
 GUNUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.02153
+  last_price: 0.02119
   volatility:
-    15m: 0.0009739607376156489
-    1h: 0.0038875579500711704
-    1d: 0.007532015147830177
+    15m: 0.00027287123406948693
+    1h: 0.001013604990344614
+    1d: 0.0076152846971225254
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 38028.0
-  volume_1h: 189134.0
-  volume_1d: 8209564.0
+  volume_15m: 75288.0
+  volume_1h: 203104.0
+  volume_1d: 9370130.0
   arbitrage:
-    bid_ask_spread: 5.000000000000143e-05
-    top_bid: 0.02148
-    top_ask: 0.02153
-    order_book_depth: 150159.0
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.02118
+    top_ask: 0.0212
+    order_book_depth: 387926.0
 QNTUSDC:
-  market_cap: 1285244699
+  market_cap: 1278352586
   circulating_supply: 14544176.164091088
-  last_price: 88.88
+  last_price: 87.93
   volatility:
-    15m: 0.0011835168456839303
-    1h: 0.0021794893862082665
-    1d: 0.0064800110051346105
+    15m: 0.0015295166582949358
+    1h: 0.0014072137155921563
+    1d: 0.006446976609419621
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 46.672
-  volume_1h: 287.012
-  volume_1d: 7429.523
+  volume_15m: 160.629
+  volume_1h: 338.755
+  volume_1d: 9321.024
   arbitrage:
-    bid_ask_spread: 0.020000000000010232
-    top_bid: 88.88
-    top_ask: 88.9
-    order_book_depth: 7.958
+    bid_ask_spread: 0.01999999999999602
+    top_bid: 87.9
+    top_ask: 87.92
+    order_book_depth: 6.754
 VETUSDC:
-  market_cap: 1629478524
+  market_cap: 1617713414
   circulating_supply: 85985041177.0
-  last_price: 0.0189
+  last_price: 0.01875
   volatility:
-    15m: 0.0013989047389654876
-    1h: 0.0017983481424833198
-    1d: 0.005760720880761174
+    15m: 0.0012289664140523132
+    1h: 0.0015189516180077027
+    1d: 0.00611980474054914
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 575826.5
-  volume_1h: 2986858.0
-  volume_1d: 60200249.7
+  volume_15m: 292303.6
+  volume_1h: 1319229.9
+  volume_1d: 72719164.3
   arbitrage:
     bid_ask_spread: 9.999999999999593e-06
-    top_bid: 0.01889
-    top_ask: 0.0189
-    order_book_depth: 668088.7
+    top_bid: 0.01876
+    top_ask: 0.01877
+    order_book_depth: 650339.0
 ZENUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 6.93
+  last_price: 6.77
   volatility:
-    15m: 0.0011957550437878153
-    1h: 0.001753269700241781
-    1d: 0.007197949635494386
+    15m: 0.0011132504049473362
+    1h: 0.0013315754034085652
+    1d: 0.007490022798220885
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 49.14
-  volume_1h: 1080.22
-  volume_1d: 17564.56
+  volume_15m: 161.36
+  volume_1h: 302.48
+  volume_1d: 21026.71
   arbitrage:
-    bid_ask_spread: 0.009999999999999787
-    top_bid: 6.92
-    top_ask: 6.93
-    order_book_depth: 2626.42
+    bid_ask_spread: 0.010000000000000675
+    top_bid: 6.77
+    top_ask: 6.78
+    order_book_depth: 2461.34
 BABYUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.03982
+  last_price: 0.03894
   volatility:
-    15m: 0.0012466042013949293
-    1h: 0.00247636370646457
-    1d: 0.00847877031292557
+    15m: 0.0011879518927255996
+    1h: 0.0013257161361329294
+    1d: 0.008665338058840916
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 46032.0
-  volume_1h: 766600.0
-  volume_1d: 9499888.0
+  volume_15m: 55712.0
+  volume_1h: 236481.0
+  volume_1d: 11115278.0
   arbitrage:
-    bid_ask_spread: 7.000000000000062e-05
-    top_bid: 0.0398
-    top_ask: 0.03987
-    order_book_depth: 140046.0
+    bid_ask_spread: 3.999999999999837e-05
+    top_bid: 0.03893
+    top_ask: 0.03897
+    order_book_depth: 80176.0
 ONDOUSDC:
-  market_cap: 2040690301
+  market_cap: 2032805099
   circulating_supply: 3159107529.0
-  last_price: 0.6449
+  last_price: 0.6405
   volatility:
-    15m: 0.0013446000094628238
-    1h: 0.001774552570271701
-    1d: 0.007413325675426968
+    15m: 0.0018363844528553428
+    1h: 0.0014913048512210396
+    1d: 0.007438194734462158
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 50059.6
-  volume_1h: 304067.0
-  volume_1d: 5109170.1
+  volume_15m: 27192.0
+  volume_1h: 100467.4
+  volume_1d: 5930873.3
   arbitrage:
-    bid_ask_spread: 0.000200000000000089
-    top_bid: 0.6446
-    top_ask: 0.6448
-    order_book_depth: 34180.7
+    bid_ask_spread: 0.00019999999999997797
+    top_bid: 0.6414
+    top_ask: 0.6416
+    order_book_depth: 15695.5
 BIGTIMEUSDC:
-  market_cap: 87029035
+  market_cap: 85388368
   circulating_supply: 1908245059.7925065
-  last_price: 0.0454
+  last_price: 0.0446
   volatility:
-    15m: 0.0019539434948856993
-    1h: 0.0016963852426994906
-    1d: 0.006865400091527629
+    15m: 0.0009358008082770023
+    1h: 0.0016609941399736558
+    1d: 0.007003052413620947
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 6405.0
-  volume_1h: 28030.0
-  volume_1d: 1318366.0
+  volume_15m: 7641.0
+  volume_1h: 54405.0
+  volume_1d: 1895645.0
   arbitrage:
-    bid_ask_spread: 7.000000000000062e-05
-    top_bid: 0.04532
-    top_ask: 0.04539
-    order_book_depth: 16348.0
+    bid_ask_spread: 5.9999999999997555e-05
+    top_bid: 0.04463
+    top_ask: 0.04469
+    order_book_depth: 19282.0
 VIRTUALUSDC:
-  market_cap: 877082436
+  market_cap: 854694706
   circulating_supply: 654865618.2293383
-  last_price: 1.3307
+  last_price: 1.2963
   volatility:
-    15m: 0.001994391477038732
-    1h: 0.003090891307630907
-    1d: 0.00958050177998725
+    15m: 0.0017144284005796635
+    1h: 0.0016415487442582313
+    1d: 0.009667688316531637
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 62395.2
-  volume_1h: 254461.5
-  volume_1d: 4234561.7
+  volume_15m: 56609.8
+  volume_1h: 123116.8
+  volume_1d: 5183213.0
   arbitrage:
-    bid_ask_spread: 0.0006999999999999229
-    top_bid: 1.3308
-    top_ask: 1.3315
-    order_book_depth: 2475.9
+    bid_ask_spread: 0.00039999999999995595
+    top_bid: 1.2955
+    top_ask: 1.2959
+    order_book_depth: 3940.1000000000004
 KERNELUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0991
+  last_price: 0.0961
   volatility:
-    15m: 0.002104418690677766
-    1h: 0.0030221764175277057
-    1d: 0.010374906818969487
+    15m: 0.0007080425491705749
+    1h: 0.002063720574743833
+    1d: 0.010647998078577138
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 6742.8
-  volume_1h: 35318.5
-  volume_1d: 670907.8
+  volume_15m: 6751.9
+  volume_1h: 71275.5
+  volume_1d: 1026669.9
   arbitrage:
     bid_ask_spread: 0.00019999999999999185
-    top_bid: 0.0985
-    top_ask: 0.0987
-    order_book_depth: 71669.0
+    top_bid: 0.0956
+    top_ask: 0.0958
+    order_book_depth: 91870.9
 WCTUSDC:
-  market_cap: 55871334
+  market_cap: 55412355
   circulating_supply: 186200000.0
-  last_price: 0.2984
+  last_price: 0.2959
   volatility:
-    15m: 0.0009213665517553139
-    1h: 0.0017525195864182236
-    1d: 0.007316242410351683
+    15m: 0.0015114123434810283
+    1h: 0.0015286810749556023
+    1d: 0.007525759007264212
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 32281.3
-  volume_1h: 129825.6
-  volume_1d: 3218136.9
+  volume_15m: 17929.9
+  volume_1h: 83046.5
+  volume_1d: 3986678.3
   arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.2983
-    top_ask: 0.2984
-    order_book_depth: 41276.2
+    bid_ask_spread: 0.00019999999999997797
+    top_bid: 0.2958
+    top_ask: 0.296
+    order_book_depth: 55480.200000000004
 PAXGUSDC:
-  market_cap: 885686361
+  market_cap: 885706058
   circulating_supply: 256655.81
-  last_price: 3455.53
+  last_price: 3450.23
   volatility:
-    15m: 0.0003795799722214384
-    1h: 0.00045772491191094884
-    1d: 0.001064695038136948
+    15m: 0.00022731407944729924
+    1h: 0.0002480189217544896
+    1d: 0.0012078924900672334
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3.6725
-  volume_1h: 15.9649
-  volume_1d: 297.9962
+  volume_15m: 0.9389
+  volume_1h: 4.7868
+  volume_1d: 382.0908
   arbitrage:
-    bid_ask_spread: 1.3200000000001637
-    top_bid: 3455.02
-    top_ask: 3456.34
-    order_book_depth: 3.4143
+    bid_ask_spread: 1.5300000000002
+    top_bid: 3448.7
+    top_ask: 3450.23
+    order_book_depth: 2.5156
 ACHUSDC:
-  market_cap: 84856731
+  market_cap: 84975725
   circulating_supply: 4943691067.145604
-  last_price: 0.0171
+  last_price: 0.01712
   volatility:
-    15m: 0.0015538444297234003
-    1h: 0.0021457357322991447
-    1d: 0.005967444123512162
+    15m: 0.0010560840572040376
+    1h: 0.0015498104824444444
+    1d: 0.006251925971716443
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 7559.0
-  volume_1h: 193528.0
-  volume_1d: 5780225.0
+  volume_15m: 96177.0
+  volume_1h: 587481.0
+  volume_1d: 7465647.0
   arbitrage:
-    bid_ask_spread: 3.999999999999837e-05
-    top_bid: 0.0171
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.01712
     top_ask: 0.01714
-    order_book_depth: 189234.0
+    order_book_depth: 217809.0
 GMTUSDC:
-  market_cap: 115355890
+  market_cap: 113831027
   circulating_supply: 2935941780.629007
-  last_price: 0.0391
+  last_price: 0.0388
   volatility:
-    15m: 0.0014724417072613835
-    1h: 0.0020011312096530967
-    1d: 0.007288268460470704
+    15m: 0.00158925292329163
+    1h: 0.0013028073968286125
+    1d: 0.0076493240797448694
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 3236.1
-  volume_1h: 41798.5
-  volume_1d: 1105627.0
+  volume_15m: 5762.5
+  volume_1h: 20329.7
+  volume_1d: 1779145.7
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.039
-    top_ask: 0.0391
-    order_book_depth: 2937199.4
+    top_bid: 0.0387
+    top_ask: 0.0388
+    order_book_depth: 2894056.3
 HYPERUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.09
+  last_price: 0.0901
   volatility:
-    15m: 0.0008886183960398026
-    1h: 0.001973862447859576
-    1d: 0.008950773682132332
+    15m: 0.001257217866850291
+    1h: 0.001415742305808535
+    1d: 0.009299581191593125
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1074.7
-  volume_1h: 7323.6
-  volume_1d: 1305826.8
+  volume_15m: 829.2
+  volume_1h: 26244.2
+  volume_1d: 1465505.5
   arbitrage:
     bid_ask_spread: 0.00019999999999999185
     top_bid: 0.0898
     top_ask: 0.09
-    order_book_depth: 90493.2
+    order_book_depth: 99365.4
 INITUSDC:
-  market_cap: 59412475
+  market_cap: 59114867
   circulating_supply: 148750000.0
-  last_price: 0.3965
+  last_price: 0.3969
   volatility:
-    15m: 0.0014504921257254293
-    1h: 0.002511355257813814
-    1d: 0.010279392909759516
+    15m: 0.0017739678756301912
+    1h: 0.001790138854139017
+    1d: 0.008745323083804567
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 804.6
-  volume_1h: 13416.4
-  volume_1d: 691624.9
+  volume_15m: 5520.6
+  volume_1h: 29443.3
+  volume_1d: 851666.0
   arbitrage:
-    bid_ask_spread: 0.00040000000000001146
-    top_bid: 0.3966
+    bid_ask_spread: 0.00020000000000003348
+    top_bid: 0.3968
     top_ask: 0.397
-    order_book_depth: 13251.199999999999
+    order_book_depth: 12738.8
 SIGNUSDC:
-  market_cap: 78049452
+  market_cap: 77466269
   circulating_supply: 1200000000.0
-  last_price: 0.06564
+  last_price: 0.06452
   volatility:
-    15m: 0.0024428832920587932
-    1h: 0.00397909043537498
-    1d: 0.006500984163720816
+    15m: 0.0005694571035617099
+    1h: 0.0007561671072971854
+    1d: 0.0070749511024027715
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 306479.0
-  volume_1h: 2673706.0
-  volume_1d: 14913136.0
+  volume_15m: 11730.0
+  volume_1h: 109736.0
+  volume_1d: 17481876.0
   arbitrage:
-    bid_ask_spread: 7.999999999999674e-05
-    top_bid: 0.06555
-    top_ask: 0.06563
-    order_book_depth: 38714.0
+    bid_ask_spread: 5.000000000000837e-05
+    top_bid: 0.06445
+    top_ask: 0.0645
+    order_book_depth: 24809.0
 STOUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0619
+  last_price: 0.062
   volatility:
-    15m: 0.0
-    1h: 0.001520696851975286
-    1d: 0.008704529540678723
+    15m: 0.0004317629110055492
+    1h: 0.001117703995603079
+    1d: 0.008594703427686564
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 0.0
-  volume_1h: 5212.6
-  volume_1d: 685741.4
+  volume_15m: 2629.0
+  volume_1h: 3260.5
+  volume_1d: 745263.6
   arbitrage:
     bid_ask_spread: 0.0001999999999999988
-    top_bid: 0.0616
-    top_ask: 0.0618
-    order_book_depth: 286053.0
+    top_bid: 0.0617
+    top_ask: 0.0619
+    order_book_depth: 278957.8
 ENJUSDC:
-  market_cap: 106856306
-  circulating_supply: 1851541516.070786
-  last_price: 0.0574
+  market_cap: 105485667
+  circulating_supply: 1851541515.824926
+  last_price: 0.0568
   volatility:
-    15m: 0.0006309938377123881
-    1h: 0.002096650812653255
-    1d: 0.007299195037153272
+    15m: 0.0004697034128513279
+    1h: 0.0013355326798147318
+    1d: 0.007445080653275284
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 6836.1
-  volume_1h: 47706.0
-  volume_1d: 666347.1
+  volume_15m: 156.4
+  volume_1h: 17914.2
+  volume_1d: 912308.5
   arbitrage:
     bid_ask_spread: 9.999999999999593e-05
-    top_bid: 0.0572
-    top_ask: 0.0573
-    order_book_depth: 459487.69999999995
+    top_bid: 0.0568
+    top_ask: 0.0569
+    order_book_depth: 442823.5
 SYRUPUSDC:
-  market_cap: 428516752
+  market_cap: 443916704
   circulating_supply: 1073833091.274637
-  last_price: 0.3983
+  last_price: 0.4112
   volatility:
-    15m: 0.0012057123210445144
-    1h: 0.002158789488123226
-    1d: 0.008210461782226761
+    15m: 0.0017642565315805312
+    1h: 0.0018493197310612728
+    1d: 0.0088396819752535
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 23136.8
-  volume_1h: 321507.1
-  volume_1d: 6483050.7
+  volume_15m: 76667.5
+  volume_1h: 319226.0
+  volume_1d: 8237421.0
   arbitrage:
-    bid_ask_spread: 9.999999999998899e-05
-    top_bid: 0.3982
-    top_ask: 0.3983
-    order_book_depth: 13143.8
+    bid_ask_spread: 0.00039999999999995595
+    top_bid: 0.4111
+    top_ask: 0.4115
+    order_book_depth: 10505.1
 KMNOUSDC:
-  market_cap: 117881235
+  market_cap: 116845766
   circulating_supply: 2149315104.25
-  last_price: 0.05429
+  last_price: 0.05438
   volatility:
-    15m: 0.002667068284065701
-    1h: 0.002350796669526923
-    1d: 0.006213223982097901
+    15m: 0.0009737717748381119
+    1h: 0.00102922149302827
+    1d: 0.006346453057589792
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 11795.0
-  volume_1h: 377862.0
-  volume_1d: 1921959.0
+  volume_15m: 11372.0
+  volume_1h: 20194.0
+  volume_1d: 2704144.0
   arbitrage:
-    bid_ask_spread: 8.99999999999998e-05
-    top_bid: 0.05428
-    top_ask: 0.05437
-    order_book_depth: 68944.0
+    bid_ask_spread: 1.9999999999999185e-05
+    top_bid: 0.05436
+    top_ask: 0.05438
+    order_book_depth: 48371.0
 SXTUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.0609
+  last_price: 0.0604
   volatility:
-    15m: 0.0014960933638471451
-    1h: 0.0021434043550408502
-    1d: 0.008993451154720866
+    15m: 0.001270707132680623
+    1h: 0.0012012108660197128
+    1d: 0.009183815133285268
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 6936.5
-  volume_1h: 148009.6
-  volume_1d: 5493392.5
+  volume_15m: 21890.7
+  volume_1h: 51047.5
+  volume_1d: 6326531.2
   arbitrage:
     bid_ask_spread: 0.00010000000000000286
-    top_bid: 0.0608
-    top_ask: 0.0609
-    order_book_depth: 317769.2
+    top_bid: 0.0605
+    top_ask: 0.0606
+    order_book_depth: 280829.8
 PUNDIXUSDC:
-  market_cap: 66195484
+  market_cap: 65944037
   circulating_supply: 258386541.0999244
-  last_price: 0.2543
+  last_price: 0.2553
   volatility:
-    15m: 0.0030192728581363002
-    1h: 0.0047728808519268634
-    1d: 0.005583167565673465
+    15m: 0.0005244529864843304
+    1h: 0.0003640376451189719
+    1d: 0.0052125683366444605
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 9467.4
-  volume_1h: 58432.9
-  volume_1d: 177492.4
+  volume_15m: 183.6
+  volume_1h: 575.1
+  volume_1d: 304290.0
   arbitrage:
-    bid_ask_spread: 0.0017000000000000348
-    top_bid: 0.2541
+    bid_ask_spread: 0.0021000000000000463
+    top_bid: 0.2537
     top_ask: 0.2558
-    order_book_depth: 56253.700000000004
+    order_book_depth: 80124.9
 NXPCUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.8985
+  last_price: 0.884
   volatility:
-    15m: 0.0016013930972533688
-    1h: 0.0022914378685835977
-    1d: 0.007812450439480409
+    15m: 0.0012334570553376512
+    1h: 0.0014041954253666187
+    1d: 0.007838890286998136
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1436.6
-  volume_1h: 10088.5
-  volume_1d: 531430.8
+  volume_15m: 6363.6
+  volume_1h: 15932.1
+  volume_1d: 679310.6
   arbitrage:
     bid_ask_spread: 0.0008000000000000229
-    top_bid: 0.8983
-    top_ask: 0.8991
-    order_book_depth: 733.2
+    top_bid: 0.884
+    top_ask: 0.8848
+    order_book_depth: 3179.6000000000004
 HAEDALUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.1072
+  last_price: 0.1063
   volatility:
-    15m: 0.0008706436673925673
-    1h: 0.001543738307305751
-    1d: 0.006253766753899994
+    15m: 0.0010827043835959474
+    1h: 0.0014774364930524727
+    1d: 0.0065581544782991425
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1521.5
-  volume_1h: 10609.3
-  volume_1d: 826669.3
+  volume_15m: 561.0
+  volume_1h: 7629.5
+  volume_1d: 1062345.1
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.107
-    top_ask: 0.1072
-    order_book_depth: 237700.4
+    bid_ask_spread: 0.00019999999999999185
+    top_bid: 0.1063
+    top_ask: 0.1065
+    order_book_depth: 211577.4
 HUMAUSDC:
-  market_cap: 59234328
+  market_cap: 59922405
   circulating_supply: 1733333333.0
-  last_price: 0.03399
+  last_price: 0.03456
   volatility:
-    15m: 0.0012826231939989299
-    1h: 0.0020877645755396014
-    1d: 0.00601392546170958
+    15m: 0.0016702646889687096
+    1h: 0.0014148419651338591
+    1d: 0.0062781427539904166
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 82350.0
-  volume_1h: 421144.0
-  volume_1d: 7176124.0
+  volume_15m: 106246.0
+  volume_1h: 149702.0
+  volume_1d: 8789176.0
   arbitrage:
-    bid_ask_spread: 1.9999999999999185e-05
-    top_bid: 0.03398
-    top_ask: 0.034
-    order_book_depth: 126605.0
+    bid_ask_spread: 3.999999999999837e-05
+    top_bid: 0.03452
+    top_ask: 0.03456
+    order_book_depth: 220221.0
 AUSDC:
-  market_cap: 733235607
-  circulating_supply: 1573254692.3603
-  last_price: 0.4644
+  market_cap: 730048237
+  circulating_supply: 1573288753.5983
+  last_price: 0.4619
   volatility:
-    15m: 0.0006689907409033536
-    1h: 0.0013532532404374863
-    1d: 0.007278542429169697
+    15m: 0.0016583360323278536
+    1h: 0.0011585616194797763
+    1d: 0.007110556849324312
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 1739.0
-  volume_1h: 16262.2
-  volume_1d: 442409.2
+  volume_15m: 2084.2
+  volume_1h: 8721.8
+  volume_1d: 497805.8
   arbitrage:
-    bid_ask_spread: 0.0006000000000000449
-    top_bid: 0.4634
-    top_ask: 0.464
-    order_book_depth: 10257.599999999999
+    bid_ask_spread: 0.0005999999999999894
+    top_bid: 0.4616
+    top_ask: 0.4622
+    order_book_depth: 10255.1
 SOPHUSDC:
-  market_cap: 64347703
+  market_cap: 64481499
   circulating_supply: 2000000000.0
-  last_price: 0.03192
+  last_price: 0.03203
   volatility:
-    15m: 0.0014046666138910265
-    1h: 0.0019600481077928734
-    1d: 0.0070077603289593025
+    15m: 0.001421659355483147
+    1h: 0.0015947973918735943
+    1d: 0.007195701128845241
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 122192.0
-  volume_1h: 486907.0
-  volume_1d: 9084470.0
+  volume_15m: 77469.0
+  volume_1h: 285631.0
+  volume_1d: 11900480.0
   arbitrage:
-    bid_ask_spread: 1.9999999999999185e-05
-    top_bid: 0.0319
-    top_ask: 0.03192
-    order_book_depth: 52984.0
+    bid_ask_spread: 3.0000000000002247e-05
+    top_bid: 0.032
+    top_ask: 0.03203
+    order_book_depth: 103709.0
 RESOLVUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.195
+  last_price: 0.1916
   volatility:
-    15m: 0.0028293197378445874
-    1h: 0.0038077370060759772
-    1d: 0.010491608640786755
+    15m: 0.003674357149825786
+    1h: 0.002774618198845884
+    1d: 0.010419603956075968
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 20919.8
-  volume_1h: 290789.6
-  volume_1d: 2412137.5
+  volume_15m: 199333.7
+  volume_1h: 287041.7
+  volume_1d: 4645221.2
   arbitrage:
-    bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1949
-    top_ask: 0.1951
-    order_book_depth: 37854.2
+    bid_ask_spread: 0.00040000000000001146
+    top_bid: 0.1916
+    top_ask: 0.192
+    order_book_depth: 56845.7
 HOMEUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.01916
+  last_price: 0.01795
   volatility:
-    15m: 0.0023736548804503574
-    1h: 0.0028567118195330886
-    1d: 0.00927796004483949
+    15m: 0.0017417513448148793
+    1h: 0.0022741304899644727
+    1d: 0.009514908723417577
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 184897.0
-  volume_1h: 914960.0
-  volume_1d: 13666496.0
+  volume_15m: 88535.0
+  volume_1h: 754873.0
+  volume_1d: 17354289.0
   arbitrage:
     bid_ask_spread: 1.9999999999999185e-05
-    top_bid: 0.01912
-    top_ask: 0.01914
-    order_book_depth: 486714.0
+    top_bid: 0.01794
+    top_ask: 0.01796
+    order_book_depth: 503194.0
 FLUXUSDC:
-  market_cap: 66505740
+  market_cap: 65460412
   circulating_supply: 386486684.4991484
-  last_price: 0.1698
+  last_price: 0.1697
   volatility:
-    15m: 0.001638420371913961
-    1h: 0.0017342421842376171
-    1d: 0.006246019099857579
+    15m: 0.0009305605059610662
+    1h: 0.0010524499338963867
+    1d: 0.0064620110932284945
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 9352.37
-  volume_1h: 40894.77
-  volume_1d: 509250.33
+  volume_15m: 4316.61
+  volume_1h: 10090.43
+  volume_1d: 557893.99
   arbitrage:
     bid_ask_spread: 0.00020000000000000573
-    top_bid: 0.1698
-    top_ask: 0.17
-    order_book_depth: 2671.18
+    top_bid: 0.1696
+    top_ask: 0.1698
+    order_book_depth: 16139.670000000002
 MASKUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 1.175
+  last_price: 1.135
   volatility:
-    15m: 0.001317437878569808
-    1h: 0.0020672329754344593
-    1d: 0.007382839489635256
+    15m: 0.0013431039818163396
+    1h: 0.0013096479741110645
+    1d: 0.008027625877666771
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 690.8
-  volume_1h: 2179.8
-  volume_1d: 38303.3
+  volume_15m: 1527.0
+  volume_1h: 3250.2
+  volume_1d: 49046.2
   arbitrage:
-    bid_ask_spread: 0.0020000000000000018
-    top_bid: 1.175
-    top_ask: 1.177
-    order_book_depth: 2694.8
+    bid_ask_spread: 0.001000000000000112
+    top_bid: 1.134
+    top_ask: 1.135
+    order_book_depth: 2878.5
 SUSHIUSDC:
-  market_cap: 101942987
+  market_cap: 100572879
   circulating_supply: 192789255.8554817
-  last_price: 0.526
+  last_price: 0.52
   volatility:
-    15m: 0.0018442844125955912
-    1h: 0.0019032892415578781
-    1d: 0.008059847677468623
+    15m: 0.001399385993562325
+    1h: 0.001764576497747561
+    1d: 0.00839477370456916
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 648.5
-  volume_1h: 1385.6
-  volume_1d: 105465.0
+  volume_15m: 545.4
+  volume_1h: 2905.7
+  volume_1d: 148931.3
   arbitrage:
     bid_ask_spread: 0.0020000000000000018
-    top_bid: 0.526
-    top_ask: 0.528
-    order_book_depth: 47876.5
+    top_bid: 0.519
+    top_ask: 0.521
+    order_book_depth: 54573.0
 SPKUSDC:
   market_cap: null
   circulating_supply: null
-  last_price: 0.041702
+  last_price: 0.041395
   volatility:
-    15m: 0.002723942483197977
-    1h: 0.00299730997132355
-    1d: 0.008745321810686381
+    15m: 0.0014595732778495715
+    1h: 0.0017550549654577199
+    1d: 0.008223452823479336
   stop_loss: 0.02
   target_pnl: 0.03
   trailing_stop: 0.01
   max_hold_time: 600
   taxes: 0.0
-  volume_15m: 304159.0
-  volume_1h: 2636795.0
-  volume_1d: 37457357.0
+  volume_15m: 210318.0
+  volume_1h: 519718.0
+  volume_1d: 47022578.0
   arbitrage:
-    bid_ask_spread: 4.9999999999980616e-06
-    top_bid: 0.041699
-    top_ask: 0.041704
-    order_book_depth: 48267.0
+    bid_ask_spread: 1.4000000000000123e-05
+    top_bid: 0.041382
+    top_ask: 0.041396
+    order_book_depth: 22371.0
