@@ -1,20 +1,23 @@
 # High Risk Auto Trade
   
-high_risk_autotrade.py                # Main bot (do NOT import/run in Streamlit!)
-streamlit_dashboard.py                # Dashboard ONLY
-secret.py                             # API Keys
-bot_state.json                        # Shared state file
-usdc_symbol_updater.py                # Fetches USDC crypto state
-symbols.yaml                          # USDC crypto state
+| File Name                  | Description                                  |
+|----------------------------|----------------------------------------------|
+| high_risk_autotrade.py     | Main bot (do NOT import/run in Streamlit!)   |
+| streamlit_dashboard.py     | Dashboard ONLY                               |
+| secret.py                  | API Keys                                     |
+| bot_state.json             | Shared state file                            |
+| usdc_symbol_updater.py     | Fetches USDC crypto state                    |
+| symbols.yaml               | USDC cryptos state                           |
 
+  <br /> 
 Requirements:  
 pip install python-telegram-bot==13.7  
   <br />  
 
 ### How does it work
-1. Generate symbols.yaml  
-2. When the first symbols.yaml gets generated run the bot (python high_risk_autotrade_data-integration.py) while usdc_symbol_updater.py keeps running  
-  
+ - Generate symbols.yaml  
+ - Run the bot  
+ - Keep usdc_symbol_updater on  
   <br />
 
 ## Momentum Detection  
@@ -29,4 +32,11 @@ The bot will consider buying only if all these timeframes show strong upward mov
 The bot uses both trailing stop logic and a maximum hold time, so if the price reverses sharply (like those red candles after the top in the image), the bot should try to exit quickly.
   <br />
 
-[!(https://i.imgur.com/7oMaPLM.jpeg)]
+[![Example](https://i.imgur.com/7oMaPLM.jpeg)]  
+
+
+### Summary
+
+If the trend is very short (just 2-3 candles), the bot might enter late or get faked out.  
+  <br />
+If a strong reversal happens quickly (as in the sharp red drop), the trailing stop might trigger and exit, but very fast drops can result in some slippage.  
