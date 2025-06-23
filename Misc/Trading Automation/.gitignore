@@ -1,7 +1,4 @@
 research
 secret.py
-symbols.yaml
-trade_log.csv
-trades_detailed.csv
-trades.csv
+*.csv
 bot_state.json
