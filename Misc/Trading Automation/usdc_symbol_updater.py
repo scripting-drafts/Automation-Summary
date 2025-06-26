@@ -11,8 +11,21 @@ YAML_FILE = "symbols.yaml"
 
 cg = CoinGeckoAPI()
 
+def fetch_with_retry(func, *args, retries=3, **kwargs):
+    for attempt in range(retries):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(f"[WARN] Attempt {attempt+1} failed: {e}")
+            time.sleep(2)
+    print("[ERROR] All retries failed.")
+    return None
+
 def fetch_usdc_symbols(client):
-    info = client.get_exchange_info()
+    info = fetch_with_retry(client.get_exchange_info)
+    if not info:
+        print("[ERROR] Could not fetch exchange info.")
+        return []
     usdc_pairs = [s for s in info['symbols'] if s['quoteAsset'] == 'USDC' and s['status'] == 'TRADING']
     print(f"Found {len(usdc_pairs)} USDC pairs")
     return usdc_pairs
@@ -24,7 +37,7 @@ def calc_volatility(closes):
     return float(stdev(returns)) if len(returns) > 1 else 0.0
 
 def build_coingecko_mapping(binance_base_assets):
-    all_coins = cg.get_coins_list()
+    all_coins = fetch_with_retry(cg.get_coins_list) or []
     symbol_map = {c['symbol'].upper(): c['id'] for c in all_coins}
     mapping = {}
     for asset in binance_base_assets:
@@ -38,7 +51,7 @@ def fetch_cg_marketcaps_and_supply(cg_ids):
     batch_size = 250  # CoinGecko max per call
     for i in range(0, len(cg_ids), batch_size):
         sublist = cg_ids[i:i + batch_size]
-        resp = cg.get_coins_markets(vs_currency='usd', ids=','.join(sublist))
+        resp = fetch_with_retry(cg.get_coins_markets, vs_currency='usd', ids=','.join(sublist)) or []
         for coin in resp:
             symbol_uc = coin['symbol'].upper()
             data[symbol_uc] = {
@@ -51,7 +64,10 @@ def fetch_symbol_data(client, symbol_info, cg_entry):
     symbol = symbol_info['symbol']
     base_asset = symbol_info['baseAsset']
     try:
-        ticker = client.get_ticker(symbol=symbol)
+        ticker = fetch_with_retry(client.get_ticker, symbol=symbol)
+        if not ticker:
+            print(f"[ERROR] Failed to fetch ticker for {symbol}")
+            return None
         last_price = float(ticker['lastPrice'])
 
         # Get CoinGecko market cap and circulating supply if available
@@ -59,28 +75,27 @@ def fetch_symbol_data(client, symbol_info, cg_entry):
         circulating_supply = cg_entry.get("circulating_supply")
 
         # Volatility
-        closes_15m = [float(k[4]) for k in client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE, limit=15)]
-        closes_1h  = [float(k[4]) for k in client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE, limit=60)]
-        closes_1d  = [float(k[4]) for k in client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_15MINUTE, limit=96)]
-
-        vol_15m = calc_volatility(closes_15m)
-        vol_1h  = calc_volatility(closes_1h)
-        vol_1d  = calc_volatility(closes_1d)
+        closes_15m = [float(k[4]) for k in fetch_with_retry(client.get_klines, symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE, limit=15) or []]
+        closes_1h  = [float(k[4]) for k in fetch_with_retry(client.get_klines, symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE, limit=60) or []]
+        closes_1d  = [float(k[4]) for k in fetch_with_retry(client.get_klines, symbol=symbol, interval=Client.KLINE_INTERVAL_15MINUTE, limit=96) or []]
 
         # Volumes
-        klines_15m = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_15MINUTE, limit=1)
-        klines_1h = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1HOUR, limit=1)
-        klines_1d = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1DAY, limit=1)
-        depth = client.get_order_book(symbol=symbol, limit=5)
+        klines_15m = fetch_with_retry(client.get_klines, symbol=symbol, interval=Client.KLINE_INTERVAL_15MINUTE, limit=1) or []
+        klines_1h = fetch_with_retry(client.get_klines, symbol=symbol, interval=Client.KLINE_INTERVAL_1HOUR, limit=1) or []
+        klines_1d = fetch_with_retry(client.get_klines, symbol=symbol, interval=Client.KLINE_INTERVAL_1DAY, limit=1) or []
+        depth = fetch_with_retry(client.get_order_book, symbol=symbol, limit=5)
+        if not depth or 'bids' not in depth or 'asks' not in depth:
+            print(f"[ERROR] Failed to fetch depth for {symbol}")
+            return None
 
         data = {
             "market_cap": market_cap,
             "circulating_supply": circulating_supply,
             "last_price": last_price,
             "volatility": {
-                "15m": vol_15m,
-                "1h": vol_1h,
-                "1d": vol_1d
+                "15m": calc_volatility(closes_15m),
+                "1h": calc_volatility(closes_1h),
+                "1d": calc_volatility(closes_1d)
             },
             "stop_loss": 0.02,
             "target_pnl": 0.03,
@@ -128,12 +143,15 @@ def update_yaml(client):
         if i % 10 == 0:
             print(f"Processed {i+1}/{len(usdc_symbols)} symbols")
 
-    with open(YAML_FILE, "w") as f:
-        yaml.dump(data, f, default_flow_style=False, sort_keys=False)
-    print(f"[{datetime.now()}] {YAML_FILE} updated. {len(data)} USDC pairs.")
+    try:
+        with open(YAML_FILE, "w") as f:
+            yaml.dump(data, f, default_flow_style=False, sort_keys=False)
+        print(f"[{datetime.now()}] {YAML_FILE} updated. {len(data)} USDC pairs.")
+    except Exception as e:
+        print(f"[ERROR] Failed to write YAML: {e}")
 
 if __name__ == "__main__":
-    client = Client(API_KEY, API_SECRET)
+    client = Client(API_KEY, API_SECRET, requests_params={'timeout': 10})
     while True:
         start = datetime.now()
         update_yaml(client)
