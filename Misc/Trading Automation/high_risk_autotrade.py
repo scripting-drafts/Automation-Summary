@@ -892,7 +892,7 @@ def trading_loop():
 
 main_keyboard = [
     ["📊 Balance", "💼 Investments"],
-    ["🔄 Rotate", "🟢 Invest", "🔴 Sell All"],
+    # ["🔄 Rotate", "🟢 Invest", "🔴 Sell All"],
     ["📝 Trade Log"]
 ]
 
@@ -1030,6 +1030,16 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             f"Investments: ${total_invested_value:.2f}\n"
             f"Portfolio value: ${total_portfolio_value:.2f} USDC"
         )
+        min_needed = 0
+        refresh_symbols()
+        if SYMBOLS:
+            min_needed = min(min_notional_for(s) for s in SYMBOLS)
+        diff = usdc - min_needed
+        if diff >= 0:
+            extra_msg = f"\nYou have enough USDC for the next trade (need ${min_needed:.2f}, have ${usdc:.2f})."
+        else:
+            extra_msg = f"\nYou need ${-diff:.2f} more USDC for the next auto trade (minimum required: ${min_needed:.2f})."
+        msg += extra_msg
         update.message.reply_text(msg)
 
     elif text == "💼 Investments":
@@ -1070,8 +1080,8 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             f"Investments: ${total_invested_value:.2f} USDC\n"
             f"Liquid (USDC): ${usdc:.2f}\n"
             f"Portfolio value: ${total_portfolio_value:.2f} USDC\n"
-            f"Assets:\n\n"
-            + "\n".join(rows)
+            # f"Assets:\n\n"
+            + "\n\n".join(rows)
         )
         update.message.reply_text(msg)
 
@@ -1087,10 +1097,10 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             )
             for tr in log[-10:]:
                 try:
-                    entry = float(tr['Entry'])
-                    exit_ = float(tr['Exit'])
-                    qty = float(tr['Qty'])
-                    pnl = float(tr['PnL $'])
+                    entry = float(tr.get('Entry', 0))
+                    exit_ = float(tr.get('Exit', 0))
+                    qty = float(tr.get('Qty', 0))
+                    pnl = float(tr.get('PnL $', 0))
                     msg += (
                         f"{tr['Time'][:16]:<19} "
                         f"{tr['Symbol']:<11} "
