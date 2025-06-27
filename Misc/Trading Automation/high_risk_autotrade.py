@@ -892,7 +892,6 @@ def trading_loop():
 
 main_keyboard = [
     ["📊 Balance", "💼 Investments"],
-    # ["🔄 Rotate", "🟢 Invest", "🔴 Sell All"],
     ["📝 Trade Log"]
 ]
 
@@ -1030,16 +1029,7 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             f"Investments: ${total_invested_value:.2f}\n"
             f"Portfolio value: ${total_portfolio_value:.2f} USDC"
         )
-        min_needed = 0
-        refresh_symbols()
-        if SYMBOLS:
-            min_needed = min(min_notional_for(s) for s in SYMBOLS)
-        diff = usdc - min_needed
-        if diff >= 0:
-            extra_msg = f"\nYou have enough USDC for the next trade (need ${min_needed:.2f}, have ${usdc:.2f})."
-        else:
-            extra_msg = f"\nYou need ${-diff:.2f} more USDC for the next auto trade (minimum required: ${min_needed:.2f})."
-        msg += extra_msg
+        
         update.message.reply_text(msg)
 
     elif text == "💼 Investments":
@@ -1080,8 +1070,8 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             f"Investments: ${total_invested_value:.2f} USDC\n"
             f"Liquid (USDC): ${usdc:.2f}\n"
             f"Portfolio value: ${total_portfolio_value:.2f} USDC\n"
-            # f"Assets:\n\n"
-            + "\n\n".join(rows)
+            f"\n\n"
+            + "\n".join(rows)
         )
         update.message.reply_text(msg)
 
@@ -1116,25 +1106,25 @@ def telegram_handle_message(update: Update, context: CallbackContext):
 
             update.message.reply_text(f"```{msg}```", parse_mode='Markdown')
 
-    elif text == "🔄 Rotate":
-        queue_action("rotate")
-        update.message.reply_text(
-            "🔄 Rotating investments...\n"
-            "Rotate = Sell everything and immediately invest in the current top gainers."
-        )
-    elif text == "🟢 Invest":
-        queue_action("invest")
-        update.message.reply_text(
-            "🟢 Investing in the current top gainers (most positive % change)."
-        )
-    elif text == "🔴 Sell All":
-        queue_action("sell_all")
-        report = state.get("last_sell_report", [])
-        if not report:
-            update.message.reply_text("🔴 Selling everything to USDC. Any unsold coins will remain in Investments.")
-        else:
-            msg = "Tried to sell all to USDC.\nFailed to sell:\n" + "\n".join(report)
-            update.message.reply_text(msg)
+    # elif text == "🔄 Rotate":
+    #     queue_action("rotate")
+    #     update.message.reply_text(
+    #         "🔄 Rotating investments...\n"
+    #         "Rotate = Sell everything and immediately invest in the current top gainers."
+    #     )
+    # elif text == "🟢 Invest":
+    #     queue_action("invest")
+    #     update.message.reply_text(
+    #         "🟢 Investing in the current top gainers (most positive % change)."
+    #     )
+    # elif text == "🔴 Sell All":
+    #     queue_action("sell_all")
+    #     report = state.get("last_sell_report", [])
+    #     if not report:
+    #         update.message.reply_text("🔴 Selling everything to USDC. Any unsold coins will remain in Investments.")
+    #     else:
+    #         msg = "Tried to sell all to USDC.\nFailed to sell:\n" + "\n".join(report)
+    #         update.message.reply_text(msg)
     else:
         update.message.reply_text("Unknown action.")
 
