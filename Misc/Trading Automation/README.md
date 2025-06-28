@@ -32,7 +32,7 @@ The bot will consider buying only if all these timeframes show strong upward mov
 The bot uses both trailing stop logic and a maximum hold time, so if the price reverses sharply (like those red candles after the top in the image), the bot should try to exit quickly.
   <br />
 
-[![Example](https://i.imgur.com/7oMaPLM.jpeg)]  
+![Example](https://i.imgur.com/7oMaPLM.jpeg)  
 
 
 ### Summary
