@@ -22,6 +22,80 @@ positions = {}
 TRADE_LOG_FILE = "trades_detailed.csv"
 YAML_SYMBOLS_FILE = "symbols.yaml"
 
+def reserve_taxes_and_reinvest():
+    """
+    Ensure there's enough USDC to cover recent tax liabilities AND to place a new order.
+    If not, sell the least profitable position(s) until there is enough.
+    Then, reinvest with only the available (tax-reserved) USDC.
+    """
+    # 1. Calculate taxes owed from recent closed trades
+    total_taxes_owed = sum(
+        float(tr.get('Tax', 0)) for tr in trade_log[-20:] if float(tr.get('Tax', 0)) > 0
+    )
+
+    fetch_usdc_balance()
+    free_usdc = balance['usd']
+    min_notional = 10.0  # You may adjust or fetch from config
+
+    # 2. If not enough after taxes, sell other positions to free up funds
+    while (free_usdc - total_taxes_owed) < min_notional:
+        # Find least profitable open position
+        if not positions:
+            print("[TAXES] No positions left to liquidate for taxes.")
+            break
+        # Compute current PnL for each open position
+        symbol_to_sell = min(
+            positions,
+            key=lambda sym: (get_latest_price(sym) - positions[sym]['entry']) / max(positions[sym]['entry'], 1e-8)
+        )
+        qty = positions[symbol_to_sell]['qty']
+        entry = positions[symbol_to_sell]['entry']
+        trade_time = positions[symbol_to_sell].get('trade_time', time.time())
+        print(f"[TAXES] Selling {symbol_to_sell} to free up USDC for taxes.")
+        exit_price, fee, tax = sell(symbol_to_sell, qty)
+        exit_time = time.time()
+        log_trade(symbol_to_sell, entry, exit_price, qty, trade_time, exit_time, fee, tax, action="sell")
+        del positions[symbol_to_sell]
+        fetch_usdc_balance()
+        free_usdc = balance['usd']
+
+    # 3. Only use USDC *after* taxes reserved for new investments
+    investable_usdc = free_usdc - total_taxes_owed
+    if investable_usdc < min_notional:
+        print("[TAXES] Not enough USDC to invest after reserving for taxes.")
+        return
+
+    # 4. Pass this to the momentum investing function
+    invest_momentum_with_usdc_limit(investable_usdc)
+
+def invest_momentum_with_usdc_limit(usdc_limit):
+    """
+    Invest in momentum coins using only up to usdc_limit USDC.
+    """
+    refresh_symbols()
+    symbols = get_yaml_ranked_momentum(limit=3)
+    if not symbols or usdc_limit < 10.0:
+        print("[INFO] No symbols to invest in or insufficient funds.")
+        return
+    amount_per_symbol = usdc_limit / len(symbols)
+    for symbol in symbols:
+        min_notional = min_notional_for(symbol)
+        if amount_per_symbol < min_notional:
+            print(f"[SKIP] {symbol}: Amount per symbol ${amount_per_symbol:.2f} < min_notional ${min_notional:.2f}")
+            continue
+        fetch_usdc_balance()
+        if balance['usd'] < min_notional:
+            print(f"[INFO] Out of funds before buying {symbol}.")
+            break
+        print(f"[INFO] Attempting to buy {symbol} with ${amount_per_symbol:.2f}")
+        result = buy(symbol, amount=amount_per_symbol)
+        if not result:
+            print(f"[BUY ERROR] {symbol}: Buy failed, refreshing USDC balance and skipping.")
+            fetch_usdc_balance()
+        else:
+            print(f"[INFO] Bought {symbol} for ${amount_per_symbol:.2f}")
+
+
 def pct_change(klines):
     if len(klines) < 2: return 0
     prev_close = float(klines[0][4])
@@ -878,7 +952,7 @@ def trading_loop():
                 last_sync = time.time()
 
             if not too_many_positions():
-                invest_momentum()  # <<< use new invest logic
+                reserve_taxes_and_reinvest()  # <<<< THIS IS THE NEW LOGIC
 
             sync_state()
             process_actions()
@@ -886,6 +960,7 @@ def trading_loop():
         except Exception as e:
             print(f"[LOOP ERROR] {e}")
         time.sleep(TRADING_INTERVAL)
+
 
 
 # --- The rest of your code remains unchanged (Telegram, utility functions, etc) ---
