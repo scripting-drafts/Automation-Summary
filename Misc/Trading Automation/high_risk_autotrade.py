@@ -39,11 +39,11 @@ def reserve_taxes_and_reinvest():
 
     # 2. If not enough after taxes, sell other positions to free up funds
     while (free_usdc - total_taxes_owed) < min_notional:
-        # Find least profitable open position
         if not positions:
             print("[TAXES] No positions left to liquidate for taxes.")
             break
-        # Compute current PnL for each open position
+
+        # Find least profitable open position
         symbol_to_sell = min(
             positions,
             key=lambda sym: (get_latest_price(sym) - positions[sym]['entry']) / max(positions[sym]['entry'], 1e-8)
@@ -53,11 +53,20 @@ def reserve_taxes_and_reinvest():
         trade_time = positions[symbol_to_sell].get('trade_time', time.time())
         print(f"[TAXES] Selling {symbol_to_sell} to free up USDC for taxes.")
         exit_price, fee, tax = sell(symbol_to_sell, qty)
+
+        # Fix: Check if sale was successful
+        if exit_price is None:
+            print(f"[SKIP] {symbol_to_sell}: Sell returned None. Skipping this position for now.")
+            # Remove the position if it's unsellable (qty after rounding is 0), or optionally just skip and try next
+            del positions[symbol_to_sell]
+            continue
+
         exit_time = time.time()
         log_trade(symbol_to_sell, entry, exit_price, qty, trade_time, exit_time, fee, tax, action="sell")
         del positions[symbol_to_sell]
         fetch_usdc_balance()
         free_usdc = balance['usd']
+
 
     # 3. Only use USDC *after* taxes reserved for new investments
     investable_usdc = free_usdc - total_taxes_owed
