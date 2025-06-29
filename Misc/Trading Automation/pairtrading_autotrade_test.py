@@ -3,19 +3,94 @@ import json, os, csv, decimal, time, threading, math, random
 from datetime import datetime
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
 from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 from secret import API_KEY, API_SECRET, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
+import numpy as np
+
+def get_log_price(symbol):
+    try:
+        price = get_latest_price(symbol)
+        return np.log(price) if price else None
+    except Exception:
+        return None
+
+def get_spread(symbols):
+    # Returns the spread (difference) between first and others (can be negative)
+    logs = [get_log_price(s) for s in symbols]
+    if None in logs:
+        return None
+    # For 2 coins: logs[0] - logs[1]; for 3+: logs[0] - mean(others)
+    if len(logs) == 2:
+        return logs[0] - logs[1]
+    else:
+        return logs[0] - np.mean(logs[1:])
+
+spread_history = []  # Place this at the top of your script (global variable)
+
+def update_spread_history(symbols, maxlen=200):
+    spread = get_spread(symbols)
+    if spread is not None:
+        spread_history.append(spread)
+        if len(spread_history) > maxlen:
+            spread_history.pop(0)
+    return spread
+
+def get_spread_zscore(current_spread):
+    if len(spread_history) < 30:
+        return 0
+    mean = np.mean(spread_history)
+    std = np.std(spread_history)
+    return (current_spread - mean) / std if std > 0 else 0
+
+PAIR_SYMBOLS = ["ETHUSDC", "BTCUSDC"]   # or e.g. ["LTCUSDC", "BCHUSDC", "BTCUSDC"]
+
+def pair_trading_logic():
+    spread = update_spread_history(PAIR_SYMBOLS)
+    if spread is None:
+        print("[PAIR] Could not compute spread.")
+        return
+
+    zscore = get_spread_zscore(spread)
+    print(f"[PAIR] Spread: {spread:.5f}, Z-score: {zscore:.2f}")
+
+    # Parameters: tweak to your liking!
+    ENTRY_THRESHOLD = 2.0   # enter trade if Z-score > 2 or < -2
+    EXIT_THRESHOLD = 0.5    # exit trade if Z-score crosses 0.5
+
+    # Example positions logic
+    global positions
+
+    in_trade = any([s in positions for s in PAIR_SYMBOLS])
+
+    # Enter trade when spread is extreme
+    if not in_trade and abs(zscore) > ENTRY_THRESHOLD:
+        # If spread is high: short first, long others. If low: long first, short others
+        amount = 10  # USD per side
+        if zscore > 0:  # spread high: short [0], long [1:]
+            print(f"[PAIR] Spread HIGH ({zscore:.2f}): Short {PAIR_SYMBOLS[0]}, Long {PAIR_SYMBOLS[1:]}")
+            # On Binance spot, you can't short: just long others (or use Futures)
+            for s in PAIR_SYMBOLS[1:]:
+                buy(s, amount=amount)
+        else:           # spread low: long [0], short [1:]
+            print(f"[PAIR] Spread LOW ({zscore:.2f}): Long {PAIR_SYMBOLS[0]}, Short {PAIR_SYMBOLS[1:]}")
+            buy(PAIR_SYMBOLS[0], amount=amount)
+            # On spot, just don't long others
+
+    # Exit logic: If Z-score returns to normal, close trades (sell all involved)
+    if in_trade and abs(zscore) < EXIT_THRESHOLD:
+        print(f"[PAIR] Spread normalized ({zscore:.2f}), closing all pair positions.")
+        for s in PAIR_SYMBOLS:
+            if s in positions:
+                qty = positions[s]['qty']
+                sell(s, qty)
+                del positions[s]
 
 BASE_ASSET = 'USDC'
 DUST_LIMIT = 1.0
 MAX_POSITIONS = 20
-MIN_PROFIT = 1.0       # %
-TRAIL_STOP = 0.6       # %
-MAX_HOLD_TIME = 900    # seconds
-INVEST_AMOUNT = 10     # USD per coin
 TRADE_LOG_FILE = "trades_detailed.csv"
 YAML_SYMBOLS_FILE = "symbols.yaml"
 
@@ -23,12 +98,6 @@ client = Client(API_KEY, API_SECRET)
 positions = {}        # single global positions dict
 balance = {'usd': 0.0}
 trade_log = []
-
-def send_with_keyboard(update, text):
-    update.message.reply_text(
-        text,
-        reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
-    )
 
 def load_trade_history():
     log = []
@@ -218,70 +287,14 @@ def format_investments_message(positions, get_latest_price, dust_limit=1.0):
         )
     return msg
 
-def settings_keyboard():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton(f"Min Profit: {MIN_PROFIT}%", callback_data="edit_min_profit")],
-        [InlineKeyboardButton(f"Trailing Stop: {TRAIL_STOP}%", callback_data="edit_trailing_stop")],
-        [InlineKeyboardButton(f"Max Hold: {MAX_HOLD_TIME//60}m", callback_data="edit_max_hold")],
-        [InlineKeyboardButton(f"Investment: ${INVEST_AMOUNT}", callback_data="edit_invest_amount")],
-        [InlineKeyboardButton("Close", callback_data="close_settings")]
-    ])
 
-def settings_callback(update, context):
-    query = update.callback_query
-    data = query.data
-    if data == "close_settings":
-        query.edit_message_text("Settings panel closed.")
-        return
 
-    field_map = {
-        "edit_min_profit": ("Min profit (%)", "min_profit"),
-        "edit_trailing_stop": ("Trailing stop (%)", "trailing_stop"),
-        "edit_max_hold": ("Max hold time (minutes)", "max_hold"),
-        "edit_invest_amount": ("Investment amount ($)", "invest_amount"),
-    }
 
-    if data in field_map:
-        label, code = field_map[data]
-        query.answer()
-        query.edit_message_text(
-            f"Send the new value for *{label}*.\n(Just type the number and send it.)",
-            parse_mode='Markdown'
-        )
-        # Store which field is being edited for this user
-        context.user_data["editing_setting"] = code
 
 def telegram_handle_message(update: Update, context: CallbackContext):
-    global MIN_PROFIT, TRAIL_STOP, MAX_HOLD_TIME, INVEST_AMOUNT
     if update.effective_chat.id != TELEGRAM_CHAT_ID:
-        send_with_keyboard(update, "Access Denied.")
+        update.message.reply_text("Access Denied.")
         return
-    # At the top of your handler
-    editing = context.user_data.get("editing_setting")
-
-    if editing:
-        value = text.strip()
-        try:
-            if editing == "min_profit":
-                MIN_PROFIT = float(value)
-                reply = f"Min profit set to {MIN_PROFIT}%"
-            elif editing == "trailing_stop":
-                TRAIL_STOP = float(value)
-                reply = f"Trailing stop set to {TRAIL_STOP}%"
-            elif editing == "max_hold":
-                MAX_HOLD_TIME = int(float(value) * 60)
-                reply = f"Max hold time set to {MAX_HOLD_TIME // 60} minutes"
-            elif editing == "invest_amount":
-                INVEST_AMOUNT = float(value)
-                reply = f"Investment amount set to ${INVEST_AMOUNT}"
-            else:
-                reply = "Unknown setting."
-            send_with_keyboard(update, reply)
-            context.user_data.pop("editing_setting")
-        except Exception:
-            send_with_keyboard(update, "Invalid value. Please send a number.")
-        return
-
     text = update.message.text
     sync_positions_with_binance(client, positions)
 
@@ -298,53 +311,14 @@ def telegram_handle_message(update: Update, context: CallbackContext):
             f"Investments: ${total_invested:.2f}\n"
             f"Portfolio value: ${total_invested + usdc:.2f} USDC"
         )
-        send_with_keyboard(update, msg)
-    
+        update.message.reply_text(msg)
     elif text == "💼 Investments":
         msg = format_investments_message(positions, get_latest_price, DUST_LIMIT)
-        send_with_keyboard(update, msg)
-    
-    elif text == "⏸ Pause Trading":
-        set_paused(True)
-        send_with_keyboard(update, "⏸ Trading is now *paused*. Bot will not auto-invest or auto-sell until resumed.", parse_mode='Markdown')
-
-    elif text == "▶️ Resume Trading":
-        set_paused(False)
-        send_with_keyboard(update, "▶️ Trading is *resumed*. Bot will continue auto-investing and auto-selling.", parse_mode='Markdown')
-
-    elif text == "🔧 Settings":
-        send_with_keyboard(update, 
-            "⚙️ *Bot Settings*\nTap an item to edit:",
-            parse_mode='Markdown',
-            reply_markup=settings_keyboard()
-        )
-
-    elif text.startswith("set "):
-        try:
-            _, field, value = text.split()
-            if field == "min_profit":
-                MIN_PROFIT = float(value)
-                reply = f"Min profit to sell set to {MIN_PROFIT}%"
-            elif field == "trailing_stop":
-                TRAIL_STOP = float(value)
-                reply = f"Trailing stop set to {TRAIL_STOP}%"
-            elif field == "max_hold":
-                MAX_HOLD_TIME = int(value)
-                reply = f"Max hold time set to {MAX_HOLD_TIME//60} minutes"
-            elif field == "invest_amount":
-                INVEST_AMOUNT = float(value)
-                reply = f"Default investment amount set to ${INVEST_AMOUNT}"
-            else:
-                reply = "Unknown setting."
-            send_with_keyboard(update, reply)
-        except Exception:
-            send_with_keyboard(update, "Format error. Use: `set field value` (e.g., `set min_profit 2.5`)", parse_mode='Markdown')
-
-
+        update.message.reply_text(msg)
     elif text == "📝 Trade Log":
         log = trade_log
         if not log:
-            send_with_keyboard(update, "No trades yet.")
+            update.message.reply_text("No trades yet.")
         else:
             msg = (
                 "Time                 Symbol       Entry      Exit       Qty        PnL($)\n"
@@ -367,9 +341,9 @@ def telegram_handle_message(update: Update, context: CallbackContext):
                 except (ValueError, KeyError) as e:
                     print(f"[WARN] Bad trade log row: {tr} ({e})")
                     continue
-            send_with_keyboard(update, f"```{msg}```", parse_mode='Markdown')
+            update.message.reply_text(f"```{msg}```", parse_mode='Markdown')
     else:
-        send_with_keyboard(update, "Unknown action.")
+        update.message.reply_text("Unknown action.")
 
 def sync_positions_with_binance(client, positions, quote_asset="USDC"):
     """Keeps local positions up-to-date with live Binance balances."""
@@ -397,18 +371,8 @@ def sync_positions_with_binance(client, positions, quote_asset="USDC"):
     except Exception as e:
         print(f"[SYNC ERROR] Failed to sync positions with Binance: {e}")
 
-def set_paused(paused: bool):
-    state = get_bot_state()
-    state["paused"] = paused
-    save_bot_state(state)
-
-def is_paused():
-    state = get_bot_state()
-    return state.get("paused", False)
-
 main_keyboard = [
     ["📊 Balance", "💼 Investments"],
-    ["⏸ Pause Trading", "▶️ Resume Trading", "🔧 Settings"],
     ["📝 Trade Log"]
 ]
 
@@ -416,13 +380,12 @@ def telegram_main():
     updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', lambda update, ctx:
-        send_with_keyboard(update, 
+        update.message.reply_text(
             "Welcome! Use the buttons below:\n\n"
             "Rotate: Sells everything and reinvests in top gainers.",
             reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
         )
     ))
-    dispatcher.add_handler(CallbackQueryHandler(settings_callback))
     dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), telegram_handle_message))
     updater.start_polling()
     updater.idle()
@@ -526,7 +489,7 @@ def log_trade(symbol, entry, exit_price, qty, trade_time, exit_time, fees=0, tax
     except Exception as e:
         print(f"[LOG ERROR] {e}")
 
-def auto_sell_momentum_positions(min_profit=MIN_PROFIT, trailing_stop=TRAIL_STOP, max_hold_time=MAX_HOLD_TIME):
+def auto_sell_momentum_positions(min_profit=1.0, trailing_stop=0.6, max_hold_time=900):
     now = time.time()
     for symbol, pos in list(positions.items()):
         try:
@@ -937,11 +900,6 @@ def trading_loop():
                 time.sleep(SYNC_INTERVAL)
                 continue
 
-            if is_paused():
-                print("[INFO] Bot is paused. Skipping trading logic.")
-                time.sleep(SYNC_INTERVAL)
-                continue
-
             fetch_usdc_balance()
             auto_sell_momentum_positions()  # <<< use new sell logic
 
@@ -952,6 +910,7 @@ def trading_loop():
             if not too_many_positions():
                 reserve_taxes_and_reinvest()  # <<<< THIS IS THE NEW LOGIC
 
+            pair_trading_logic()
             sync_state()
             process_actions()
             fetch_usdc_balance()
