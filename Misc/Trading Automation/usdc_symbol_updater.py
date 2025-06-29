@@ -139,9 +139,24 @@ def update_yaml(client):
         symbol_data = fetch_symbol_data(client, symbol_info, cg_entry)
         if symbol_data:
             data[symbol] = symbol_data
-        time.sleep(0.25)  # minimal sleep to avoid Binance bans
+        time.sleep(0.25)
         if i % 10 == 0:
             print(f"Processed {i+1}/{len(usdc_symbols)} symbols")
+
+    # ------ Dynamically tag top N by market cap as "core" ------
+    TOP_N_CORE = 5   # <--- adjust as desired!
+    # Filter out symbols with no market cap data
+    symbols_with_mc = [
+        (s, d.get("market_cap", 0) or 0)
+        for s, d in data.items() if d.get("market_cap")
+    ]
+    # Sort by market cap, highest first
+    top_core_symbols = set(s for s, mc in sorted(symbols_with_mc, key=lambda x: x[1], reverse=True)[:TOP_N_CORE])
+
+    # Now, update each symbol's 'core' field
+    for symbol in data:
+        data[symbol]['core'] = bool(symbol in top_core_symbols)
+    # ----------------------------------------------------------
 
     try:
         with open(YAML_FILE, "w") as f:

@@ -173,30 +173,53 @@ def reserve_taxes_and_reinvest():
 
 def invest_momentum_with_usdc_limit(usdc_limit):
     """
-    Invest in momentum coins using only up to usdc_limit USDC.
+    Invest in as many eligible momentum symbols as possible, always using the min_notional per symbol,
+    never all-or-nothing. Any remaining funds are left in USDC.
     """
     refresh_symbols()
     symbols = get_yaml_ranked_momentum(limit=3)
-    if not symbols or usdc_limit < 10.0:
+    if not symbols or usdc_limit < 1:
         print("[INFO] No symbols to invest in or insufficient funds.")
         return
-    amount_per_symbol = usdc_limit / len(symbols)
+
+    eligible_symbols = []
+    min_notionals = []
+    # First, filter symbols where the min_notional is within reach
     for symbol in symbols:
         min_notional = min_notional_for(symbol)
-        if amount_per_symbol < min_notional:
-            print(f"[SKIP] {symbol}: Amount per symbol ${amount_per_symbol:.2f} < min_notional ${min_notional:.2f}")
-            continue
+        min_notionals.append((symbol, min_notional))
+    
+    # Now, keep adding symbols as long as we have enough total USDC for their min_notional
+    total_spent = 0
+    symbols_to_buy = []
+    for symbol, min_notional in sorted(min_notionals, key=lambda x: -x[1]):  # Buy more expensive coins first
+        if usdc_limit - total_spent >= min_notional:
+            symbols_to_buy.append((symbol, min_notional))
+            total_spent += min_notional
+
+    if not symbols_to_buy:
+        print(f"[INFO] Not enough USDC to invest in any eligible symbol. Minimum needed: {min([mn for s, mn in min_notionals]):.2f} USDC.")
+        return
+
+    # Now, for each, buy as much as possible (min_notional or more, divide rest if possible)
+    remaining_usdc = usdc_limit - sum(mn for _, mn in symbols_to_buy)
+    # Optional: distribute remaining equally or just leave as USDC
+    for symbol, min_notional in symbols_to_buy:
+        amount = min_notional
+        # Optionally add a share of remaining_usdc:
+        # amount += remaining_usdc / len(symbols_to_buy)
         fetch_usdc_balance()
-        if balance['usd'] < min_notional:
+        if balance['usd'] < amount:
             print(f"[INFO] Out of funds before buying {symbol}.")
             break
-        print(f"[INFO] Attempting to buy {symbol} with ${amount_per_symbol:.2f}")
-        result = buy(symbol, amount=amount_per_symbol)
+        print(f"[INFO] Attempting to buy {symbol} with ${amount:.2f}")
+        result = buy(symbol, amount=amount)
         if not result:
             print(f"[BUY ERROR] {symbol}: Buy failed, refreshing USDC balance and skipping.")
             fetch_usdc_balance()
         else:
-            print(f"[INFO] Bought {symbol} for ${amount_per_symbol:.2f}")
+            print(f"[INFO] Bought {symbol} for ${amount:.2f}")
+
 
 
 def pct_change(klines):
