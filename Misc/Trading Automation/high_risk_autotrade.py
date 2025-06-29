@@ -24,9 +24,8 @@ YAML_SYMBOLS_FILE = "symbols.yaml"
 
 def reserve_taxes_and_reinvest():
     """
-    Ensure there's enough USDC to cover recent tax liabilities AND to place a new order.
-    If not, sell the least profitable position(s) until there is enough.
-    Then, reinvest with only the available (tax-reserved) USDC.
+    Reserve USDC for taxes by selling just enough (partially, from multiple profitable positions if needed),
+    always selling profitable positions first, never at a loss.
     """
     # 1. Calculate taxes owed from recent closed trades
     total_taxes_owed = sum(
@@ -35,47 +34,79 @@ def reserve_taxes_and_reinvest():
 
     fetch_usdc_balance()
     free_usdc = balance['usd']
-    min_notional = 10.0  # You may adjust or fetch from config
+    min_notional = 10.0  # You can fetch dynamically per symbol
 
-    # 2. If not enough after taxes, sell other positions to free up funds
-    while (free_usdc - total_taxes_owed) < min_notional:
-        if not positions:
-            print("[TAXES] No positions left to liquidate for taxes.")
-            break
+    def position_profit(sym):
+        pos = positions[sym]
+        cur_price = get_latest_price(sym)
+        entry = pos['entry']
+        return (cur_price - entry) * pos['qty']
 
-        # Find least profitable open position
-        symbol_to_sell = min(
-            positions,
-            key=lambda sym: (get_latest_price(sym) - positions[sym]['entry']) / max(positions[sym]['entry'], 1e-8)
+    # 2. Loop: sell just enough from profitable positions until USDC after taxes >= min_notional
+    needed_usdc = (min_notional + total_taxes_owed) - free_usdc
+
+    # Only act if needed
+    if needed_usdc > 0:
+        # Get all profitable positions, sorted by largest profit first (minimizes leftovers)
+        profitable_positions = sorted(
+            [sym for sym in positions if position_profit(sym) > 0 and round_qty(sym, positions[sym]['qty']) > 0],
+            key=position_profit,
+            reverse=True
         )
-        qty = positions[symbol_to_sell]['qty']
-        entry = positions[symbol_to_sell]['entry']
-        trade_time = positions[symbol_to_sell].get('trade_time', time.time())
-        print(f"[TAXES] Selling {symbol_to_sell} to free up USDC for taxes.")
-        exit_price, fee, tax = sell(symbol_to_sell, qty)
+        for symbol_to_sell in profitable_positions:
+            pos = positions[symbol_to_sell]
+            cur_price = get_latest_price(symbol_to_sell)
+            entry = pos['entry']
+            qty_available = pos['qty']
+            trade_time = pos.get('trade_time', time.time())
 
-        # Fix: Check if sale was successful
-        if exit_price is None:
-            print(f"[SKIP] {symbol_to_sell}: Sell returned None. Skipping this position for now.")
-            # Remove the position if it's unsellable (qty after rounding is 0), or optionally just skip and try next
-            del positions[symbol_to_sell]
-            continue
+            fetch_usdc_balance()
+            free_usdc = balance['usd']
+            needed_usdc = (min_notional + total_taxes_owed) - free_usdc
+            if needed_usdc <= 0:
+                break  # Goal reached
 
-        exit_time = time.time()
-        log_trade(symbol_to_sell, entry, exit_price, qty, trade_time, exit_time, fee, tax, action="sell")
-        del positions[symbol_to_sell]
+            # Calculate qty needed from this position
+            qty_to_sell = min(qty_available, needed_usdc / cur_price)
+            qty_to_sell = round_qty(symbol_to_sell, qty_to_sell)
+
+            if qty_to_sell == 0:
+                print(f"[SKIP] {symbol_to_sell}: Qty after rounding is 0. Skipping this position for now.")
+                del positions[symbol_to_sell]
+                continue
+
+            print(f"[TAXES] Selling {qty_to_sell:.6f} {symbol_to_sell} (profit: {position_profit(symbol_to_sell):.2f}) to free up USDC for taxes.")
+
+            exit_price, fee, tax = sell(symbol_to_sell, qty_to_sell)
+
+            if exit_price is None:
+                print(f"[SKIP] {symbol_to_sell}: Sell returned None. Skipping this position for now.")
+                del positions[symbol_to_sell]
+                continue
+
+            exit_time = time.time()
+            log_trade(symbol_to_sell, entry, exit_price, qty_to_sell, trade_time, exit_time, fee, tax, action="sell")
+
+            # Update or remove position
+            if qty_to_sell == qty_available:
+                del positions[symbol_to_sell]
+            else:
+                positions[symbol_to_sell]['qty'] -= qty_to_sell
+
+        # Re-fetch balance after all sells
         fetch_usdc_balance()
         free_usdc = balance['usd']
 
-
-    # 3. Only use USDC *after* taxes reserved for new investments
+    # 3. Now, invest only with the safe amount after reserving for taxes
     investable_usdc = free_usdc - total_taxes_owed
     if investable_usdc < min_notional:
         print("[TAXES] Not enough USDC to invest after reserving for taxes.")
         return
 
-    # 4. Pass this to the momentum investing function
     invest_momentum_with_usdc_limit(investable_usdc)
+
+
+
 
 def invest_momentum_with_usdc_limit(usdc_limit):
     """
