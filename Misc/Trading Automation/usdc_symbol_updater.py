@@ -30,6 +30,32 @@ def fetch_usdc_symbols(client):
     print(f"Found {len(usdc_pairs)} USDC pairs")
     return usdc_pairs
 
+def fetch_btc_pairs(client):
+    info = fetch_with_retry(client.get_exchange_info)
+    if not info:
+        print("[ERROR] Could not fetch exchange info.")
+        return []
+    # Fetch pairs with quoteAsset USDC, BTC, or ETH
+    pairs = [
+        s for s in info['symbols']
+        if s['quoteAsset'] == 'BTC' and s['status'] == 'TRADING'
+    ]
+    print(f"Found {len(pairs)} BTC pairs")
+    return pairs
+
+def fetch_usdc_btc_eth_pairs(client):
+    info = fetch_with_retry(client.get_exchange_info)
+    if not info:
+        print("[ERROR] Could not fetch exchange info.")
+        return []
+    # Fetch pairs with quoteAsset USDC, BTC, or ETH
+    pairs = [
+        s for s in info['symbols']
+        if s['quoteAsset'] in ('USDC', 'BTC', 'ETH') and s['status'] == 'TRADING'
+    ]
+    print(f"Found {len(pairs)} pairs (USDC, BTC, ETH)")
+    return pairs
+
 def calc_volatility(closes):
     if len(closes) < 2:
         return 0.0
@@ -120,7 +146,7 @@ def fetch_symbol_data(client, symbol_info, cg_entry):
 
 def update_yaml(client):
     print(f"\n[{datetime.now()}] Updating {YAML_FILE} ...")
-    usdc_symbols = fetch_usdc_symbols(client)
+    usdc_symbols = fetch_btc_pairs(client)
     if not usdc_symbols:
         print("[WARNING] No USDC pairs found!")
         return

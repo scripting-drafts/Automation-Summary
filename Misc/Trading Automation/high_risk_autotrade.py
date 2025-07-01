@@ -11,6 +11,19 @@ from secret import API_KEY, API_SECRET, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
 BASE_ASSET = 'USDC'
 DUST_LIMIT = 0.3
+
+MIN_MARKETCAP = 5_000_000  
+MIN_VOLUME = 500_000     
+MIN_VOLATILITY = 0.0005     
+
+# MIN_1M = 0.05
+# MIN_5M = 0.15
+# MIN_15M = 0.3
+
+MIN_1M = 0.002   # 0.2% in 1m
+MIN_5M = 0.005   # 0.5% in 5m
+MIN_15M = 0.01   # 1% in 15m
+
 MAX_POSITIONS = 20
 MIN_PROFIT = 1.0       # %
 TRAIL_STOP = 0.6       # %
@@ -763,11 +776,12 @@ def pct_change(klines):
     last_close = float(klines[1][4])
     return (last_close - prev_close) / prev_close * 100
 
-def has_recent_momentum(symbol, min_1m=0.3, min_5m=0.6, min_15m=1.0):
+def has_recent_momentum(symbol, min_1m=MIN_1M, min_5m=MIN_5M, min_15m=MIN_15M):
     try:
         klines_1m = client.get_klines(symbol=symbol, interval='1m', limit=2)
         klines_5m = client.get_klines(symbol=symbol, interval='5m', limit=2)
         klines_15m = client.get_klines(symbol=symbol, interval='15m', limit=2)
+        print(f"[DEBUG] {symbol}: 1m={pct_change(klines_1m):.4f} 5m={pct_change(klines_5m):.4f} 15m={pct_change(klines_15m):.4f}")
         return (
             pct_change(klines_1m) > min_1m and
             pct_change(klines_5m) > min_5m and
@@ -777,10 +791,10 @@ def has_recent_momentum(symbol, min_1m=0.3, min_5m=0.6, min_15m=1.0):
         return False
 
 def get_yaml_ranked_momentum(
-        limit=3, 
-        min_marketcap=100_000, 
-        min_volume=100_000, 
-        min_volatility=0.002):
+        limit=MAX_POSITIONS, 
+        min_marketcap=MIN_MARKETCAP, 
+        min_volume=MIN_VOLUME, 
+        min_volatility=MIN_VOLATILITY):
     stats = load_symbol_stats()
     if not stats:
         return []
@@ -789,16 +803,25 @@ def get_yaml_ranked_momentum(
     for symbol, s in stats.items():
         ticker = tickers.get(symbol)
         if not ticker:
+            print(f"[SKIP] {symbol}: Not in live ticker data")
             continue
         mc = s.get("market_cap", 0) or 0
         vol = s.get("volume_1d", 0) or 0
         vola = s.get("volatility", {}).get("1d", 0) or 0
         price_change = float(ticker.get('priceChangePercent', 0))
-        # Filters
-        if mc < min_marketcap or vol < min_volume or vola < min_volatility:
+        if mc < min_marketcap:
+            print(f"[SKIP] {symbol}: market_cap {mc} < min {min_marketcap}")
+            continue
+        if vol < min_volume:
+            print(f"[SKIP] {symbol}: volume {vol} < min {min_volume}")
+            continue
+        if vola < min_volatility:
+            print(f"[SKIP] {symbol}: volatility {vola} < min {min_volatility}")
             continue
         if not has_recent_momentum(symbol):
+            print(f"[SKIP] {symbol}: has no recent momentum")
             continue
+        
         # Calculate the momentum score (sum of recent % changes)
         k1m = client.get_klines(symbol=symbol, interval='1m', limit=2)
         k5m = client.get_klines(symbol=symbol, interval='5m', limit=2)
@@ -838,8 +861,12 @@ def invest_momentum_with_usdc_limit(usdc_limit):
     """
     refresh_symbols()
     symbols = get_yaml_ranked_momentum(limit=10)
-    if not symbols or usdc_limit < 1:
-        print("[INFO] No symbols to invest in or insufficient funds.")
+    print(f"[DEBUG] Momentum symbols eligible for investment: {symbols}")
+    if not symbols:
+        print("[DIAGNOSE] No symbols passed the momentum and filter criteria.")
+        return
+    if usdc_limit < 1:
+        print("[INFO] Insufficient funds.")
         return
 
     min_notionals = []
