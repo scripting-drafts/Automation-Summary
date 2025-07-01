@@ -24,11 +24,32 @@ positions = {}        # single global positions dict
 balance = {'usd': 0.0}
 trade_log = []
 
-def send_with_keyboard(update, text):
+import time
+
+def parse_trade_time(val, default=None):
+    """Parse trade_time as float (Unix timestamp) or from string like 'YYYY-MM-DD HH:MM:SS'."""
+    if val is None:
+        return default if default is not None else time.time()
+    try:
+        return float(val)
+    except Exception:
+        try:
+            return time.mktime(datetime.strptime(val, "%Y-%m-%d %H:%M:%S").timetuple())
+        except Exception:
+            return default if default is not None else time.time()
+
+
+def send_with_keyboard(update, text, parse_mode=None, reply_markup=None):
+    if reply_markup is None:
+        reply_markup = ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
     update.message.reply_text(
         text,
-        reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
+        reply_markup=reply_markup,
+        parse_mode=parse_mode
     )
+
+
+
 
 def load_trade_history():
     log = []
@@ -48,7 +69,7 @@ def rebuild_cost_basis(trade_log):
         qty = float(tr.get('Qty', 0))
         entry = float(tr.get('Entry', 0))
         action = tr.get('action', '').lower() if 'action' in tr else ('buy' if float(tr.get('Entry', 0)) > 0 else 'sell')
-        tstamp = tr.get('Time')
+        tstamp = parse_trade_time(tr.get('Time'), time.time())
         if symbol not in positions_tmp:
             positions_tmp[symbol] = {'qty': 0.0, 'cost': 0.0, 'trade_time': tstamp}
         if action == 'buy':
@@ -72,9 +93,10 @@ def rebuild_cost_basis(trade_log):
             cost_basis[symbol] = {
                 'qty': v['qty'],
                 'entry': avg_entry,
-                'trade_time': v['trade_time'],
+                'trade_time': v['trade_time'],  # now always float
             }
     return cost_basis
+
 
 def reconcile_positions_with_binance(client, positions, quote_asset="USDC"):
     """Update local 'positions' to match true Binance balances for all open positions."""
@@ -95,11 +117,6 @@ def reconcile_positions_with_binance(client, positions, quote_asset="USDC"):
                 positions.pop(symbol)
     except Exception as e:
         print(f"[SYNC ERROR] Failed to reconcile with Binance: {e}")
-
-trade_log = load_trade_history()
-positions.clear()
-positions.update(rebuild_cost_basis(trade_log))
-reconcile_positions_with_binance(client, positions)
 
 def fetch_usdc_balance():
     """Update the global USDC balance from Binance live."""
@@ -488,7 +505,11 @@ def estimate_trade_tax(entry_price, exit_price, qty, trade_time, exit_time):
     Estimates the tax for a given trade based on holding period and gain.
     Uses 40% for short-term (<24h), 25% for long-term (>=24h).
     """
-    holding_period = exit_time - trade_time
+    trade_time = parse_trade_time(trade_time, time.time())
+    exit_time = parse_trade_time(exit_time, time.time())
+    trade_time_float = parse_trade_time(trade_time, time.time())
+    exit_time_float = parse_trade_time(exit_time, time.time())
+    holding_period = exit_time_float - trade_time_float
     profit = (exit_price - entry_price) * qty
     short_term_rate = 0.40
     long_term_rate = 0.25
@@ -499,10 +520,13 @@ def estimate_trade_tax(entry_price, exit_price, qty, trade_time, exit_time):
     tax = profit * rate if profit > 0 else 0
     return tax
 
+
 def log_trade(symbol, entry, exit_price, qty, trade_time, exit_time, fees=0, tax=0, action="sell"):
     pnl = (exit_price - entry) * qty if action == "sell" else 0
     pnl_pct = ((exit_price - entry) / entry * 100) if action == "sell" and entry != 0 else 0
-    duration_sec = int(exit_time - trade_time) if action == "sell" else 0
+    duration_sec = int(
+    parse_trade_time(exit_time, time.time()) - parse_trade_time(trade_time, time.time())
+    )
     trade = {
         'Time': datetime.fromtimestamp(trade_time).strftime("%Y-%m-%d %H:%M:%S"),
         'Action': action,
@@ -532,7 +556,7 @@ def auto_sell_momentum_positions(min_profit=MIN_PROFIT, trailing_stop=TRAIL_STOP
         try:
             entry = float(pos['entry'])
             qty = float(pos['qty'])
-            trade_time = float(pos.get('trade_time', now))
+            trade_time = parse_trade_time(pos.get('trade_time', now), now)
 
             current_price = get_latest_price(symbol)
             if current_price is None:
@@ -580,6 +604,7 @@ def auto_sell_momentum_positions(min_profit=MIN_PROFIT, trailing_stop=TRAIL_STOP
                 del positions[symbol]
         except Exception as e:
             print(f"[AUTO-SELL ERROR] {symbol}: {e}")
+
 
 
 def get_1h_percent_change(symbol):
@@ -643,8 +668,10 @@ def reserve_taxes_and_reinvest():
     # Helper: short-term check
     SHORT_TERM_SECONDS = 24 * 3600  # 24 hours, adjust if needed
     def is_short_term(pos):
-        held_for = time.time() - pos.get('trade_time', time.time())
+        trade_time = parse_trade_time(pos.get('trade_time', time.time()), time.time())
+        held_for = time.time() - trade_time
         return held_for < SHORT_TERM_SECONDS
+
 
     # Helper: profit calculation
     def position_profit(sym):
@@ -989,7 +1016,10 @@ def resume_positions_from_binance():
 
 if __name__ == "__main__":
     refresh_symbols()
-    positions.update(resume_positions_from_binance())
+    trade_log = load_trade_history()
+    positions.clear()
+    positions.update(rebuild_cost_basis(trade_log))
+    reconcile_positions_with_binance(client, positions)
     try:
         trading_thread = threading.Thread(target=trading_loop, daemon=True)
         trading_thread.start()
