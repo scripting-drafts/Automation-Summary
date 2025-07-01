@@ -3,3 +3,4 @@ secret.py
 *.csv
 bot_state.json
 symbols.yaml
+trades_detailed.csv

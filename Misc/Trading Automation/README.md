@@ -12,6 +12,8 @@
   <br /> 
 Requirements:  
 pip install python-telegram-bot==13.7  
+sudo apt install ntpdate  
+sudo ntpdate pool.ntp.org  
   <br />  
 
 ### How does it work

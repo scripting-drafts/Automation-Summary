@@ -10,7 +10,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from secret import API_KEY, API_SECRET, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
 BASE_ASSET = 'USDC'
-DUST_LIMIT = 1.0
+DUST_LIMIT = 0.3
 MAX_POSITIONS = 20
 MIN_PROFIT = 1.0       # %
 TRAIL_STOP = 0.6       # %
@@ -20,6 +20,13 @@ TRADE_LOG_FILE = "trades_detailed.csv"
 YAML_SYMBOLS_FILE = "symbols.yaml"
 
 client = Client(API_KEY, API_SECRET)
+# --- Time Sync Patch: ---
+try:
+    client.get_server_time()
+    print("[INFO] Synced time with Binance server.")
+except Exception as e:
+    print(f"[ERROR] Could not sync time with Binance server: {e}")
+
 positions = {}        # single global positions dict
 balance = {'usd': 0.0}
 trade_log = []
@@ -181,6 +188,14 @@ def get_sellable_positions():
     for symbol, pos in positions.items():
         qty = pos.get("qty", 0)
         sell_qty = round_qty(symbol, qty)
+        current_price = get_latest_price(symbol)
+        value = current_price * sell_qty
+        if sell_qty == 0 or qty == 0:
+            # print(f"[SKIP] {symbol}: Qty after rounding is 0. Skipping sell for now.")
+            continue
+        if value < DUST_LIMIT:
+            print(f"[SKIP] {symbol}: Value after rounding is ${value:.2f} (below DUST_LIMIT ${DUST_LIMIT}), skipping sell.")
+            continue
         try:
             min_notional = min_notional_for(symbol)
             current_price = get_latest_price(symbol)
@@ -235,68 +250,9 @@ def format_investments_message(positions, get_latest_price, dust_limit=1.0):
         )
     return msg
 
-def settings_keyboard():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton(f"Min Profit: {MIN_PROFIT}%", callback_data="edit_min_profit")],
-        [InlineKeyboardButton(f"Trailing Stop: {TRAIL_STOP}%", callback_data="edit_trailing_stop")],
-        [InlineKeyboardButton(f"Max Hold: {MAX_HOLD_TIME//60}m", callback_data="edit_max_hold")],
-        [InlineKeyboardButton(f"Investment: ${INVEST_AMOUNT}", callback_data="edit_invest_amount")],
-        [InlineKeyboardButton("Close", callback_data="close_settings")]
-    ])
-
-def settings_callback(update, context):
-    query = update.callback_query
-    data = query.data
-    if data == "close_settings":
-        query.edit_message_text("Settings panel closed.")
-        return
-
-    field_map = {
-        "edit_min_profit": ("Min profit (%)", "min_profit"),
-        "edit_trailing_stop": ("Trailing stop (%)", "trailing_stop"),
-        "edit_max_hold": ("Max hold time (minutes)", "max_hold"),
-        "edit_invest_amount": ("Investment amount ($)", "invest_amount"),
-    }
-
-    if data in field_map:
-        label, code = field_map[data]
-        query.answer()
-        query.edit_message_text(
-            f"Send the new value for *{label}*.\n(Just type the number and send it.)",
-            parse_mode='Markdown'
-        )
-        # Store which field is being edited for this user
-        context.user_data["editing_setting"] = code
-
 def telegram_handle_message(update: Update, context: CallbackContext):
-    global MIN_PROFIT, TRAIL_STOP, MAX_HOLD_TIME, INVEST_AMOUNT
     if update.effective_chat.id != TELEGRAM_CHAT_ID:
         send_with_keyboard(update, "Access Denied.")
-        return
-    # At the top of your handler
-    editing = context.user_data.get("editing_setting")
-
-    if editing:
-        value = text.strip()
-        try:
-            if editing == "min_profit":
-                MIN_PROFIT = float(value)
-                reply = f"Min profit set to {MIN_PROFIT}%"
-            elif editing == "trailing_stop":
-                TRAIL_STOP = float(value)
-                reply = f"Trailing stop set to {TRAIL_STOP}%"
-            elif editing == "max_hold":
-                MAX_HOLD_TIME = int(float(value) * 60)
-                reply = f"Max hold time set to {MAX_HOLD_TIME // 60} minutes"
-            elif editing == "invest_amount":
-                INVEST_AMOUNT = float(value)
-                reply = f"Investment amount set to ${INVEST_AMOUNT}"
-            else:
-                reply = "Unknown setting."
-            send_with_keyboard(update, reply)
-            context.user_data.pop("editing_setting")
-        except Exception:
-            send_with_keyboard(update, "Invalid value. Please send a number.")
         return
 
     text = update.message.text
@@ -304,11 +260,18 @@ def telegram_handle_message(update: Update, context: CallbackContext):
 
     if text == "📊 Balance":
         fetch_usdc_balance()
-        total_invested = sum(
-            get_latest_price(s) * float(p['qty'])
-            for s, p in positions.items()
-            if get_latest_price(s) * float(p['qty']) > DUST_LIMIT
-        )
+
+        total_invested = 0.0
+        for s, p in positions.items():
+            price = get_latest_price(s)
+            if price is None:
+                print(f"[WARN] No price for {s}, skipping in total_invested calculation.")
+                continue
+            qty = float(p['qty'])
+            value = price * qty
+            if value > DUST_LIMIT:
+                total_invested += value
+
         usdc = balance['usd']
         msg = (
             f"USDC Balance: ${usdc:.2f}\n"
@@ -328,35 +291,6 @@ def telegram_handle_message(update: Update, context: CallbackContext):
     elif text == "▶️ Resume Trading":
         set_paused(False)
         send_with_keyboard(update, "▶️ Trading is *resumed*. Bot will continue auto-investing and auto-selling.", parse_mode='Markdown')
-
-    elif text == "🔧 Settings":
-        send_with_keyboard(update, 
-            "⚙️ *Bot Settings*\nTap an item to edit:",
-            parse_mode='Markdown',
-            reply_markup=settings_keyboard()
-        )
-
-    elif text.startswith("set "):
-        try:
-            _, field, value = text.split()
-            if field == "min_profit":
-                MIN_PROFIT = float(value)
-                reply = f"Min profit to sell set to {MIN_PROFIT}%"
-            elif field == "trailing_stop":
-                TRAIL_STOP = float(value)
-                reply = f"Trailing stop set to {TRAIL_STOP}%"
-            elif field == "max_hold":
-                MAX_HOLD_TIME = int(value)
-                reply = f"Max hold time set to {MAX_HOLD_TIME//60} minutes"
-            elif field == "invest_amount":
-                INVEST_AMOUNT = float(value)
-                reply = f"Default investment amount set to ${INVEST_AMOUNT}"
-            else:
-                reply = "Unknown setting."
-            send_with_keyboard(update, reply)
-        except Exception:
-            send_with_keyboard(update, "Format error. Use: `set field value` (e.g., `set min_profit 2.5`)", parse_mode='Markdown')
-
 
     elif text == "📝 Trade Log":
         log = trade_log
@@ -425,7 +359,7 @@ def is_paused():
 
 main_keyboard = [
     ["📊 Balance", "💼 Investments"],
-    ["⏸ Pause Trading", "▶️ Resume Trading", "🔧 Settings"],
+    ["⏸ Pause Trading", "▶️ Resume Trading"],
     ["📝 Trade Log"]
 ]
 
@@ -439,7 +373,6 @@ def telegram_main():
             reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
         )
     ))
-    dispatcher.add_handler(CallbackQueryHandler(settings_callback))
     dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), telegram_handle_message))
     updater.start_polling()
     updater.idle()
@@ -488,9 +421,15 @@ def buy(symbol, amount=None):
 def sell(symbol, qty):
     try:
         sell_qty = round_qty(symbol, qty)
-        if sell_qty == 0:
-            print(f"[SKIP] {symbol}: Qty after rounding is 0. Skipping sell for now.")
+        current_price = get_latest_price(symbol)
+        value = current_price * sell_qty
+        if sell_qty == 0 or qty == 0:
+            # print(f"[SKIP] {symbol}: Qty after rounding is 0. Skipping sell for now.")
             return None, 0, 0
+        if value < DUST_LIMIT:
+            print(f"[SKIP] {symbol}: Value after rounding is ${value:.2f} (below DUST_LIMIT ${DUST_LIMIT}), skipping sell.")
+            return None, 0, 0
+        
         order = client.order_market_sell(symbol=symbol, quantity=sell_qty)
         price = float(order['fills'][0]['price'])
         fee = sum(float(f['commission']) for f in order['fills']) if "fills" in order else 0
@@ -564,8 +503,12 @@ def auto_sell_momentum_positions(min_profit=MIN_PROFIT, trailing_stop=TRAIL_STOP
                 continue
 
             sell_qty = round_qty(symbol, qty)
+            value = current_price * sell_qty
             if sell_qty == 0 or qty == 0:
-                print(f"[SKIP] {symbol}: Qty after rounding is 0. Skipping sell for now.")
+                # print(f"[SKIP] {symbol}: Qty after rounding is 0. Skipping sell for now.")
+                continue
+            if value < DUST_LIMIT:
+                print(f"[SKIP] {symbol}: Value after rounding is ${value:.2f} (below DUST_LIMIT ${DUST_LIMIT}), skipping sell.")
                 continue
 
             pnl_pct = ((current_price - entry) / entry * 100) if entry else 0
@@ -650,7 +593,15 @@ def sync_investments_with_binance():
         print(f"[SYNC ERROR] Could not sync investments with Binance: {e}")
 
 def too_many_positions():
-    return len(positions) >= MAX_POSITIONS
+    count = 0
+    for symbol, pos in positions.items():
+        price = get_latest_price(symbol)
+        if price is None:
+            continue
+        if pos.get('qty', 0) * price > DUST_LIMIT:
+            count += 1
+    return count >= MAX_POSITIONS
+
 
 def reserve_taxes_and_reinvest():
     """
@@ -692,7 +643,6 @@ def reserve_taxes_and_reinvest():
     while True:
         # Calculate how much USDC we still need to invest after tax reserve
         needed_usdc = 0
-        investable_usdc = free_usdc - total_taxes_owed
 
         # We'll use the minimum min_notional for ALL symbols in momentum (safe fallback)
         momentum_symbols = get_yaml_ranked_momentum(limit=3)
@@ -884,6 +834,7 @@ def invest_momentum_with_usdc_limit(usdc_limit):
     """
     Invest in as many eligible momentum symbols as possible, always using the min_notional per symbol,
     never all-or-nothing. Any remaining funds are left in USDC.
+    This version treats coins you own (including dust) and coins you don't equally.
     """
     refresh_symbols()
     symbols = get_yaml_ranked_momentum(limit=10)
@@ -891,14 +842,11 @@ def invest_momentum_with_usdc_limit(usdc_limit):
         print("[INFO] No symbols to invest in or insufficient funds.")
         return
 
-    eligible_symbols = []
     min_notionals = []
-    # First, filter symbols where the min_notional is within reach
     for symbol in symbols:
         min_notional = min_notional_for(symbol)
         min_notionals.append((symbol, min_notional))
-    
-    # Now, keep adding symbols as long as we have enough total USDC for their min_notional
+
     total_spent = 0
     symbols_to_buy = []
     for symbol, min_notional in sorted(min_notionals, key=lambda x: -x[1]):  # Buy more expensive coins first
@@ -910,13 +858,8 @@ def invest_momentum_with_usdc_limit(usdc_limit):
         print(f"[INFO] Not enough USDC to invest in any eligible symbol. Minimum needed: {min([mn for s, mn in min_notionals]):.2f} USDC.")
         return
 
-    # Now, for each, buy as much as possible (min_notional or more, divide rest if possible)
-    remaining_usdc = usdc_limit - sum(mn for _, mn in symbols_to_buy)
-    # Optional: distribute remaining equally or just leave as USDC
     for symbol, min_notional in symbols_to_buy:
         amount = min_notional
-        # Optionally add a share of remaining_usdc:
-        # amount += remaining_usdc / len(symbols_to_buy)
         fetch_usdc_balance()
         if balance['usd'] < amount:
             print(f"[INFO] Out of funds before buying {symbol}.")
@@ -928,6 +871,7 @@ def invest_momentum_with_usdc_limit(usdc_limit):
             fetch_usdc_balance()
         else:
             print(f"[INFO] Bought {symbol} for ${amount:.2f}")
+
 
 def get_bot_state():
     if not os.path.exists("bot_state.json"):
@@ -1020,6 +964,7 @@ if __name__ == "__main__":
     positions.clear()
     positions.update(rebuild_cost_basis(trade_log))
     reconcile_positions_with_binance(client, positions)
+    print(f"[INFO] Bot paused state on startup: {is_paused()}")
     try:
         trading_thread = threading.Thread(target=trading_loop, daemon=True)
         trading_thread.start()
