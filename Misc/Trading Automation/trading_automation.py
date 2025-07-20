@@ -1,28 +1,47 @@
-import yaml
-import json, os, csv, decimal, time, threading, math, random
+import yaml, pytz, json, os, csv, decimal, time, threading, math, random
 from datetime import datetime
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
-
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    MessageHandler,
+    Application,
+    CallbackContext,
+    ContextTypes,
+    BaseHandler,
+    filters,
+    JobQueue,
+)
 from secret import API_KEY, API_SECRET, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
+import apscheduler.util
+
+def patched_get_localzone():
+    return pytz.UTC
+
+apscheduler.util.get_localzone = patched_get_localzone
 
 BASE_ASSET = 'USDC'
-DUST_LIMIT = 0.3
+DUST_LIMIT = 0.4
+
+# MIN_MARKETCAP = 2_000_000  
+# MIN_VOLUME = 250_000     
+# MIN_VOLATILITY = 0.0002 
 
 MIN_MARKETCAP = 5_000_000  
 MIN_VOLUME = 500_000     
 MIN_VOLATILITY = 0.0005     
 
-# MIN_1M = 0.05
-# MIN_5M = 0.15
-# MIN_15M = 0.3
-
 MIN_1M = 0.002   # 0.2% in 1m
 MIN_5M = 0.005   # 0.5% in 5m
 MIN_15M = 0.01   # 1% in 15m
+
+# MIN_1M = 0.05
+# MIN_5M = 0.15
+# MIN_15M = 0.3
 
 MAX_POSITIONS = 20
 MIN_PROFIT = 1.0       # %
@@ -59,17 +78,10 @@ def parse_trade_time(val, default=None):
             return default if default is not None else time.time()
 
 
-def send_with_keyboard(update, text, parse_mode=None, reply_markup=None):
+async def send_with_keyboard(update: Update, text, parse_mode=None, reply_markup=None):
     if reply_markup is None:
         reply_markup = ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
-    update.message.reply_text(
-        text,
-        reply_markup=reply_markup,
-        parse_mode=parse_mode
-    )
-
-
-
+    await update.message.reply_text(text, reply_markup=reply_markup, parse_mode=parse_mode)
 
 def load_trade_history():
     log = []
@@ -263,9 +275,9 @@ def format_investments_message(positions, get_latest_price, dust_limit=1.0):
         )
     return msg
 
-def telegram_handle_message(update: Update, context: CallbackContext):
+async def telegram_handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_chat.id != TELEGRAM_CHAT_ID:
-        send_with_keyboard(update, "Access Denied.")
+        await send_with_keyboard(update, "Access Denied.")
         return
 
     text = update.message.text
@@ -274,41 +286,52 @@ def telegram_handle_message(update: Update, context: CallbackContext):
     if text == "📊 Balance":
         fetch_usdc_balance()
 
+        usdc = balance['usd']
         total_invested = 0.0
+        invested_details = []
+
         for s, p in positions.items():
             price = get_latest_price(s)
             if price is None:
-                print(f"[WARN] No price for {s}, skipping in total_invested calculation.")
                 continue
             qty = float(p['qty'])
             value = price * qty
+            # Only show if value is above DUST_LIMIT
             if value > DUST_LIMIT:
                 total_invested += value
+                invested_details.append(f"{s}: {qty:.6f} @ ${price:.2f} = ${value:.2f}")
 
-        usdc = balance['usd']
         msg = (
-            f"USDC Balance: ${usdc:.2f}\n"
-            f"Investments: ${total_invested:.2f}\n"
-            f"Portfolio value: ${total_invested + usdc:.2f} USDC"
+            f"USDC Balance: **${usdc:.2f}**\n"
+            f"Total Invested: **${total_invested:.2f}**\n"
+            f"Portfolio Value: **${usdc + total_invested:.2f} USDC**"
         )
-        send_with_keyboard(update, msg)
+
+        if invested_details:
+            msg += "\n\n*Investments:*"
+            for line in invested_details:
+                msg += f"\n- {line}"
+
+        await send_with_keyboard(update, msg, parse_mode='Markdown')
+
+
     
     elif text == "💼 Investments":
         msg = format_investments_message(positions, get_latest_price, DUST_LIMIT)
-        send_with_keyboard(update, msg)
+        await send_with_keyboard(update, msg)
     
     elif text == "⏸ Pause Trading":
         set_paused(True)
-        send_with_keyboard(update, "⏸ Trading is now *paused*. Bot will not auto-invest or auto-sell until resumed.", parse_mode='Markdown')
+        await send_with_keyboard(update, "⏸ Trading is now *paused*. Bot will not auto-invest or auto-sell until resumed.", parse_mode='Markdown')
 
     elif text == "▶️ Resume Trading":
         set_paused(False)
-        send_with_keyboard(update, "▶️ Trading is *resumed*. Bot will continue auto-investing and auto-selling.", parse_mode='Markdown')
+        await send_with_keyboard(update, "▶️ Trading is *resumed*. Bot will continue auto-investing and auto-selling.", parse_mode='Markdown')
 
     elif text == "📝 Trade Log":
         log = trade_log
         if not log:
-            send_with_keyboard(update, "No trades yet.")
+            await send_with_keyboard(update, "No trades yet.")
         else:
             msg = (
                 "Time                 Symbol       Entry      Exit       Qty        PnL($)\n"
@@ -331,9 +354,9 @@ def telegram_handle_message(update: Update, context: CallbackContext):
                 except (ValueError, KeyError) as e:
                     print(f"[WARN] Bad trade log row: {tr} ({e})")
                     continue
-            send_with_keyboard(update, f"```{msg}```", parse_mode='Markdown')
+            await send_with_keyboard(update, f"```{msg}```", parse_mode='Markdown')
     else:
-        send_with_keyboard(update, "Unknown action.")
+        await send_with_keyboard(update, "Unknown action.")
 
 def sync_positions_with_binance(client, positions, quote_asset="USDC"):
     """Keeps local positions up-to-date with live Binance balances."""
@@ -376,19 +399,23 @@ main_keyboard = [
     ["📝 Trade Log"]
 ]
 
+async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await send_with_keyboard(
+        update,
+        "Welcome! Use the buttons below:\n\nRotate: Sells everything and reinvests in top gainers.",
+        reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
+    )
+
 def telegram_main():
-    updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
-    dispatcher = updater.dispatcher
-    dispatcher.add_handler(CommandHandler('start', lambda update, ctx:
-        send_with_keyboard(update, 
-            "Welcome! Use the buttons below:\n\n"
-            "Rotate: Sells everything and reinvests in top gainers.",
-            reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
-        )
-    ))
-    dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), telegram_handle_message))
-    updater.start_polling()
-    updater.idle()
+    application = ApplicationBuilder() \
+        .token(TELEGRAM_TOKEN) \
+        .build()
+
+    application.add_handler(CommandHandler('start', start_handler))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, telegram_handle_message))
+
+    application.run_polling()
+
 
 def quote_precision_for(symbol):
     try:
