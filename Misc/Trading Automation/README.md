@@ -11,7 +11,7 @@
 
   <br /> 
 Requirements:  
-pip install python-telegram-bot==13.7  
+pip install python-telegram-bot==22.2 (Previous 13.5)  
 sudo apt install ntpdate  
 sudo ntpdate pool.ntp.org  
   <br />  

@@ -27,21 +27,13 @@ apscheduler.util.get_localzone = patched_get_localzone
 BASE_ASSET = 'USDC'
 DUST_LIMIT = 0.4
 
-# MIN_MARKETCAP = 2_000_000  
-# MIN_VOLUME = 250_000     
-# MIN_VOLATILITY = 0.0002 
-
-MIN_MARKETCAP = 5_000_000  
-MIN_VOLUME = 500_000     
-MIN_VOLATILITY = 0.0005     
+MIN_MARKETCAP = 2_000_000  
+MIN_VOLUME = 250_000     
+MIN_VOLATILITY = 0.0002
 
 MIN_1M = 0.002   # 0.2% in 1m
 MIN_5M = 0.005   # 0.5% in 5m
 MIN_15M = 0.01   # 1% in 15m
-
-# MIN_1M = 0.05
-# MIN_5M = 0.15
-# MIN_15M = 0.3
 
 MAX_POSITIONS = 20
 MIN_PROFIT = 1.0       # %
@@ -50,6 +42,7 @@ MAX_HOLD_TIME = 900    # seconds
 INVEST_AMOUNT = 10     # USD per coin
 TRADE_LOG_FILE = "trades_detailed.csv"
 YAML_SYMBOLS_FILE = "symbols.yaml"
+BOT_STATE_FILE = "bot_state.json"
 
 client = Client(API_KEY, API_SECRET)
 # --- Time Sync Patch: ---
@@ -100,7 +93,8 @@ def rebuild_cost_basis(trade_log):
         symbol = tr.get('Symbol')
         qty = float(tr.get('Qty', 0))
         entry = float(tr.get('Entry', 0))
-        action = tr.get('action', '').lower() if 'action' in tr else ('buy' if float(tr.get('Entry', 0)) > 0 else 'sell')
+        action = 'buy' if float(tr.get('Entry', 0)) > 0 else 'sell'
+        action = tr.get('action', '').lower() if 'action' in tr else (action)
         tstamp = parse_trade_time(tr.get('Time'), time.time())
         if symbol not in positions_tmp:
             positions_tmp[symbol] = {'qty': 0.0, 'cost': 0.0, 'trade_time': tstamp}
@@ -402,7 +396,7 @@ main_keyboard = [
 async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await send_with_keyboard(
         update,
-        "Welcome! Use the buttons below:\n\nRotate: Sells everything and reinvests in top gainers.",
+        "Welcome! Use the buttons below\n",
         reply_markup=ReplyKeyboardMarkup(main_keyboard, resize_keyboard=True)
     )
 
@@ -928,13 +922,13 @@ def invest_momentum_with_usdc_limit(usdc_limit):
 
 
 def get_bot_state():
-    if not os.path.exists("bot_state.json"):
+    if not os.path.exists(BOT_STATE_FILE):
         return {"balance": 0, "positions": {}, "paused": False, "log": [], "actions": []}
-    with open("bot_state.json", "r") as f:
+    with open(BOT_STATE_FILE, "r") as f:
         return json.load(f)
 
 def save_bot_state(state):
-    with open("bot_state.json", "w") as f:
+    with open(BOT_STATE_FILE, "w") as f:
         json.dump(state, f)
 
 def sync_state():
@@ -1006,10 +1000,10 @@ def resume_positions_from_binance():
                     "timestamp": time.time(),
                     "trade_time": time.time()
                 }
-            except:
+            except Exception:
                 continue
         return resumed
-    except Exception as e:
+    except Exception:
         return {}
 
 if __name__ == "__main__":
